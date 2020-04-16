@@ -8,10 +8,9 @@ install:
   - cd desapp-groupF-backend/ && mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
   
 script:
-  - cd desapp-groupF-backend/
   - mvn test -B
   
  after_success:
-  - cd desapp-groupB-backend/
+  - cd desapp-groupF-backend/
   - mvn cobertura:cobertura
   - mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/cobertura/coverage.xml -DprojectToken=00afb194beed4589aaa835437d603e98 -DapiToken=123121
