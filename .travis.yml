@@ -13,4 +13,4 @@ script:
   
 after_success:
   - mvn cobertura:cobertura
-  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java -r target/site/cobertura/coverage.xml --partial -DprojectToken=05999dd90ceb401889ae05e156f39e08
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java -r target/site/cobertura/coverage.xml --partial -DprojectToken=$CODACY_PROJECT_TOKEN
