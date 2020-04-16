@@ -12,6 +12,5 @@ script:
   - mvn test -B
   
 after_success:
-  - cd desapp-groupF-backend/
   - mvn cobertura:cobertura
-  - mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/cobertura/coverage.xml
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java -r target/site/cobertura/coverage.xml --partial
