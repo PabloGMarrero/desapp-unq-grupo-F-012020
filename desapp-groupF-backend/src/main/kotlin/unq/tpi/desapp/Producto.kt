@@ -7,4 +7,7 @@ class Producto(id:Long, imagen:String, nombre:String, precio:Double, marca:Strin
     var nombre: String = nombre
     var precio: Double = precio
     var marca: String = marca
+
+
+
 }

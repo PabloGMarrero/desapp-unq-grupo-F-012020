@@ -1,5 +1,7 @@
 package unq.tpi.desapp
 
+import java.time.LocalDate
+
 class Comercio  {
     var rubro: String = ""
     var domicilio: String = ""
@@ -10,8 +12,16 @@ class Comercio  {
     var ofertas: MutableList<Oferta> =  mutableListOf()
 
 
-    fun devolverListaDeProductos()  {
+    fun devolverListaDeProductos() : MutableList<Producto> {
+        return listaDeProductos
+    }
 
+    fun agregarOferta(oferta : Oferta) {
+        this.ofertas.add(oferta)
+    }
+
+    fun agregarProducto(producto: Producto) {
+        this.listaDeProductos.add(producto)
     }
 
 }

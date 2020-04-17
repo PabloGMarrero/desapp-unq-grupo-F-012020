@@ -7,9 +7,8 @@ class Usuario {
     var email: String = ""
     var umbralDeCompra: Double = 0.0
     var preferenciaCategoria: MutableList<Categorias> =  mutableListOf()
-
-
-    //HistorialdeCompras..posiblemente lista de comprar
+    var historialCompras: MutableList<Compra> =  mutableListOf()
+    var carrito: MutableList<ItemCompra> = mutableListOf()
 
     class Categorias {
 
