@@ -1,6 +1,6 @@
 package unq.tpi.desapp
 
-class Usuario {
+class Usuario(nombre: String, contraseña: String, email: String) {
 
     var nombre: String = ""
     var contrasenia: String = ""
@@ -16,6 +16,14 @@ class Usuario {
 
     fun agregarItemProducto(producto: Producto, cantidad: Double) {
         carrito.add(ItemCompra(producto,cantidad))
+    }
+
+    fun agregarAlHistorial(compra: Compra){
+        historialCompras.add(compra)
+    }
+
+    fun cambiarUmbralDeCompra(distancia: Double){
+        this.umbralDeCompra = distancia
     }
 
 
