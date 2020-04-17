@@ -10,6 +10,7 @@ class Comercio  {
     var distanciaMaxima: Double = 0.0
     var listaDeProductos: MutableList<Producto> =  mutableListOf()
     var ofertas: MutableList<Oferta> =  mutableListOf()
+    var comprasRecibidas: MutableList<Compra> = mutableListOf()
 
 
     fun devolverListaDeProductos() : MutableList<Producto> {
@@ -22,6 +23,11 @@ class Comercio  {
 
     fun agregarProducto(producto: Producto) {
         this.listaDeProductos.add(producto)
+    }
+
+    fun tieneStock(producto: Producto): Boolean {
+        return this.listaDeProductos.contains(producto)
+
     }
 
 }

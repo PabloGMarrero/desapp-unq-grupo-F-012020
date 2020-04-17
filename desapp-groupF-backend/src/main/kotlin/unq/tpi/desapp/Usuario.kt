@@ -13,5 +13,11 @@ class Usuario {
     class Categorias {
 
     }
+
+    fun agregarItemProducto(producto: Producto, cantidad: Double) {
+        carrito.add(ItemCompra(producto,cantidad))
+    }
+
+
 }
 
