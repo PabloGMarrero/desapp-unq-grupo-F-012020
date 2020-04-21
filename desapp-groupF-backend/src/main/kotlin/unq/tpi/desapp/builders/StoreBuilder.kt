@@ -33,7 +33,7 @@ class StoreBuilder {
         return this
     }
 
-    fun withAdress(url:String):StoreBuilder{
+    fun withAdress(adress :String):StoreBuilder{
         this.adress = adress
         return this
     }
