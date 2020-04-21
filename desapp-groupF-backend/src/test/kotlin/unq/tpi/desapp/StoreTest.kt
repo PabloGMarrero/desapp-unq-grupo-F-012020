@@ -30,7 +30,7 @@ class StoreTest {
     }
 
     @Test
-    fun testProductoConMarcaDistintoVacio(){
+    fun testStoreCoverageDistance(){
         var store = StoreBuilder.aStore().withDistance(100.00).build()
         assertEquals(store.coverageDistance, 100.00)
     }

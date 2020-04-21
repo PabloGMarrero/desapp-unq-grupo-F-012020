@@ -2,9 +2,9 @@ package unq.tpi.desapp
 
 class Store(activity: String, adress: String, distance: Double )  {
 
-    var activity: String = ""
-    var adress: String = ""
-    var coverageDistance: Double = 0.0
+    var activity: String = activity
+    var adress: String = adress
+    var coverageDistance: Double = distance
     var openingHours: MutableList<OpenHours> = mutableListOf()
     var paymentTypes: MutableList<PaymentType> = mutableListOf()
     var productList: MutableList<Product> =  mutableListOf()
