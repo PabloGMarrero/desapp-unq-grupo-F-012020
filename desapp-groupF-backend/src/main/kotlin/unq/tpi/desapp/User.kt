@@ -27,6 +27,10 @@ class User(nombre: String, contraseña: String, email: String) {
         this.purchaseRange = distancia
     }
 
+    fun addCategory(aCategory: Categories){
+        this.categoryPreferences.add(aCategory)
+    }
+
 
 }
 

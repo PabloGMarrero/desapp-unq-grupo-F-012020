@@ -12,6 +12,8 @@ class StoreTest {
     val aDiscount = Discount(10.0, LocalDate.now(), LocalDate.MAX,aProduct )
     val openH = Store.OpenHours("Jueves","09:00","19:00")
     val payment = Store.PaymentType("Banco Galicia", "1000 0000 0000 0000")
+    val aUser = User("Pelufo","123","pelufo@pelufo")
+    val aPurchase = Purchase(aUser,"Envio a Domicilio")
 
     @Test
     fun testStoreDefault() {
@@ -65,6 +67,13 @@ class StoreTest {
         var store = StoreBuilder.aStore().build()
         store.addDiscount(aDiscount)
         assert(store.discounts.contains(aDiscount))
+    }
+
+    @Test
+    fun testStoreAddPurchase(){
+        var store = StoreBuilder.aStore().build()
+        store.addPurchase(aPurchase)
+        assert(store.purchasesReceived.contains(aPurchase))
     }
 
 

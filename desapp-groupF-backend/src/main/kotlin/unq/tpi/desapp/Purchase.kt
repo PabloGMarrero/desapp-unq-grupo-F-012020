@@ -2,20 +2,28 @@ package unq.tpi.desapp
 
 import java.time.LocalDate
 
-class Purchase {
-    var dateTime: LocalDate = TODO()
-    var listaDeProductos: MutableList<Item> = mutableListOf()
-    var user: User = TODO()
-    var tipoDeEnvio: String = ""
-    //estado
-    //itemCompra
+class Purchase(aUser: User, deliveryType: String) {
+    var purchaseDate: LocalDate = LocalDate.now()
+    var itemList: MutableList<Item> = mutableListOf()
+    var user: User = aUser
+    var deliveryType: String = deliveryType
+    var status: String = ""
 
-    fun devolverTotal(): Double {
-        return 0.0
+    fun getTotal(): Double {
+        var total = 0.0
+        for (item in itemList){
+            total = total + (item.quantity * item.product.precio)
+        }
+        return total
     }
 
-    fun agregarItem(item: Item) {
+    fun addItem(item: Item) {
+        this.itemList.add(item)
 
+    }
+
+    fun changeStatus( newState: String){
+        this.status = newState
     }
 
 }
