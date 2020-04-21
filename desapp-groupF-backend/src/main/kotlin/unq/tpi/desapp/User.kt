@@ -8,14 +8,14 @@ class User(nombre: String, contraseña: String, email: String) {
     var umbralDeCompra: Double = 0.0
     var preferenciaCategoria: MutableList<Categorias> =  mutableListOf()
     var historialPurchases: MutableList<Purchase> =  mutableListOf()
-    var carrito: MutableList<ItemCompra> = mutableListOf()
+    var carrito: MutableList<Item> = mutableListOf()
 
     class Categorias {
 
     }
 
-    fun agregarItemProducto(product: Product, cantidad: Double) {
-        carrito.add(ItemCompra(product,cantidad))
+    fun agregarItemProducto(product: Product, cantidad: Double, store: Store) {
+        carrito.add(Item(product,cantidad, store))
     }
 
     fun agregarAlHistorial(purchase: Purchase){

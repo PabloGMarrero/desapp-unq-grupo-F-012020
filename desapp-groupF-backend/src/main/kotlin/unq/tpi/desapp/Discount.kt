@@ -6,7 +6,7 @@ class Discount {
     var porcentajeDeDescuento: Double = 0.0
     var listaDeProducts: MutableList<Product> =  mutableListOf()
     var fechaDesde: LocalDate = TODO()
-    var FechaHasta: LocalDate
+    var FechaHasta: LocalDate = TODO()
 
 
 }

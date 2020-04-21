@@ -26,10 +26,10 @@ class Sistema {
         this.comercios.add(comercio)
     }
 
-    fun agregarItemAlCarrito(user: User, product: Product, cantidad: Double){
+    fun agregarItemAlCarrito(user: User, product: Product, cantidad: Double, store: Store){
 
         if (this.comercioTieneStock(product)) {
-            user.agregarItemProducto(product, cantidad)
+            user.agregarItemProducto(product, cantidad, store)
         }
     }
 
