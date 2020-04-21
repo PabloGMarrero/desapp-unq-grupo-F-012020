@@ -1,6 +1,6 @@
 package unq.tpi.desapp.builders
 
-import unq.tpi.desapp.Producto
+import unq.tpi.desapp.Product
 
 class ProductoBuilder {
 
@@ -17,8 +17,8 @@ class ProductoBuilder {
         }
     }
 
-    fun build(): Producto {
-        return Producto(id, imagen, nombre, precio, marca)
+    fun build(): Product {
+        return Product(id, imagen, nombre, precio, marca)
     }
 
     fun conId(id:Long): ProductoBuilder{

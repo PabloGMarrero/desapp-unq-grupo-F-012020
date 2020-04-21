@@ -2,10 +2,10 @@ package unq.tpi.desapp
 
 import java.time.LocalDate
 
-class Compra {
+class Purchase {
     var dateTime: LocalDate = TODO()
     var listaDeProductos: MutableList<ItemCompra> = mutableListOf()
-    var usuario: Usuario = TODO()
+    var user: User = TODO()
     var tipoDeEnvio: String = ""
     //estado
     //itemCompra

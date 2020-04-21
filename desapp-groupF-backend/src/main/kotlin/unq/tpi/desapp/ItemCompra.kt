@@ -1,7 +1,7 @@
 package unq.tpi.desapp
 
-class ItemCompra(producto: Producto, cantidad: Double) {
-    var item: Producto? = null
+class ItemCompra(product: Product, cantidad: Double) {
+    var item: Product? = null
     var cantidad: Double = 0.0
     val comercio: Comercio? = null
 
