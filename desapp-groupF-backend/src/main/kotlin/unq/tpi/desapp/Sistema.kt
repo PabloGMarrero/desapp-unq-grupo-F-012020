@@ -29,7 +29,7 @@ class Sistema {
     fun agregarItemAlCarrito(user: User, product: Product, cantidad: Double, store: Store){
 
         if (this.comercioTieneStock(product)) {
-            user.agregarItemProducto(product, cantidad, store)
+      //      user.agregarItemProducto(product, cantidad, store)
         }
     }
 

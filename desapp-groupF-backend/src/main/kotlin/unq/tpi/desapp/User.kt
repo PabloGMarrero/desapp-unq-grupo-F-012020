@@ -5,25 +5,26 @@ class User(nombre: String, contraseña: String, email: String) {
     var nombre: String = ""
     var contrasenia: String = ""
     var email: String = ""
-    var umbralDeCompra: Double = 0.0
-    var preferenciaCategoria: MutableList<Categorias> =  mutableListOf()
+    var purchaseRange: Double = 0.0
+    var categoryPreferences: MutableList<Categories> =  mutableListOf()
     var historialPurchases: MutableList<Purchase> =  mutableListOf()
-    var carrito: MutableList<Item> = mutableListOf()
+    var shoppingBag: MutableList<Item> = mutableListOf()
 
-    class Categorias {
+    class Categories(name: String) {
+        var name: String = name
 
     }
 
-    fun agregarItemProducto(product: Product, cantidad: Double, store: Store) {
-        carrito.add(Item(product,cantidad, store))
+    fun adddItemProduct(product: Product, quantity: Double, store: Store) {
+        shoppingBag.add(Item(product,quantity, store))
     }
 
-    fun agregarAlHistorial(purchase: Purchase){
+    fun addToAlHistorial(purchase: Purchase){
         historialPurchases.add(purchase)
     }
 
-    fun cambiarUmbralDeCompra(distancia: Double){
-        this.umbralDeCompra = distancia
+    fun changePurchaseRange(distancia: Double){
+        this.purchaseRange = distancia
     }
 
 

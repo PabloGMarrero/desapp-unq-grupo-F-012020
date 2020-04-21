@@ -22,7 +22,7 @@ class Store(activity: String, adress: String, distance: Double )  {
         var hourTo: String = hourTo
     }
 
-    fun addOferta(discount : Discount) {
+    fun addDiscount(discount : Discount) {
         this.discounts.add(discount)
     }
 
@@ -39,12 +39,16 @@ class Store(activity: String, adress: String, distance: Double )  {
         this.purchasesReceived.add(purchase)
     }
 
-    fun addPaymentType (bank: String , card: String){
-        this.paymentTypes.add(PaymentType(bank,card))
+    fun addPaymentType (pay: PaymentType){
+        this.paymentTypes.add(pay)
     }
 
-    fun addOpenhours(day: String, hourFrom:String, hourTo: String){
-        this.openingHours.add(OpenHours(day,hourFrom,hourTo))
+    fun addOpenhours(openHours: OpenHours){
+        this.openingHours.add(openHours)
+    }
+
+    fun changeCoverageDistance(newDistance: Double){
+        this.coverageDistance = newDistance
     }
 
 
