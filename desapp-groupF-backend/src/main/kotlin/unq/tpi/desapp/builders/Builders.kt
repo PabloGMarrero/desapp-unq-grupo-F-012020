@@ -105,3 +105,25 @@ class PurchaseBuilder {
 
 
 }
+
+class UserBuilder {
+
+    var name: String = ""
+    var pass: String = ""
+    var email: String = ""
+    var purchaseRange: Double = 0.0
+
+
+    companion object {
+        @JvmStatic
+        fun aUser():UserBuilder{
+            return UserBuilder()
+        }
+    }
+
+    fun build(): User {
+        return User(name,pass,email)
+    }
+
+
+}

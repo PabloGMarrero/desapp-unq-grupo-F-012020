@@ -1,10 +1,10 @@
 package unq.tpi.desapp
 
-class User(nombre: String, contraseña: String, email: String) {
+class User(aName: String, aPassword: String, aMail: String) {
 
-    var nombre: String = ""
-    var contrasenia: String = ""
-    var email: String = ""
+    var name: String = aName
+    var password: String = aPassword
+    var email: String = aMail
     var purchaseRange: Double = 0.0
     var categoryPreferences: MutableList<Categories> =  mutableListOf()
     var historialPurchases: MutableList<Purchase> =  mutableListOf()
@@ -15,11 +15,11 @@ class User(nombre: String, contraseña: String, email: String) {
 
     }
 
-    fun adddItemProduct(product: Product, quantity: Double, store: Store) {
-        shoppingBag.add(Item(product,quantity, store))
+    fun adddItemProduct(aItem: Item) {
+        shoppingBag.add(aItem)
     }
 
-    fun addToAlHistorial(purchase: Purchase){
+    fun addToHistorial(purchase: Purchase){
         historialPurchases.add(purchase)
     }
 
