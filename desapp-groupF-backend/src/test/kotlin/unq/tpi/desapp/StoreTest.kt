@@ -19,7 +19,7 @@ class StoreTest {
     fun testStoreDefault() {
         var store = StoreBuilder.aStore().build()
         assertEquals(store.activity, "")
-        assertEquals(store.adress, "")
+        assertEquals(store.address, "")
         assertEquals(store.coverageDistance, 0.0)
     }
 
@@ -32,7 +32,7 @@ class StoreTest {
     @Test
     fun testStoreAdress(){
         var store = StoreBuilder.aStore().withAdress("Av. Monroe 1010").build()
-        assertEquals(store.adress, "Av. Monroe 1010")
+        assertEquals(store.address, "Av. Monroe 1010")
     }
 
     @Test

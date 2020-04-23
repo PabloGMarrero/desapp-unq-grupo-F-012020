@@ -17,7 +17,7 @@ class UserTest {
     @Test
     fun TestUserAdddItemProduct() {
         var user = UserBuilder.aUser().build()
-        user.adddItemProduct(aItem)
+        user.addItemProduct(aItem)
         assert(user.shoppingBag.contains(aItem))
     }
 
