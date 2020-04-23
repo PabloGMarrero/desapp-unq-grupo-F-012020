@@ -1,13 +1,13 @@
 package unq.tpi.desapp
 
-class Product(id:Long, imagen:String, nombre:String, precio:Double, marca:String) {
+class Product(id:Long, imageUrl:String, productName:String, price:Double, brand:String) {
 
 
     var id: Long = id
-    var imagen:String = imagen
-    var nombre: String = nombre
-    var precio: Double = precio
-    var marca: String = marca
+    var imageUrl:String = imageUrl
+    var productName: String = productName
+    var price: Double = price
+    var brand: String = brand
 
 
 

@@ -2,11 +2,8 @@ package unq.tpi.desapp
 
 import java.time.LocalDate
 
-class Discount(percentage: Double, dateFrom: LocalDate, dateTo:LocalDate, product: Product) {
+abstract class Discount(percentage: Double, dateFrom: LocalDate, dateTo:LocalDate) {
     var percentage: Double = percentage
-    var product: Product =  product
     var dateFrom: LocalDate = dateFrom
-    var DateTo: LocalDate = dateTo
-
-
+    var dateTo: LocalDate = dateTo
 }

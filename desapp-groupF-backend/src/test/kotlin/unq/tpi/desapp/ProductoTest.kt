@@ -3,7 +3,7 @@ package unq.tpi.desapp
 import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
-import unq.tpi.desapp.builders.ProductoBuilder
+import unq.tpi.desapp.builders.ProductBuilder
 
 @SpringBootTest
 class ProductoTest {
@@ -11,49 +11,49 @@ class ProductoTest {
 
     @Test
     fun testConstructorParametrosDefault() {
-        var producto = ProductoBuilder.unProducto().build()
+        var producto = ProductBuilder.aProduct().build()
         assertEquals(producto.id, 0)
-        assertEquals(producto.imagen, "")
-        assertEquals(producto.marca, "")
-        assertEquals(producto.nombre, "")
-        assertEquals(producto.precio, 0.0)
+        assertEquals(producto.imageUrl, "")
+        assertEquals(producto.brand, "")
+        assertEquals(producto.productName, "")
+        assertEquals(producto.price, 0.0)
     }
 
     @Test
-    fun testProductoConId100(){
-        var producto = ProductoBuilder.unProducto().conId(100).build()
+    fun testProductWithId100(){
+        var producto = ProductBuilder.aProduct().withId(100).build()
         assertEquals(producto.id, 100)
     }
 
     @Test
-    fun testProductoConImagenDistintoVacio(){
-        var producto = ProductoBuilder.unProducto().conUrl("blabla").build()
-        assertEquals(producto.imagen, "blabla")
+    fun testProductWithUrlImage(){
+        var producto = ProductBuilder.aProduct().withUrl("blabla").build()
+        assertEquals(producto.imageUrl, "blabla")
     }
 
     @Test
-    fun testProductoConMarcaDistintoVacio(){
-        var producto = ProductoBuilder.unProducto().conMarca("Marolio").build()
-        assertEquals(producto.marca, "Marolio")
+    fun testProductWithBrand(){
+        var producto = ProductBuilder.aProduct().withBrand("Marolio").build()
+        assertEquals(producto.brand, "Marolio")
     }
 
     @Test
-    fun testProductoConNombreDistintoVacio(){
-        var producto = ProductoBuilder.unProducto().conNombre("Aceite").build()
-        assertEquals(producto.nombre, "Aceite")
+    fun testProductWithName(){
+        var producto = ProductBuilder.aProduct().withName("Aceite").build()
+        assertEquals(producto.productName, "Aceite")
     }
 
     @Test
-    fun testProductoConPrecioDistintoVacio(){
-        var producto = ProductoBuilder.unProducto().conPrecio(85.5).build()
-        assertEquals(producto.precio, 85.5)
+    fun testProductWithPrice(){
+        var producto = ProductBuilder.aProduct().withPrice(85.5).build()
+        assertEquals(producto.price, 85.5)
     }
 
     @Test
-    fun testProductoConPrecio50YMarcaPepitos(){
-        var producto = ProductoBuilder.unProducto().conPrecio(50.0).conMarca("Pepitos").build()
-        assertEquals(producto.precio, 50.0)
-        assertEquals(producto.marca, "Pepitos")
+    fun testProductWithPrice50AndBrandPepitos(){
+        var producto = ProductBuilder.aProduct().withPrice(50.0).withBrand("Pepitos").build()
+        assertEquals(producto.price, 50.0)
+        assertEquals(producto.brand, "Pepitos")
     }
 
 }
