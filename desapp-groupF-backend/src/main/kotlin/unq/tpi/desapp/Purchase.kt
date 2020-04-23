@@ -12,7 +12,7 @@ class Purchase(aUser: User, deliveryType: String) {
     fun getTotal(): Double {
         var total = 0.0
         for (item in itemList){
-            total = total + (item.quantity * item.product.precio)
+            total = total + (item.quantity * item.product.price)
         }
         return total
     }

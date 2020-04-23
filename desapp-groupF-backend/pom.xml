@@ -64,6 +64,13 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+			<groupId>io.mockk</groupId>
+			<artifactId>mockk</artifactId>
+			<version>1.10.0</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- Codacy coberture -->
 		<dependency>
 			<groupId>com.codacy</groupId>

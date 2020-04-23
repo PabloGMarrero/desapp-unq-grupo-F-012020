@@ -52,6 +52,4 @@ class Store(activity: String, adress: String, distance: Double )  {
     }
 
 
-
 }
-//e2a1d8454e4948008593996ff0f8af46 token repository
