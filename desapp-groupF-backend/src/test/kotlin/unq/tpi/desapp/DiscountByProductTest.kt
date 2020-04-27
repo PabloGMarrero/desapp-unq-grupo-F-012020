@@ -3,9 +3,11 @@ package unq.tpi.desapp
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.springframework.boot.test.context.SpringBootTest
 import unq.tpi.desapp.builders.DiscountByProductBuilder
 import java.time.LocalDate
 
+@SpringBootTest
 class DiscountByProductTest {
 
     var aProduct = mockk<Product>()
