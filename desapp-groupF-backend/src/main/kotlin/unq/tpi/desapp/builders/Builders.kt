@@ -258,7 +258,7 @@ class GeographicMapBuilder{
     }
 
     fun build():GeographicMap{
-        return  GeographicMap(latitude, longitude, address)
+        return  GeographicMap(latitude, longitude)
     }
 
     fun withLatitude(aLatitud:Double):GeographicMapBuilder {
@@ -270,9 +270,43 @@ class GeographicMapBuilder{
         this.longitude = aLongitude
         return this
     }
+}
 
-    fun withAddress(anAddress:String):GeographicMapBuilder {
-        this.address = anAddress
+class AddressBuilder(){
+    var locality: String = ""
+    var street: String = ""
+    var number:Long = 0
+    var zone : GeographicMap = GeographicMapBuilder.aGeographicMap().build()
+
+    companion object{
+        @JvmStatic
+        fun anAddress():AddressBuilder{
+            return AddressBuilder()
+        }
+    }
+
+    fun build():Address{
+        return Address(locality, street, number, zone)
+    }
+
+    fun withLocality(aLocality:String):AddressBuilder{
+        this.locality = aLocality
         return this
     }
+
+    fun withStreet(aStreet:String):AddressBuilder{
+        this.street = aStreet
+        return this
+    }
+
+    fun withNumber(aNumber:Long):AddressBuilder{
+        this.number = aNumber
+        return this
+    }
+
+    fun withZone(aGeographicZone:GeographicMap):AddressBuilder{
+        this.zone = aGeographicZone
+        return this
+    }
+
 }
