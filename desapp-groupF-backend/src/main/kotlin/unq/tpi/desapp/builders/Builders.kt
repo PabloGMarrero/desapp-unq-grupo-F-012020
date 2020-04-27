@@ -244,3 +244,35 @@ class DiscountByProductsBuilder{
         return this
     }
 }
+
+class GeographicMapBuilder{
+    var latitude:Double = 0.00
+    var longitude:Double = 0.00
+    var address:String = ""
+
+    companion object{
+        @JvmStatic
+        fun aGeographicMap():GeographicMapBuilder{
+            return  GeographicMapBuilder()
+        }
+    }
+
+    fun build():GeographicMap{
+        return  GeographicMap(latitude, longitude, address)
+    }
+
+    fun withLatitude(aLatitud:Double):GeographicMapBuilder {
+        this.latitude = aLatitud
+        return this
+    }
+
+    fun withLongitude(aLongitude:Double):GeographicMapBuilder {
+        this.longitude = aLongitude
+        return this
+    }
+
+    fun withAddress(anAddress:String):GeographicMapBuilder {
+        this.address = anAddress
+        return this
+    }
+}
