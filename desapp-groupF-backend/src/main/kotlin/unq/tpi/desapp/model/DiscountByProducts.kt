@@ -1,4 +1,4 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 import java.time.LocalDate
 
@@ -12,6 +12,6 @@ import java.time.LocalDate
  */
 
 class DiscountByProducts(percentage: Double, dateFrom: LocalDate, dateTo:LocalDate, listOfProducts: MutableList<Product> )
-    :Discount(percentage, dateFrom, dateTo) {
+    : Discount(percentage, dateFrom, dateTo) {
     var listOfProducts: MutableList<Product> = listOfProducts
 }

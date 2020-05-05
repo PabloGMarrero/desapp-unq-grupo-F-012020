@@ -1,19 +1,20 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import unq.tpi.desapp.builders.StoreBuilder
+import unq.tpi.desapp.model.*
 import java.time.LocalDate
 
 @SpringBootTest
 class StoreTest {
-    val aProduct = Product(1, "blabla","Pepitos",35.5, "Bagley")
-    val aDiscount = DiscountByCategory(10.0, LocalDate.now(), LocalDate.MAX, "" )
+    val aProduct = Product(1, "blabla", "Pepitos", 35.5, "Bagley")
+    val aDiscount = DiscountByCategory(10.0, LocalDate.now(), LocalDate.MAX, "")
     val openH = Store.OpenHours("Jueves","09:00","19:00")
     val payment = Store.PaymentType("Banco Galicia", "1000 0000 0000 0000")
-    val aUser = User("Pelufo","123","pelufo@pelufo")
-    val aPurchase = Purchase(aUser,"Envio a Domicilio")
+    val aUser = User("Pelufo", "123", "pelufo@pelufo")
+    val aPurchase = Purchase(aUser, "Envio a Domicilio")
 
     @Test
     fun testStoreDefault() {

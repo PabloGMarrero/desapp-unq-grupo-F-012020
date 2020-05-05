@@ -1,4 +1,4 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 /**
  * Store represent the store business to each owner.

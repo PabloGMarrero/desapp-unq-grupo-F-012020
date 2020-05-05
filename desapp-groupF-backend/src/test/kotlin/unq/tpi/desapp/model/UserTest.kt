@@ -1,9 +1,10 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import unq.tpi.desapp.builders.UserBuilder
+import unq.tpi.desapp.model.*
 
 @SpringBootTest
 class UserTest {

@@ -1,8 +1,6 @@
 package unq.tpi.desapp.builders
 
-import org.apache.tomcat.jni.Local
-import shapeless.ops.nat
-import unq.tpi.desapp.*
+import unq.tpi.desapp.model.*
 import java.time.LocalDate
 
 class ProductBuilder {
@@ -90,7 +88,7 @@ class StoreBuilder {
 
 class PurchaseBuilder {
 
-    var user: User = User("","","")
+    var user: User = User("", "", "")
     var deliveryType: String = ""
 
 
@@ -124,7 +122,7 @@ class UserBuilder {
     }
 
     fun build(): User {
-        return User(name,pass,email)
+        return User(name, pass, email)
     }
 
 
@@ -165,7 +163,7 @@ class DiscountByCategoryBuilder{
     }
 
     fun build(): DiscountByCategory {
-        return DiscountByCategory(percentage,dateFrom,dateTo, categoryName)
+        return DiscountByCategory(percentage, dateFrom, dateTo, categoryName)
     }
 }
 
@@ -183,7 +181,7 @@ class DiscountByProductBuilder{
     }
 
     fun build(): DiscountByProduct {
-        return DiscountByProduct(percentage,dateFrom,dateTo, aProduct)
+        return DiscountByProduct(percentage, dateFrom, dateTo, aProduct)
     }
 
     fun withPercentage(percentage:Double):DiscountByProductBuilder{
@@ -221,7 +219,7 @@ class DiscountByProductsBuilder{
     }
 
     fun build(): DiscountByProducts {
-        return DiscountByProducts(percentage,dateFrom,dateTo, listOfProducts)
+        return DiscountByProducts(percentage, dateFrom, dateTo, listOfProducts)
     }
 
     fun withPercentage(percentage:Double):DiscountByProductsBuilder{
@@ -257,8 +255,8 @@ class GeographicMapBuilder{
         }
     }
 
-    fun build():GeographicMap{
-        return  GeographicMap(latitude, longitude)
+    fun build(): GeographicMap {
+        return GeographicMap(latitude, longitude)
     }
 
     fun withLatitude(aLatitud:Double):GeographicMapBuilder {
@@ -285,7 +283,7 @@ class AddressBuilder(){
         }
     }
 
-    fun build():Address{
+    fun build(): Address {
         return Address(locality, street, number, zone)
     }
 
@@ -304,7 +302,7 @@ class AddressBuilder(){
         return this
     }
 
-    fun withZone(aGeographicZone:GeographicMap):AddressBuilder{
+    fun withZone(aGeographicZone: GeographicMap):AddressBuilder{
         this.zone = aGeographicZone
         return this
     }

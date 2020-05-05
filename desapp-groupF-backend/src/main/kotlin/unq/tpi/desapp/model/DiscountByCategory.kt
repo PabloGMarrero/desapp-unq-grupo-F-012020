@@ -1,5 +1,6 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
+import unq.tpi.desapp.model.Discount
 import java.time.LocalDate
 
 /**
@@ -11,6 +12,6 @@ import java.time.LocalDate
  * @param categoryName represents the name of the category
  */
 class DiscountByCategory (percentage: Double, dateFrom: LocalDate, dateTo:LocalDate, categoryName: String)
-    :Discount(percentage, dateFrom, dateTo) {
+    : Discount(percentage, dateFrom, dateTo) {
     var categoryName = categoryName
 }

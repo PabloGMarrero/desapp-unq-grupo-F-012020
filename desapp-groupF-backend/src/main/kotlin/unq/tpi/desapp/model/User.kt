@@ -1,4 +1,4 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 /**
  * Purchase represents the purchase of each user

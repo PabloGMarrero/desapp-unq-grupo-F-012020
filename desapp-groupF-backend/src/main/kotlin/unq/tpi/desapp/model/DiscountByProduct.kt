@@ -1,4 +1,4 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 import java.time.LocalDate
 
@@ -11,6 +11,6 @@ import java.time.LocalDate
  * @param aProduct represents the product it applies the discount.
  */
 class DiscountByProduct(percentage: Double, dateFrom: LocalDate, dateTo:LocalDate, aProduct: Product)
-    :Discount(percentage, dateFrom, dateTo) {
+    : Discount(percentage, dateFrom, dateTo) {
     var aProduct = aProduct
 }

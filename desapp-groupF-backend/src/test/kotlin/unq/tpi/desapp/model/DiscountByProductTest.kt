@@ -1,10 +1,11 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import unq.tpi.desapp.builders.DiscountByProductBuilder
+import unq.tpi.desapp.model.Product
 import java.time.LocalDate
 
 @SpringBootTest
