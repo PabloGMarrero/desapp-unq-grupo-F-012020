@@ -2,7 +2,8 @@ package unq.tpi.desapp.model
 
 import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.*
+import unq.tpi.desapp.builders.ProductBuilder
 import unq.tpi.desapp.builders.StoreBuilder
 import unq.tpi.desapp.model.*
 import java.time.LocalDate
@@ -77,5 +78,23 @@ class StoreTest {
         assert(store.purchasesReceived.contains(aPurchase))
     }
 
+    @Test
+    fun testChangeCoverageDistanceFrom100to200(){
+        var store = StoreBuilder.aStore().withDistance(100.0).build()
+        assertEquals(store.coverageDistance, 100.00)
 
+        store.changeCoverageDistance(200.0)
+        assertEquals(store.coverageDistance, 200.0)
+    }
+
+    @Test
+    fun testVerifyIfStoreHasProductAsStock(){
+        var store = StoreBuilder.aStore().withDistance(100.0).build()
+        var product = ProductBuilder.aProduct().build()
+
+        assertFalse(store.hasProductAsStock(product))
+        store.addProduct(product)
+
+        assertTrue(store.hasProductAsStock(product))
+    }
 }

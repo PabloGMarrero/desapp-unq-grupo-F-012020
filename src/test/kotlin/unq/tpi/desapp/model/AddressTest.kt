@@ -19,4 +19,30 @@ class AddressTest {
         assertEquals(address.geographicZone, zone)
     }
 
+    @Test
+    fun testAddresWithLocalityQuilmes(){
+        var address = AddressBuilder.anAddress().withLocality("Quilmes").build()
+        assertEquals(address.locality, "Quilmes")
+    }
+
+    @Test
+    fun testAddresWithStreetRivadavia(){
+        var address = AddressBuilder.anAddress().withStreet("Rivadavia").build()
+        assertEquals(address.street, "Rivadavia")
+    }
+
+    @Test
+    fun testAddresWithNumber150(){
+        var address = AddressBuilder.anAddress().withNumber(150).build()
+        assertEquals(address.number, 150)
+    }
+
+    @Test
+    fun testAddresWithZone(){
+        var zone = GeographicMapBuilder.aGeographicMap().withLatitude(41.0).withLongitude(35.0).build()
+        var address = AddressBuilder.anAddress().withZone(zone).build()
+
+        assertEquals(address.geographicZone, zone)
+    }
+
 }
