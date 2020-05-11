@@ -1,7 +1,11 @@
 package unq.tpi.desapp.builders
 
 import unq.tpi.desapp.model.*
+import unq.tpi.desapp.model.deliveryType.DeliveryType
+import unq.tpi.desapp.model.deliveryType.HomeDelivery
+import unq.tpi.desapp.model.deliveryType.PickupInStore
 import java.time.LocalDate
+import java.time.LocalTime
 
 class ProductBuilder {
 
@@ -82,15 +86,45 @@ class StoreBuilder {
         return this
     }
 
+}
 
+class ItemBuilder{
+    var product: Product = ProductBuilder.aProduct().build()
+    var quantity: Double = 0.00
+    var store: Store = StoreBuilder.aStore().build()
 
+    companion object{
+        @JvmStatic
+        fun anItem():ItemBuilder{
+            return ItemBuilder()
+        }
+    }
+
+    fun build():Item{
+        return Item(product, quantity, store)
+    }
+
+    fun withProduct(aProduct: Product):ItemBuilder{
+        this.product = aProduct
+        return this
+    }
+
+    fun withQuantity(aQuantity:Double):ItemBuilder{
+        this.quantity = aQuantity
+        return this
+    }
+
+    fun withAStore(aStore:Store):ItemBuilder{
+        this.store = aStore
+        return this
+    }
 }
 
 class PurchaseBuilder {
 
-    var user: User = User("", "", "")
-    var deliveryType: String = ""
-
+    var user: User = UserBuilder.anUser().build()
+    var deliveryType: DeliveryType = PickupInStoreBuilder.aPickupInStore().build()
+    var paymentMethod: PaymentMethod = PaymentMethod.CASH
 
     companion object {
         @JvmStatic
@@ -100,7 +134,17 @@ class PurchaseBuilder {
     }
 
     fun build(): Purchase {
-        return Purchase(user, deliveryType)
+        return Purchase(user, deliveryType, paymentMethod)
+    }
+
+    fun withDeliveryType(aDeliveryType:DeliveryType):PurchaseBuilder{
+        this.deliveryType = aDeliveryType
+        return this
+    }
+
+    fun withUser(anUser:User):PurchaseBuilder{
+        this.user = anUser
+        return this
     }
 
 
@@ -116,7 +160,7 @@ class UserBuilder {
 
     companion object {
         @JvmStatic
-        fun aUser():UserBuilder{
+        fun anUser():UserBuilder{
             return UserBuilder()
         }
     }
@@ -304,6 +348,72 @@ class AddressBuilder(){
 
     fun withZone(aGeographicZone: GeographicMap):AddressBuilder{
         this.zone = aGeographicZone
+        return this
+    }
+
+}
+
+class PickupInStoreBuilder(){
+    var date: LocalDate = LocalDate.MIN
+    var hour: LocalTime = LocalTime.MIDNIGHT
+    var storeAddress: String  = ""
+
+    companion object{
+        @JvmStatic
+        fun aPickupInStore():PickupInStoreBuilder{
+            return PickupInStoreBuilder()
+        }
+    }
+
+    fun build(): PickupInStore {
+        return PickupInStore(date, hour, storeAddress)
+    }
+
+    fun withDate(aDate:LocalDate):PickupInStoreBuilder{
+        this.date = aDate
+        return this
+    }
+
+    fun withHour(anHour:LocalTime):PickupInStoreBuilder{
+        this.hour = anHour
+        return this
+    }
+
+    fun withStoreAddress(anAddress:String):PickupInStoreBuilder{
+        this.storeAddress = anAddress
+        return this
+    }
+
+}
+
+class HomeDeliveryBuilder(){
+    var date: LocalDate = LocalDate.MIN
+    var hour: LocalTime = LocalTime.MIDNIGHT
+    var address: String  = ""
+
+    companion object{
+        @JvmStatic
+        fun aHomeDelivery():HomeDeliveryBuilder{
+            return HomeDeliveryBuilder()
+        }
+    }
+
+    fun build(): HomeDelivery {
+        return HomeDelivery(date, hour, address)
+    }
+
+    fun withDate(aDate:LocalDate):HomeDeliveryBuilder{
+        this.date = aDate
+        return this
+    }
+
+    fun withHour(anHour:LocalTime):HomeDeliveryBuilder{
+        this.hour = anHour
+        return this
+    }
+
+    fun withAddress(anAddress:String):HomeDeliveryBuilder{
+        this.address = anAddress
         return this
     }
 

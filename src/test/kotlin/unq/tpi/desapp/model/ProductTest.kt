@@ -2,11 +2,11 @@ package unq.tpi.desapp.model
 
 import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.*
 import unq.tpi.desapp.builders.ProductBuilder
 
 @SpringBootTest
-class ProductoTest {
+class ProductTest {
 
 
     @Test
@@ -56,4 +56,19 @@ class ProductoTest {
         assertEquals(producto.brand, "Pepitos")
     }
 
+    @Test
+    fun testOneProductIsEqualToAnotherOneWithSameAttributes(){
+        var productA = ProductBuilder.aProduct().build()
+        var productB = ProductBuilder.aProduct().build()
+
+        assertEquals(productA, productB)
+    }
+
+    @Test
+    fun testOneProductIsEqualToAnotherOneWithDifferentsAttributes(){
+        var productA = ProductBuilder.aProduct().build()
+        var productB = ProductBuilder.aProduct().withId(10).build()
+
+        assertNotEquals(productA, productB)
+    }
 }

@@ -17,6 +17,20 @@ class Product(id:Long, imageUrl:String, productName:String, price:Double, brand:
     var price: Double = price
     var brand: String = brand
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Product
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
 
 
 }
