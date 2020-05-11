@@ -54,6 +54,10 @@ class Purchase(anUser: User, deliveryType: DeliveryType, paymentMethod: PaymentM
     }
 
 
+    /**
+     * Change the paymment method of the purchase
+     * @param aPaymentMethod the paymment method of the purchase
+     */
     fun changePaymentMethod(aPaymentMethod: PaymentMethod){
         this.paymentMethod = aPaymentMethod
     }
