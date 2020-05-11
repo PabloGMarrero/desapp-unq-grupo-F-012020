@@ -101,4 +101,12 @@ class HomeDeliveryTest {
 
         assertNotEquals(deliveryTypeA, deliveryTypeB)
     }
+
+    @Test
+    fun testEqualsAndHashCodeMethods(){
+        var deliveryTypeA = HomeDeliveryBuilder.aHomeDelivery().build()
+
+        assertEquals(deliveryTypeA, deliveryTypeA)
+        assertEquals(deliveryTypeA.hashCode(), deliveryTypeA.hashCode())
+    }
 }

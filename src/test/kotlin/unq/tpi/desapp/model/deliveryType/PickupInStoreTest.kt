@@ -95,4 +95,12 @@ class PickupInStoreTest {
         assertNotEquals(deliveryTypeA, deliveryTypeB)
     }
 
+    @Test
+    fun testEqualsAndHashCodeMethods(){
+        var deliveryTypeA = PickupInStoreBuilder.aPickupInStore().build()
+
+        assertEquals(deliveryTypeA, deliveryTypeA)
+        assertEquals(deliveryTypeA.hashCode(), deliveryTypeA.hashCode())
+    }
+
 }

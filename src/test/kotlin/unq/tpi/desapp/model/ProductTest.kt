@@ -71,4 +71,12 @@ class ProductTest {
 
         assertNotEquals(productA, productB)
     }
+
+    @Test
+    fun testEqualsAndHashCodeTest(){
+        var product = ProductBuilder.aProduct().build()
+
+        assertEquals(product, product)
+        assertEquals(product.hashCode(), product.hashCode())
+    }
 }

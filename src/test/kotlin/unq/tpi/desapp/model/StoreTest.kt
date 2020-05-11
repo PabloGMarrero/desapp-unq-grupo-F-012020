@@ -26,25 +26,25 @@ class StoreTest {
     }
 
     @Test
-    fun testStoreWithActivityKiosko(){
+    fun testStoreWithActivityKiosko() {
         var store = StoreBuilder.aStore().withActivity("Kiosko").build()
         assertEquals(store.activity, "Kiosko")
     }
 
     @Test
-    fun testStoreAdress(){
+    fun testStoreAdress() {
         var store = StoreBuilder.aStore().withAdress("Av. Monroe 1010").build()
         assertEquals(store.address, "Av. Monroe 1010")
     }
 
     @Test
-    fun testStoreCoverageDistance(){
+    fun testStoreCoverageDistance() {
         var store = StoreBuilder.aStore().withDistance(100.00).build()
         assertEquals(store.coverageDistance, 100.00)
     }
 
     @Test
-    fun testStoreAddPaymentType(){
+    fun testStoreAddPaymentType() {
         var store = StoreBuilder.aStore().build()
         var payment = PaymentMethod.CASH
 
@@ -53,55 +53,55 @@ class StoreTest {
     }
 
     @Test
-    fun testDeletePaymentType(){
+    fun testDeletePaymentType() {
         var store = StoreBuilder.aStore().build()
         var payment = PaymentMethod.DEBIT
 
         assertEquals(store.paymentsMethods.size, 1)
-        assertTrue(store.paymentsMethods.contains(PaymentMethod.CASH) )
+        assertTrue(store.paymentsMethods.contains(PaymentMethod.CASH))
 
         store.addPaymentMethod(payment)
         assertEquals(store.paymentsMethods.size, 2)
-        assertTrue(store.paymentsMethods.contains(PaymentMethod.CASH) )
-        assertTrue(store.paymentsMethods.contains(payment) )
+        assertTrue(store.paymentsMethods.contains(PaymentMethod.CASH))
+        assertTrue(store.paymentsMethods.contains(payment))
 
         store.deletePaymentMethod(payment)
-        assertTrue(store.paymentsMethods.contains(PaymentMethod.CASH) )
+        assertTrue(store.paymentsMethods.contains(PaymentMethod.CASH))
         assertEquals(store.paymentsMethods.size, 1)
     }
 
     @Test
-    fun testStoreAddOpenHours(){
+    fun testStoreAddOpenHours() {
         var store = StoreBuilder.aStore().build()
         var openH = OpenHours("Jueves", DateTime().withHourOfDay(9).withMinuteOfHour(30),
-                DateTime().withHourOfDay(13).withMinuteOfHour(30) )
+                DateTime().withHourOfDay(13).withMinuteOfHour(30))
         store.addOpenhours(openH)
         assert(store.openingHours.contains(openH))
     }
 
     @Test
-    fun testStoreAddProduct(){
+    fun testStoreAddProduct() {
         var store = StoreBuilder.aStore().build()
         store.addProduct(aProduct)
         assert(store.productList.contains(aProduct))
     }
 
     @Test
-    fun testStoreAddDiscount(){
+    fun testStoreAddDiscount() {
         var store = StoreBuilder.aStore().build()
         store.addDiscount(aDiscount)
         assert(store.discounts.contains(aDiscount))
     }
 
     @Test
-    fun testStoreAddPurchase(){
+    fun testStoreAddPurchase() {
         var store = StoreBuilder.aStore().build()
         store.addPurchase(aPurchase)
         assert(store.purchasesReceived.contains(aPurchase))
     }
 
     @Test
-    fun testChangeCoverageDistanceFrom100to200(){
+    fun testChangeCoverageDistanceFrom100to200() {
         var store = StoreBuilder.aStore().withDistance(100.0).build()
         assertEquals(store.coverageDistance, 100.00)
 
@@ -110,7 +110,7 @@ class StoreTest {
     }
 
     @Test
-    fun testVerifyIfStoreHasProductAsStock(){
+    fun testVerifyIfStoreHasProductAsStock() {
         var store = StoreBuilder.aStore().withDistance(100.0).build()
         var product = ProductBuilder.aProduct().build()
 
@@ -118,5 +118,21 @@ class StoreTest {
         store.addProduct(product)
 
         assertTrue(store.hasProductAsStock(product))
+    }
+
+    @Test
+    fun testEqualsAndHashCodeMethods() {
+        var store = StoreBuilder.aStore().build()
+
+        assertEquals(store, store)
+        assertEquals(store.hashCode(), store.hashCode())
+    }
+
+    @Test
+    fun testStoreWithDifferentAddress() {
+        var store = StoreBuilder.aStore().build()
+        var anotherStore = StoreBuilder.aStore().withAdress("test").build()
+
+        assertEquals(store, anotherStore)
     }
 }
