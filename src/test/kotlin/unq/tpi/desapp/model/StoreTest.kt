@@ -133,6 +133,6 @@ class StoreTest {
         var store = StoreBuilder.aStore().build()
         var anotherStore = StoreBuilder.aStore().withAdress("test").build()
 
-        assertEquals(store, anotherStore)
+        assertNotEquals(store, anotherStore)
     }
 }
