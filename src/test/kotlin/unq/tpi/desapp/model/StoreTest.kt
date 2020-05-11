@@ -1,21 +1,21 @@
 package unq.tpi.desapp.model
 
+import org.joda.time.DateTime
 import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import unq.tpi.desapp.builders.ProductBuilder
+import unq.tpi.desapp.builders.PurchaseBuilder
 import unq.tpi.desapp.builders.StoreBuilder
 import unq.tpi.desapp.model.*
 import java.time.LocalDate
+import java.time.LocalTime
 
 @SpringBootTest
 class StoreTest {
     val aProduct = Product(1, "blabla", "Pepitos", 35.5, "Bagley")
     val aDiscount = DiscountByCategory(10.0, LocalDate.now(), LocalDate.MAX, "")
-    val openH = Store.OpenHours("Jueves","09:00","19:00")
-    val payment = Store.PaymentType("Banco Galicia", "1000 0000 0000 0000")
-    val aUser = User("Pelufo", "123", "pelufo@pelufo")
-    val aPurchase = Purchase(aUser, "Envio a Domicilio")
+    val aPurchase = PurchaseBuilder.aPurchase().build() // Purchase(aUser, "Envio a Domicilio")
 
     @Test
     fun testStoreDefault() {
@@ -46,13 +46,35 @@ class StoreTest {
     @Test
     fun testStoreAddPaymentType(){
         var store = StoreBuilder.aStore().build()
-        store.addPaymentType(payment)
-        assert(store.paymentTypes.contains(payment))
+        var payment = PaymentMethod.CASH
+
+        store.addPaymentMethod(payment)
+        assert(store.paymentsMethods.contains(payment))
+    }
+
+    @Test
+    fun testDeletePaymentType(){
+        var store = StoreBuilder.aStore().build()
+        var payment = PaymentMethod.DEBIT
+
+        assertEquals(store.paymentsMethods.size, 1)
+        assertTrue(store.paymentsMethods.contains(PaymentMethod.CASH) )
+
+        store.addPaymentMethod(payment)
+        assertEquals(store.paymentsMethods.size, 2)
+        assertTrue(store.paymentsMethods.contains(PaymentMethod.CASH) )
+        assertTrue(store.paymentsMethods.contains(payment) )
+
+        store.deletePaymentMethod(payment)
+        assertTrue(store.paymentsMethods.contains(PaymentMethod.CASH) )
+        assertEquals(store.paymentsMethods.size, 1)
     }
 
     @Test
     fun testStoreAddOpenHours(){
         var store = StoreBuilder.aStore().build()
+        var openH = OpenHours("Jueves", DateTime().withHourOfDay(9).withMinuteOfHour(30),
+                DateTime().withHourOfDay(13).withMinuteOfHour(30) )
         store.addOpenhours(openH)
         assert(store.openingHours.contains(openH))
     }

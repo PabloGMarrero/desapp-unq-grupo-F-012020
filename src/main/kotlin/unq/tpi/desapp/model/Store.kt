@@ -14,21 +14,15 @@ class Store(activity: String, address: String, distance: Double )  {
     var address: String = address
     var coverageDistance: Double = distance
     var openingHours: MutableList<OpenHours> = mutableListOf()
-    var paymentTypes: MutableList<PaymentType> = mutableListOf()
+    var paymentsMethods: MutableList<PaymentMethod> = mutableListOf()
     var productList: MutableList<Product> =  mutableListOf()
     var discounts: MutableList<Discount> =  mutableListOf()
     var purchasesReceived: MutableList<Purchase> = mutableListOf()
 
-    class PaymentType(bank:String, card: String){
-        var bank: String = bank
-        var card: String = card
+    init {
+        paymentsMethods.add(PaymentMethod.CASH)
     }
 
-    class OpenHours(day:String, hourFrom:String, hourTo:String){
-        var day: String = day
-        var hourFrom: String = hourFrom
-        var hourTo: String = hourTo
-    }
 
     /**
      * Adds a new [discount] to the store.
@@ -64,14 +58,6 @@ class Store(activity: String, address: String, distance: Double )  {
     }
 
     /**
-     * Adds a new [pay] to the store.
-     * @param pay
-     */
-    fun addPaymentType (pay: PaymentType){
-        this.paymentTypes.add(pay)
-    }
-
-    /**
      * Adds the [openHours] of the store.
      * @param openHours
      */
@@ -85,6 +71,40 @@ class Store(activity: String, address: String, distance: Double )  {
      */
     fun changeCoverageDistance(newDistance: Double){
         this.coverageDistance = newDistance
+    }
+
+
+    /**
+     * Adds a [paymentMethod] to the itemlist of the purchase.
+     * @param paymentMethod represents one item of the purcase
+     */
+    fun addPaymentMethod(paymentMethod: PaymentMethod) {
+        if (! this.paymentsMethods.contains(paymentMethod)){
+            this.paymentsMethods.add(paymentMethod)
+        }
+    }
+
+    /**
+     * Adds a [item] to the itemlist of the purchase.
+     * @param item represents one item of the purcase
+     */
+    fun deletePaymentMethod(paymentMethod: PaymentMethod) {
+        this.paymentsMethods.remove(paymentMethod)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Store
+
+        if (address != other.address) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return address.hashCode()
     }
 
 
