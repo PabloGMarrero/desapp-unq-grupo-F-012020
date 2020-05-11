@@ -15,10 +15,7 @@ before_install:
   
 install:
   - mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
-  
-script:
-  - mvn test -B
-  
+
 after_success:
   - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Kotlin --force-language 
   - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
