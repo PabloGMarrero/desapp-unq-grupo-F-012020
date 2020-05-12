@@ -5,6 +5,11 @@ NEW FEATURES:
 * Modelo de Back End con las clases requeridas
 * Test Unitario del codigo de Back End con >90% de Cobertura
 * Aplicacion Spring 
+* Configuracion de integracion continua Travis, build corriendo y SUCCESS. 
+* Deploy automatico en heroku
+* Codacy configurado, link en readme.md en github. 
+* Pequeño endpoint para productos
+* Modelado completo
 
 NOTES:
 
