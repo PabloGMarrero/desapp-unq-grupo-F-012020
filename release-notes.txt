@@ -2,18 +2,19 @@
 RELEASE V1.0.1
 ---------------------------------------------------------------------
 NEW FEATURES:
-* Modelo de Back End con las clases requeridas
+* Modelado completo
 * Test Unitario del codigo de Back End con >90% de Cobertura
 * Aplicacion Spring 
 * Configuracion de integracion continua Travis, build corriendo y SUCCESS. 
 * Deploy automatico en heroku
 * Codacy configurado, link en readme.md en github. 
 * Pequeño endpoint para productos
-* Modelado completo
+
 
 NOTES:
-
+* Algunos metodos de la APIREST "emulan" el funcionamiento del sistema no funcionan realmente contra una base de datos, está mockeado sobre una lista x ya que hay algunas cosas van a migrar a DB con uso de daos
+* Falta llamado a una api para calcular distancias según dirección o utilizar cálculo matemático con dos puntos
 
 
 KNOWN ISSUES:
-
+* Falta delimitar cuando una compra intervienen varios locales y poder seccionarlo
