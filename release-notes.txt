@@ -18,3 +18,5 @@ NOTES:
 
 KNOWN ISSUES:
 * Falta delimitar cuando una compra intervienen varios locales y poder seccionarlo
+* Falta delimitar bien cuando un usuario es usuario o cuando admin de un local
+* Falta la carga mediante batch
