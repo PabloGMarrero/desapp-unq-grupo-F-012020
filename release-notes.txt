@@ -1,0 +1,14 @@
+---------------------------------------------------------------------
+RELEASE V1.0.1
+---------------------------------------------------------------------
+NEW FEATURES:
+* Modelo de Back End con las clases requeridas
+* Test Unitario del codigo de Back End con >90% de Cobertura
+* Aplicacion Spring 
+
+NOTES:
+
+
+
+KNOWN ISSUES:
+
