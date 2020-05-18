@@ -18,5 +18,17 @@ class StoreService {
       fun findByID(id: Long): Optional<Store> {
             return repository.findById(id)
       }
+
+      fun getAll() : MutableIterable<Store> {
+            return repository.findAll()
+      }
+
+      fun save(aStore: Store): Store {
+            return repository.save(aStore)
+      }
+
+      fun updateStore(aStore: Store):Store{
+           return this.save(aStore)
+      }
 }
 

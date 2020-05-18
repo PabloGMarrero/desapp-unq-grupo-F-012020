@@ -40,7 +40,7 @@ class ProductController{
     fun getProductsByName(@RequestParam("productName") nameProduct:String):ResponseEntity<Iterable<Product>>{
         var products:Iterable<Product>  = this.productService.getByName(nameProduct)
         if(products.toList().isNotEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body(products)
+            return ResponseEntity.ok().body(products)
         }else{
             return ResponseEntity.notFound().build()
         }
@@ -51,7 +51,7 @@ class ProductController{
     fun addProduct(@RequestBody aProduct: Product):ResponseEntity<Product>{
         try {
             var productSaved:Product = this.productService.save(aProduct)
-            return ResponseEntity.status(HttpStatus.OK).body(productSaved)
+            return ResponseEntity.ok().body(productSaved)
         }catch(ex:Exception) {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null)
         }
@@ -60,7 +60,7 @@ class ProductController{
 
     @PutMapping("/add")
     fun updateProduct(@RequestParam("id") id: Long, @RequestBody product: Product):ResponseEntity<Product>{
-        return ResponseEntity.status(HttpStatus.OK).body(this.productService.updateProduct(product))
+        return ResponseEntity.ok().body(this.productService.updateProduct(product))
     }
 
     @DeleteMapping("/delete")
