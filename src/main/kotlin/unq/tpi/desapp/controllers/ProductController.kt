@@ -1,59 +1,76 @@
 package unq.tpi.desapp.controllers
 
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import unq.tpi.desapp.builders.ProductBuilder
 import unq.tpi.desapp.model.Product
-import unq.tpi.desapp.service.ProductRepository
-import javax.annotation.PostConstruct
+import unq.tpi.desapp.service.ProductService
+import org.springframework.http.ResponseEntity
+import java.util.*
+
 
 @RestController
 @RequestMapping("/products")
+class ProductController{
 
-class ProductController() {
-    var productRepository:ProductRepository = ProductRepository()
-
-    @PostConstruct
-    fun initial(){
-        var coke = ProductBuilder.aProduct().withBrand("Coca Cola").withName("Coca Cola Regular").withPrice(125.50).withId(1).build()
-        var chocolate = ProductBuilder.aProduct().withBrand("Coffler").withName("chocolate 200grs").withPrice(190.5).withId(2).build()
-
-        this.productRepository.saveProduct(coke, 1)
-        this.productRepository.saveProduct(chocolate, 1)
-    }
+    @Autowired
+    var productService: ProductService = ProductService()
 
     @GetMapping("/")
-    fun getProducts():MutableList<Product>{
-        return this.productRepository.getAll()
+    fun getAllProducts():ResponseEntity<Iterable<Product>> {
+        var list:Iterable<Product> = this.productService.findAll()
+        if (list.toList().isNotEmpty()){
+            return ResponseEntity.status(HttpStatus.OK).body(list)
+        }else{
+            return ResponseEntity.noContent().build()
+        }
     }
 
     @GetMapping("/get")
-    fun getProductById(@RequestParam("productId") productId:Long):Product{
-        return this.productRepository.getById(productId)
+    fun getProductById(@RequestParam("productId") productId:Long):ResponseEntity<Product>{
+        var product:Optional<Product>  = this.productService.findById(productId)
+        if(product.isPresent) {
+            return ResponseEntity.status(HttpStatus.OK).body(product.get())
+        }else{
+            return ResponseEntity.notFound().build()
+        }
     }
+
+    @GetMapping("/get/name")
+    fun getProductsByName(@RequestParam("productName") nameProduct:String):ResponseEntity<Iterable<Product>>{
+        var products:Iterable<Product>  = this.productService.getByName(nameProduct)
+        if(products.toList().isNotEmpty()) {
+            return ResponseEntity.ok().body(products)
+        }else{
+            return ResponseEntity.notFound().build()
+        }
+    }
+
 
     @PostMapping("/add")
-    fun addProduct(@RequestBody aProduct: Product){
-        this.productRepository.saveProduct(aProduct, 1)
+    fun addProduct(@RequestBody aProduct: Product):ResponseEntity<Product>{
+        try {
+            var productSaved:Product = this.productService.save(aProduct)
+            return ResponseEntity.ok().body(productSaved)
+        }catch(ex:Exception) {
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null)
+        }
+
     }
 
-    @PostMapping("/add{id}")
-    fun updateProduct(@PathVariable id: Long, @RequestBody product: Product){
-        var product: Product = this.productRepository.getById(id)
-        if ( product === null){
-            //doesnt exist so must return an exception or whatever we want
-        }else{
-            this.productRepository.modifyProduct(product, 1)
+    @PutMapping("/add")
+    fun updateProduct(@RequestParam("id") id: Long, @RequestBody product: Product):ResponseEntity<Product>{
+        return ResponseEntity.ok().body(this.productService.updateProduct(product))
+    }
+
+    @DeleteMapping("/delete")
+    fun deleteProduct(@RequestParam("id") id: Long):ResponseEntity<Product>{
+        try {
+            this.productService.deleteProduct(id)
+            return ResponseEntity.noContent().build()
+        }catch(ex:Exception) {
+            return ResponseEntity.notFound().build()
         }
     }
 
-    @DeleteMapping("delete/{id}")
-    fun deleteProduct(@PathVariable id: Long){
-        var storeId:Long = 100
-        var product: Product = this.productRepository.getById(id)
-        if (product != null){
-            this.productRepository.deleteProduct(product, storeId)
-        }else{
-            //could return an exception saying that the product doesnt exist or whatever we want
-        }
-    }
 }

@@ -2,7 +2,7 @@ package unq.tpi.desapp.model
 
 import java.io.Serializable
 import javax.persistence.*
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
+import kotlin.jvm.Transient
 
 /**
  * Store represent the store business to each owner.
@@ -44,6 +44,9 @@ class Store : Serializable {
 
     @Transient
     var purchasesReceived: MutableList<Purchase> = mutableListOf()
+
+    @Transient
+    var listOfTurns: MutableList<Turn> = mutableListOf()
 
     init {
         paymentsMethods.add(PaymentMethod.CASH)
@@ -110,8 +113,8 @@ class Store : Serializable {
 
 
     /**
-     * Adds a [paymentMethod] to the itemlist of the purchase.
-     * @param paymentMethod represents one item of the purcase
+     * Adds a [paymentMethod] to the payments methods list.
+     * @param paymentMethod represents one payment method
      */
     fun addPaymentMethod(paymentMethod: PaymentMethod) {
         if (! this.paymentsMethods.contains(paymentMethod)){
@@ -120,13 +123,16 @@ class Store : Serializable {
     }
 
     /**
-     * Adds a [item] to the itemlist of the purchase.
-     * @param item represents one item of the purcase
+     * Delete the [paymentMethod] from the payments methods list.
+     * @param paymentsMethods
      */
     fun deletePaymentMethod(paymentMethod: PaymentMethod) {
         this.paymentsMethods.remove(paymentMethod)
     }
 
+    /**
+     *
+     */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -138,9 +144,26 @@ class Store : Serializable {
         return true
     }
 
+    /**
+     *
+     */
     override fun hashCode(): Int {
         return address.hashCode()
     }
 
+    /**
+     * Adds a [aTurn] to the listOfTurns of the store.
+     * @param aTurn
+     */
+    fun addTurn(aTurn: Turn){
+        this.listOfTurns.add(aTurn)
+    }
 
+    /**
+     * Adds a [aTurn] to the listOfTurns of the store.
+     * @param aTurn
+     */
+    fun deleteTurn(aTurn: Turn){
+        this.listOfTurns.remove(aTurn)
+    }
 }

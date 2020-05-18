@@ -1,5 +1,10 @@
 package unq.tpi.desapp.model
 
+/**
+ * GeographicMap represents the object to manipulate distances between two points
+ * @param latitude
+ * @param longitude
+ */
 class GeographicMap (latitude:Double, longitude:Double ){
     var latitude:Double= latitude
     var longitude:Double= longitude

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions.*
 import unq.tpi.desapp.builders.ProductBuilder
 import unq.tpi.desapp.builders.PurchaseBuilder
 import unq.tpi.desapp.builders.StoreBuilder
+import unq.tpi.desapp.builders.TurnBuilder
 import unq.tpi.desapp.model.*
 import java.time.LocalDate
 import java.time.LocalTime
@@ -134,5 +135,35 @@ class StoreTest {
         var anotherStore = StoreBuilder.aStore().withAdress("test").build()
 
         assertNotEquals(store, anotherStore)
+    }
+
+    @Test
+    fun testStoreRecentlyCreatedListOfTurnIsempty() {
+        var store = StoreBuilder.aStore().build()
+
+        assertTrue(store.listOfTurns.isEmpty())
+    }
+
+    @Test
+    fun testStoreRecentlyCreatedAddATurnAndNowSizeIs1() {
+        var store = StoreBuilder.aStore().build()
+        var turn = TurnBuilder.aTurn().build()
+
+        assertTrue(store.listOfTurns.isEmpty())
+        store.addTurn(turn)
+        assertEquals(store.listOfTurns.size, 1)
+        assertTrue(store.listOfTurns.contains(turn))
+    }
+
+    @Test
+    fun testStoreRecentlyCreatedAddATurnAndThenDeleteItSizeIs0() {
+        var store = StoreBuilder.aStore().build()
+        var turn = TurnBuilder.aTurn().build()
+
+        assertTrue(store.listOfTurns.isEmpty())
+        store.addTurn(turn)
+        assertEquals(store.listOfTurns.size, 1)
+        store.deleteTurn(turn)
+        assertEquals(store.listOfTurns.size, 0)
     }
 }
