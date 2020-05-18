@@ -1,5 +1,8 @@
 package unq.tpi.desapp.model
 
+import java.io.Serializable
+import javax.persistence.*
+
 /**
  * Product represents the item of a purchase.
  *
@@ -10,12 +13,33 @@ package unq.tpi.desapp.model
  * @param brand represents the name of the brand.
  */
 
-class Product(id:Long, imageUrl:String, productName:String, price:Double, brand:String) {
-    var id: Long = id
-    var imageUrl:String = imageUrl
-    var productName: String = productName
-    var price: Double = price
-    var brand: String = brand
+@Entity
+@Table(name="product")
+class Product :Serializable {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0
+
+    @Column
+    var imageUrl: String= ""
+
+    @Column
+    var productName: String = ""
+
+    @Column
+    var price: Double = 0.0
+
+    @Column
+    var brand: String = ""
+
+    constructor()
+    constructor(id:Long, imageUrl:String, productName:String, price:Double, brand:String){
+        this.id = id
+        this.imageUrl = imageUrl
+        this.productName = productName
+        this.price = price
+        this.brand= brand
+    }
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -31,6 +55,5 @@ class Product(id:Long, imageUrl:String, productName:String, price:Double, brand:
     override fun hashCode(): Int {
         return id.hashCode()
     }
-
 
 }

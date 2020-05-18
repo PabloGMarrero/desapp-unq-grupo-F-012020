@@ -1,5 +1,9 @@
 package unq.tpi.desapp.model
 
+import java.io.Serializable
+import javax.persistence.*
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
+
 /**
  * Store represent the store business to each owner.
  *
@@ -8,19 +12,50 @@ package unq.tpi.desapp.model
  * @param distance represents what is his max distance to cover in the map.
  */
 
-class Store(activity: String, address: String, distance: Double )  {
 
-    var activity: String = activity
-    var address: String = address
-    var coverageDistance: Double = distance
+@Entity
+@Table(name="stores")
+class Store : Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0
+
+    @Column
+    var activity: String = ""
+
+    @Column
+    var address: String = ""
+
+    @Column
+    var coverageDistance: Double = 0.0
+
+    @Transient
     var openingHours: MutableList<OpenHours> = mutableListOf()
+
+    @Transient
     var paymentsMethods: MutableList<PaymentMethod> = mutableListOf()
+
+    @Transient
     var productList: MutableList<Product> =  mutableListOf()
+
+    @Transient
     var discounts: MutableList<Discount> =  mutableListOf()
+
+    @Transient
     var purchasesReceived: MutableList<Purchase> = mutableListOf()
 
     init {
         paymentsMethods.add(PaymentMethod.CASH)
+    }
+
+
+    constructor()
+    constructor(storeId:Long,activity: String, address: String, distance: Double ){
+        this.id = storeId
+        this.activity = activity
+        this.address = address
+        this.coverageDistance = distance
     }
 
 

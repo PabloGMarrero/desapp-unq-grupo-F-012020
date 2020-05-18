@@ -56,6 +56,7 @@ class ProductBuilder {
 
 class StoreBuilder {
 
+    var id: Long = 0
     var activity: String = ""
     var adress: String = ""
     var coverageDistance: Double = 0.0
@@ -68,7 +69,7 @@ class StoreBuilder {
     }
 
     fun build(): Store {
-        return Store(activity, adress, coverageDistance)
+        return Store(id,activity, adress, coverageDistance)
     }
 
     fun withActivity(activity: String): StoreBuilder{
