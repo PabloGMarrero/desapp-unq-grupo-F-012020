@@ -10,7 +10,7 @@ import unq.tpi.desapp.model.*
 @SpringBootTest
 class UserTest {
     val aProduct = Product(1, "blabla", "Pepitos", 35.5, "Bagley")
-    val aStore = Store("Kiosko", "Emilio J 2020", 20.0)
+    val aStore = Store(1,"Kiosko", "Emilio J 2020", 20.0)
     val aItem = Item(aProduct, 1.0, aStore)
     val aPurchase = PurchaseBuilder.aPurchase().build()
     val aCategory = User.Categories("Almacen")
