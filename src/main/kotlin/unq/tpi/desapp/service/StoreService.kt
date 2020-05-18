@@ -17,5 +17,13 @@ class StoreService {
       fun findByID(id: String?): Store? {
             return repository!!.findById(id)
       }
+
+      fun getAll() : MutableIterable<Store?> {
+            return repository!!.findAll()
+      }
+
+      fun save(aStore: Store): Store? {
+            return repository!!.save(aStore)
+      }
 }
 

@@ -9,4 +9,6 @@ import unq.tpi.desapp.model.Store
 @Repository
 interface StoreRepository : CrudRepository<Store?, Int?> {
     fun findById(id: String?): Store?
+
+    
 }
