@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import unq.tpi.desapp.model.Product
 import unq.tpi.desapp.model.Store
 import unq.tpi.desapp.service.StoreService
 import java.util.*
@@ -19,17 +20,6 @@ class StoreController {
     @Autowired
     val storeService: StoreService = StoreService()
 
-    @GetMapping("/{id}")
-    fun getStore(@PathVariable("id") id: Long): ResponseEntity<Store> {
-        var store: Optional<Store> =  storeService.findByID(id)
-        if (store.isPresent){
-            return ResponseEntity.status(HttpStatus.OK).body(store.get())
-        }else{
-            return ResponseEntity.noContent().build()
-        }
-
-    }
-
     @GetMapping("/")
     fun getAllStores(): ResponseEntity<Iterable<Store>> {
 
@@ -42,14 +32,45 @@ class StoreController {
         }
     }
 
-    @PostMapping("/store")
+    @GetMapping("get/{id}")
+    fun getStore(@PathVariable("id") id: Long): ResponseEntity<Store> {
+        var store: Optional<Store> =  storeService.findByID(id)
+        if (store.isPresent){
+            return ResponseEntity.status(HttpStatus.OK).body(store.get())
+        }else{
+            return ResponseEntity.noContent().build()
+        }
+
+    }
+
+    @GetMapping("/get/name")
+    fun getStoresByName(@RequestParam("storeName") nameStore:String):ResponseEntity<Iterable<Store>>{
+        var stores:Iterable<Store>  = this.storeService.getByName(nameStore)
+        if(stores.toList().isNotEmpty()) {
+            return ResponseEntity.ok().body(stores)
+        }else{
+            return ResponseEntity.notFound().build()
+        }
+    }
+
+    @PostMapping("/add")
     fun createStore(@RequestBody aStore: @Valid Store): ResponseEntity<Store> {
         return ResponseEntity.ok().body(storeService.save(aStore))
     }
 
-    @PutMapping("/store")
+    @PutMapping("/add")
     fun updateStore(@RequestParam("id") id: Long, @RequestBody aStore: @Valid Store):ResponseEntity<Store> {
         return ResponseEntity.ok().body(this.storeService.updateStore(aStore))
+    }
+
+    @DeleteMapping("/delete")
+    fun deletestore(@RequestParam("id") id: Long):ResponseEntity<Store>{
+        try {
+            this.storeService.deleteStore(id)
+            return ResponseEntity.noContent().build()
+        }catch(ex:Exception) {
+            return ResponseEntity.notFound().build()
+        }
     }
 
 }

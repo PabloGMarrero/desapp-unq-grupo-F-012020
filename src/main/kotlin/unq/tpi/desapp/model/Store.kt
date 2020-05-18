@@ -25,6 +25,9 @@ class Store : Serializable {
     var activity: String = ""
 
     @Column
+    var storeName: String = ""
+
+    @Column
     var address: String = ""
 
     @Column
