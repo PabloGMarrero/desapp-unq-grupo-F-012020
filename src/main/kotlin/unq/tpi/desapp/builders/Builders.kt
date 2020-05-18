@@ -418,3 +418,18 @@ class HomeDeliveryBuilder(){
     }
 
 }
+
+class TurnBuilder{
+    var day = LocalDate.MIN
+    var hour = LocalTime.MIN
+    companion object{
+        @JvmStatic
+        fun aTurn():TurnBuilder{
+            return TurnBuilder()
+        }
+    }
+
+    fun build():Turn{
+        return Turn(day, hour)
+    }
+}

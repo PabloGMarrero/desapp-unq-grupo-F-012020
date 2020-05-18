@@ -12,4 +12,6 @@ class Address(locality:String, street:String, number:Long, aZone: GeographicMap)
     var street = street
     var number = number
     var geographicZone = aZone
+
+
 }

@@ -18,6 +18,7 @@ class Store(activity: String, address: String, distance: Double )  {
     var productList: MutableList<Product> =  mutableListOf()
     var discounts: MutableList<Discount> =  mutableListOf()
     var purchasesReceived: MutableList<Purchase> = mutableListOf()
+    var listOfTurns: MutableList<Turn> = mutableListOf()
 
     init {
         paymentsMethods.add(PaymentMethod.CASH)
@@ -75,8 +76,8 @@ class Store(activity: String, address: String, distance: Double )  {
 
 
     /**
-     * Adds a [paymentMethod] to the itemlist of the purchase.
-     * @param paymentMethod represents one item of the purcase
+     * Adds a [paymentMethod] to the payments methods list.
+     * @param paymentMethod represents one payment method
      */
     fun addPaymentMethod(paymentMethod: PaymentMethod) {
         if (! this.paymentsMethods.contains(paymentMethod)){
@@ -85,13 +86,16 @@ class Store(activity: String, address: String, distance: Double )  {
     }
 
     /**
-     * Adds a [item] to the itemlist of the purchase.
-     * @param item represents one item of the purcase
+     * Delete the [paymentMethod] from the payments methods list.
+     * @param paymentsMethods
      */
     fun deletePaymentMethod(paymentMethod: PaymentMethod) {
         this.paymentsMethods.remove(paymentMethod)
     }
 
+    /**
+     *
+     */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -103,9 +107,26 @@ class Store(activity: String, address: String, distance: Double )  {
         return true
     }
 
+    /**
+     *
+     */
     override fun hashCode(): Int {
         return address.hashCode()
     }
 
+    /**
+     * Adds a [aTurn] to the listOfTurns of the store.
+     * @param aTurn
+     */
+    fun addTurn(aTurn: Turn){
+        this.listOfTurns.add(aTurn)
+    }
 
+    /**
+     * Adds a [aTurn] to the listOfTurns of the store.
+     * @param aTurn
+     */
+    fun deleteTurn(aTurn: Turn){
+        this.listOfTurns.remove(aTurn)
+    }
 }
