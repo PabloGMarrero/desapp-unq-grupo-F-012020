@@ -27,3 +27,5 @@ target/
 .project
 .idea/*
 .settings/*
+
+*.iml
