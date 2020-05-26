@@ -4,10 +4,7 @@ import org.joda.time.DateTime
 import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
-import unq.tpi.desapp.builders.ProductBuilder
-import unq.tpi.desapp.builders.PurchaseBuilder
-import unq.tpi.desapp.builders.StoreBuilder
-import unq.tpi.desapp.builders.TurnBuilder
+import unq.tpi.desapp.builders.*
 import unq.tpi.desapp.model.*
 import java.time.LocalDate
 import java.time.LocalTime
@@ -21,9 +18,11 @@ class StoreTest {
     @Test
     fun testStoreDefault() {
         var store = StoreBuilder.aStore().build()
+        var address = AddressBuilder.anAddress().build()
         assertEquals(store.activity, "")
-        assertEquals(store.address, "")
+        assertEquals(store.address, address)
         assertEquals(store.coverageDistance, 0.0)
+        assertEquals(store.storeName, "")
     }
 
     @Test
@@ -34,14 +33,22 @@ class StoreTest {
 
     @Test
     fun testStoreAdress() {
-        var store = StoreBuilder.aStore().withAdress("Av. Monroe 1010").build()
-        assertEquals(store.address, "Av. Monroe 1010")
+        var address = AddressBuilder.anAddress().withStreet("Av. Monroe").withNumber(1010).build()
+        var store = StoreBuilder.aStore().withAdress(address).build()
+        assertEquals(store.getAddressStreet(), "Av. Monroe")
+        assertEquals(store.getAddressNumber(), 1010)
     }
 
     @Test
     fun testStoreCoverageDistance() {
         var store = StoreBuilder.aStore().withDistance(100.00).build()
         assertEquals(store.coverageDistance, 100.00)
+    }
+
+    @Test
+    fun testStoreNameStore() {
+        var store = StoreBuilder.aStore().withStoreName("Kiosco").build()
+        assertEquals(store.storeName, "Kiosco")
     }
 
     @Test
@@ -132,7 +139,8 @@ class StoreTest {
     @Test
     fun testStoreWithDifferentAddress() {
         var store = StoreBuilder.aStore().build()
-        var anotherStore = StoreBuilder.aStore().withAdress("test").build()
+        var address = AddressBuilder.anAddress().withStreet("test").build()
+        var anotherStore = StoreBuilder.aStore().withAdress(address).build()
 
         assertNotEquals(store, anotherStore)
     }
@@ -165,5 +173,29 @@ class StoreTest {
         assertEquals(store.listOfTurns.size, 1)
         store.deleteTurn(turn)
         assertEquals(store.listOfTurns.size, 0)
+    }
+
+    @Test
+    fun testStoreWihtCoverageDistance1IsInsideOfTheRangeOfUNQ(){
+
+        var marianoMoreno = GeographicMapBuilder.aGeographicMap().withLatitude(-34.710895).withLongitude(-58.283421).build()
+
+        var unq = GeographicMapBuilder.aGeographicMap().withLatitude(-34.706272).withLongitude(-58.278519).build()
+        var storeAddress = AddressBuilder.anAddress().withZone(unq).build()
+        var store = StoreBuilder.aStore().withDistance(1.0).withAdress(storeAddress).build()
+
+        assertTrue(store.isInsideRange(marianoMoreno.latitude, marianoMoreno.longitude))
+    }
+
+    @Test
+    fun testStoreWihtCoverageDistance0_5IsNotInsideOfTheRangeOfUNQ(){
+
+        var marianoMoreno = GeographicMapBuilder.aGeographicMap().withLatitude(-34.710895).withLongitude(-58.283421).build()
+
+        var unq = GeographicMapBuilder.aGeographicMap().withLatitude(-34.706272).withLongitude(-58.278519).build()
+        var storeAddress = AddressBuilder.anAddress().withZone(unq).build()
+        var store = StoreBuilder.aStore().withDistance(0.5).withAdress(storeAddress).build()
+
+        assertFalse(store.isInsideRange(marianoMoreno.latitude, marianoMoreno.longitude))
     }
 }

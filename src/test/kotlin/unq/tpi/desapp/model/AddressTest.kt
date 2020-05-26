@@ -45,4 +45,65 @@ class AddressTest {
         assertEquals(address.geographicZone, zone)
     }
 
+    @Test
+    fun testTwoBasicAddressWithSameStateAreEqualAddress(){
+        var address = AddressBuilder.anAddress().build()
+        var anotherAddress = AddressBuilder.anAddress().build()
+
+        assertEquals(address, anotherAddress)
+    }
+
+    @Test
+    fun testTwoBasicAddressWithDifferentAddressNumberAreNotEqualAddress(){
+        var address = AddressBuilder.anAddress().withNumber(100).build()
+        var anotherAddress = AddressBuilder.anAddress().build()
+
+        assertNotEquals(address, anotherAddress)
+    }
+
+    @Test
+    fun testTwoBasicAddressWithDifferentStreetAddressAreNotEqualAddress(){
+        var address = AddressBuilder.anAddress().withStreet("another street").build()
+        var anotherAddress = AddressBuilder.anAddress().build()
+
+        assertNotEquals(address, anotherAddress)
+    }
+
+    @Test
+    fun testTwoBasicAddressWithDifferentLocalityAddressAreNotEqualAddress(){
+        var address = AddressBuilder.anAddress().withLocality("another locality").build()
+        var anotherAddress = AddressBuilder.anAddress().build()
+
+        assertNotEquals(address, anotherAddress)
+    }
+
+    @Test
+    fun testGivenAnAddressWithAGeographicZoneUNQReturnsDistanceToAnotherAddressWithZoneCONSTITheDiffIs12_74(){
+        var unq = GeographicMapBuilder.aGeographicMap().withLatitude(-34.706272).withLongitude(-58.278519).build()
+        var consti = GeographicMapBuilder.aGeographicMap().withLatitude(-34.628126).withLongitude(-58.380523).build()
+        var address = AddressBuilder.anAddress().withZone(unq).build()
+
+        var distance = address.calculateDistanceWithInKm(consti.latitude, consti.longitude)
+        assertEquals(distance, 12.74)
+    }
+
+    @Test
+    fun testGivenAnAddressWithAGeographicZoneUNQReturnsDistanceToAnotherAddressWithZoneOBELISCOTheDiffIs14_81(){
+        var unq = GeographicMapBuilder.aGeographicMap().withLatitude(-34.706272).withLongitude(-58.278519).build()
+        var obelisco = GeographicMapBuilder.aGeographicMap().withLatitude(-34.603595).withLongitude(-58.381717).build()
+        var address = AddressBuilder.anAddress().withZone(unq).build()
+
+        var distance = address.calculateDistanceWithInKm(obelisco.latitude, obelisco.longitude)
+        assertEquals(distance, 14.81)
+    }
+
+    @Test
+    fun testGivenAnAddressWithAGeographicZoneUNQReturnsDistanceToAnotherAddressWithZoneMarianoMorenoReturns0_68(){
+        var unq = GeographicMapBuilder.aGeographicMap().withLatitude(-34.706272).withLongitude(-58.278519).build()
+        var marianoMoreno = GeographicMapBuilder.aGeographicMap().withLatitude(-34.710895).withLongitude(-58.283421).build()
+        var address = AddressBuilder.anAddress().withZone(unq).build()
+
+        var distance = address.calculateDistanceWithInKm(marianoMoreno.latitude, marianoMoreno.longitude)
+        assertEquals(distance, 0.68)
+    }
 }
