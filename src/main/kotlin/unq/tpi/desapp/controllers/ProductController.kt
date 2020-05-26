@@ -11,6 +11,8 @@ import java.util.*
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = ["*"])
+
 class ProductController{
 
     @Autowired

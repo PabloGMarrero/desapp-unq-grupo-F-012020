@@ -11,6 +11,8 @@ import java.util.*
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = ["*"])
+
 class UserController {
 
     @Autowired

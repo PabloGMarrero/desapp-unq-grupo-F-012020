@@ -14,6 +14,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/stores")
+@CrossOrigin(origins = ["*"])
 
 class StoreController {
 
