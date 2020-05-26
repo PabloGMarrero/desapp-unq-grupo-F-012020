@@ -58,8 +58,9 @@ class StoreBuilder {
 
     var id: Long = 0
     var activity: String = ""
-    var adress: String = ""
+    var address: Address = AddressBuilder.anAddress().build()
     var coverageDistance: Double = 0.0
+    var name = ""
 
     companion object {
         @JvmStatic
@@ -69,7 +70,7 @@ class StoreBuilder {
     }
 
     fun build(): Store {
-        return Store(id,activity, adress, coverageDistance)
+        return Store(id,activity, address, coverageDistance, name)
     }
 
     fun withActivity(activity: String): StoreBuilder{
@@ -77,8 +78,8 @@ class StoreBuilder {
         return this
     }
 
-    fun withAdress(adress :String):StoreBuilder{
-        this.adress = adress
+    fun withAdress(address :Address):StoreBuilder{
+        this.address = address
         return this
     }
 
@@ -87,6 +88,10 @@ class StoreBuilder {
         return this
     }
 
+    fun withStoreName(name:String ):StoreBuilder{
+        this.name = name
+        return this
+    }
 }
 
 class ItemBuilder{
@@ -291,7 +296,6 @@ class DiscountByProductsBuilder{
 class GeographicMapBuilder{
     var latitude:Double = 0.00
     var longitude:Double = 0.00
-    var address:String = ""
 
     companion object{
         @JvmStatic

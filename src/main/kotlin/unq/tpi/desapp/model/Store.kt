@@ -1,5 +1,6 @@
 package unq.tpi.desapp.model
 
+import unq.tpi.desapp.builders.AddressBuilder
 import java.io.Serializable
 import javax.persistence.*
 import kotlin.jvm.Transient
@@ -15,7 +16,7 @@ import kotlin.jvm.Transient
 
 @Entity
 @Table(name="stores")
-class Store : Serializable {
+class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +29,7 @@ class Store : Serializable {
     var storeName: String = ""
 
     @Column
-    var address: String = ""
+    var address: Address = AddressBuilder.anAddress().build()
 
     @Column
     var coverageDistance: Double = 0.0
@@ -39,7 +40,8 @@ class Store : Serializable {
     @Transient
     var paymentsMethods: MutableList<PaymentMethod> = mutableListOf()
 
-    @Transient
+    @OneToMany
+    @JoinColumn(name="store_id")
     var productList: MutableList<Product> =  mutableListOf()
 
     @Transient
@@ -55,13 +57,13 @@ class Store : Serializable {
         paymentsMethods.add(PaymentMethod.CASH)
     }
 
-
     constructor()
-    constructor(storeId:Long,activity: String, address: String, distance: Double ){
+    constructor(storeId:Long,activity: String, address: Address, distance: Double, storeName:String){
         this.id = storeId
         this.activity = activity
         this.address = address
         this.coverageDistance = distance
+        this.storeName = storeName
     }
 
 
@@ -168,5 +170,30 @@ class Store : Serializable {
      */
     fun deleteTurn(aTurn: Turn){
         this.listOfTurns.remove(aTurn)
+    }
+
+    /**
+     * Returns the name of the street of the address
+     * @return an string that represents the name of the street
+     */
+    fun getAddressStreet():String{
+        return address.street
+    }
+
+    /**
+     * Returns the number of the street of the address
+     * @return a number that represents the name of the street
+     */
+    fun getAddressNumber():Long{
+        return address.number
+    }
+
+    /**
+     *
+     */
+
+    fun isInsideRange(lat:Double, lon: Double):Boolean{
+        var distance = this.address.calculateDistanceWithInKm(lat, lon)
+        return distance <= this.coverageDistance
     }
 }

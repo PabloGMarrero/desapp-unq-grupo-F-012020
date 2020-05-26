@@ -73,6 +73,18 @@ class StoreController {
         }
     }
 
+    @GetMapping("/store")
+    fun getStoreProductsInsideRange(@RequestParam("latitude") latitude:Double,
+                         @RequestParam("longitude") longitude:Double):ResponseEntity<Iterable<Product>>{
+       var products:List<Product> = this.storeService.getProductsInsideRange(latitude, longitude).toList()
+
+        if(products.toList().isNotEmpty()) {
+            return ResponseEntity.ok().body(products)
+        }else{
+            return ResponseEntity.notFound().build()
+        }
+    }
+
 }
 
 
