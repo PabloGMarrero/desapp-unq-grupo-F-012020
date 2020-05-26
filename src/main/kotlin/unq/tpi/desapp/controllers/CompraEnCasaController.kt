@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/")
-class CompraEnCasaAPI {
+class CompraEnCasaController {
 
     @GetMapping("/")
     fun default(): ResponseEntity<String?>? {
