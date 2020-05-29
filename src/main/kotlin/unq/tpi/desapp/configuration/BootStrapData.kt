@@ -57,7 +57,7 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
 
         /*--------------------------*/
         var chocolate = ProductBuilder.aProduct().withBrand("Shot").withName("Chocolate Con Mani 200 gr")
-                .withPrice(300.0).withId(2).withUrl("https://d26lpennugtm8s.cloudfront.net/stores/001/132/452/products/shot-35g1-a782c971e846430ff815874203088855-1024-1024.jpg").build()
+                .withPrice(300.0).withId(3).withUrl("https://d26lpennugtm8s.cloudfront.net/stores/001/132/452/products/shot-35g1-a782c971e846430ff815874203088855-1024-1024.jpg").build()
 
         productRepository.save(chocolate)
 
@@ -68,7 +68,7 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
 
         /*--------------------------*/
         var pitusas = ProductBuilder.aProduct().withBrand("Pitusas").withName("Galletitas Pitusas 160 gr")
-                .withPrice(50.0).withId(2).withUrl("https://walmartar.vteximg.com.br/arquivos/ids/829412-1000-1000/Galletitas-Vainilla-Pitusas-160-Gr-1-24891.jpg").build()
+                .withPrice(50.0).withId(4).withUrl("https://walmartar.vteximg.com.br/arquivos/ids/829412-1000-1000/Galletitas-Vainilla-Pitusas-160-Gr-1-24891.jpg").build()
 
         productRepository.save(pitusas)
 
