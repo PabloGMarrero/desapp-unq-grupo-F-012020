@@ -28,7 +28,7 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
         storeRepository.save(panaderia)
 
         var kiloPan = ProductBuilder.aProduct().withBrand("casero").withName("Mingnon por kilo")
-                .withPrice(80.0).withId(1).withUrl("").build()
+                .withPrice(80.0).withId(1).withUrl("https://www.lareinacorrientes.com.ar/wp-content/uploads/2017/05/Pan-Mignon.jpg").build()
 
         productRepository.save(kiloPan)
 
@@ -46,13 +46,35 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
         storeRepository.save(kiosco)
 
         var cocacola = ProductBuilder.aProduct().withBrand("Coca-Cola").withName("Coca-Cola 2.25lts")
-                .withPrice(210.0).withId(2).withUrl("").build()
+                .withPrice(210.0).withId(2).withUrl("https://supermercado.carrefour.com.ar/media/catalog/product/cache/1/thumbnail/60x/9df78eab33525d08d6e5fb8d27136e95/7/7/7790895000997_01.jpg").build()
 
         productRepository.save(cocacola)
 
         kiosco.addProduct(cocacola)
 
         productRepository.save(cocacola)
+        storeRepository.save(kiosco)
+
+        /*--------------------------*/
+        var chocolate = ProductBuilder.aProduct().withBrand("Shot").withName("Chocolate Con Mani 200 gr")
+                .withPrice(300.0).withId(2).withUrl("https://d26lpennugtm8s.cloudfront.net/stores/001/132/452/products/shot-35g1-a782c971e846430ff815874203088855-1024-1024.jpg").build()
+
+        productRepository.save(chocolate)
+
+        kiosco.addProduct(chocolate)
+
+        productRepository.save(chocolate)
+        storeRepository.save(kiosco)
+
+        /*--------------------------*/
+        var pitusas = ProductBuilder.aProduct().withBrand("Pitusas").withName("Galletitas Pitusas 160 gr")
+                .withPrice(50.0).withId(2).withUrl("https://walmartar.vteximg.com.br/arquivos/ids/829412-1000-1000/Galletitas-Vainilla-Pitusas-160-Gr-1-24891.jpg").build()
+
+        productRepository.save(pitusas)
+
+        kiosco.addProduct(pitusas)
+
+        productRepository.save(pitusas)
         storeRepository.save(kiosco)
 
 
