@@ -28,7 +28,7 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
         storeRepository.save(panaderia)
 
         var kiloPan = ProductBuilder.aProduct().withBrand("casero").withName("Mingnon por kilo")
-                .withPrice(80.0).withId(1).withUrl("https://www.lareinacorrientes.com.ar/wp-content/uploads/2017/05/Pan-Mignon.jpg").build()
+                .withPrice(80.0).withId(1).withUrl("https://costumbres.com.ar/wp-content/uploads/2020/01/pan-mignon.png").build()
 
         productRepository.save(kiloPan)
 
@@ -46,7 +46,7 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
         storeRepository.save(kiosco)
 
         var cocacola = ProductBuilder.aProduct().withBrand("Coca-Cola").withName("Coca-Cola 2.25lts")
-                .withPrice(210.0).withId(2).withUrl("https://supermercado.carrefour.com.ar/media/catalog/product/cache/1/thumbnail/60x/9df78eab33525d08d6e5fb8d27136e95/7/7/7790895000997_01.jpg").build()
+                .withPrice(210.0).withId(2).withUrl("https://www.pngkit.com/png/detail/76-764935_coca-cola-1-5-l-png.png").build()
 
         productRepository.save(cocacola)
 
@@ -57,7 +57,7 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
 
         /*--------------------------*/
         var chocolate = ProductBuilder.aProduct().withBrand("Shot").withName("Chocolate Con Mani 200 gr")
-                .withPrice(300.0).withId(3).withUrl("https://d26lpennugtm8s.cloudfront.net/stores/001/132/452/products/shot-35g1-a782c971e846430ff815874203088855-1024-1024.jpg").build()
+                .withPrice(300.0).withId(3).withUrl("https://dulcilandia.com.ar/wp-content/uploads/2020/04/01101097-510x510.png").build()
 
         productRepository.save(chocolate)
 
@@ -67,14 +67,14 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
         storeRepository.save(kiosco)
 
         /*--------------------------*/
-        var pitusas = ProductBuilder.aProduct().withBrand("Pitusas").withName("Galletitas Pitusas 160 gr")
-                .withPrice(50.0).withId(4).withUrl("https://walmartar.vteximg.com.br/arquivos/ids/829412-1000-1000/Galletitas-Vainilla-Pitusas-160-Gr-1-24891.jpg").build()
+        var galletitas = ProductBuilder.aProduct().withBrand("Arcor").withName("Galletitas Merengadas 160 gr")
+                .withPrice(50.0).withId(4).withUrl("https://latinamericadistributors.com/wp-content/uploads/2018/10/Sin-ti%CC%81tulo-10-19-600x600.png").build()
 
-        productRepository.save(pitusas)
+        productRepository.save(galletitas)
 
-        kiosco.addProduct(pitusas)
+        kiosco.addProduct(galletitas)
 
-        productRepository.save(pitusas)
+        productRepository.save(galletitas)
         storeRepository.save(kiosco)
 
 
