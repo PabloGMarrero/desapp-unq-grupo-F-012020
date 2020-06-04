@@ -53,5 +53,13 @@ class StoreService {
 
             return products
       }
+
+      fun getStoresInsideRange(latitud:Double, longitude:Double):Iterable<Store>{
+            var stores:Iterable<Store>  = this.repository.findAll()
+            stores = stores.filter { store -> store.isInsideRange(latitud, longitude)}
+
+            return stores
+      }
+
 }
 
