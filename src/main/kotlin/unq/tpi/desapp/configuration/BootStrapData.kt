@@ -37,18 +37,7 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
         productRepository.save(kiloPan)
         storeRepository.save(panaderia)
 
-        /*--------------------------*/
-        var rosca = ProductBuilder.aProduct().withBrand("casero").withName("Rosca de Pascua")
-                .withPrice(180.0).withId(6).withUrl("https://3.bp.blogspot.com/-Z1h0pcehtwY/XC60rEeoa9I/AAAAAAAAKb0/O12oBHrYn84e4NUu-QUCzIZHHY94r1ZSQCLcBGAs/s1600/DSCN9792.png").build()
 
-        productRepository.save(rosca)
-
-        panaderia.addProduct(rosca)
-
-        productRepository.save(rosca)
-        storeRepository.save(panaderia)
-
-        /*--------------------------*/
 
 
         var zoneKiosco = GeographicMapBuilder.aGeographicMap().withLongitude(-34.721732).withLatitude(-58.256736).build()
@@ -101,32 +90,26 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
         productRepository.save(sidra)
         storeRepository.save(kiosco)
 
+        /*--------------------------*/
+        var rosca = ProductBuilder.aProduct().withBrand("casero").withName("Rosca de Pascua")
+                .withPrice(180.0).withId(6).withUrl("https://3.bp.blogspot.com/-Z1h0pcehtwY/XC60rEeoa9I/AAAAAAAAKb0/O12oBHrYn84e4NUu-QUCzIZHHY94r1ZSQCLcBGAs/s1600/DSCN9792.png").build()
 
-        var zoneSupermercado = GeographicMapBuilder.aGeographicMap().withLongitude(-34.70683).withLatitude(-58.2770065).build()
-        var addressSupermercado = AddressBuilder.anAddress().withLocality("Quilmes")
-                .withNumber(130).withStreet("Rivadavia").withZone(zoneSupermercado).build()
-        var supermercado = StoreBuilder.aStore().withActivity("Market").withDistance(1.5)
-                .withAdress(addressSupermercado).withStoreName("Super Cachito").build()
-        storeRepository.save(supermercado)
+        productRepository.save(rosca)
+
+        panaderia.addProduct(rosca)
+
+        productRepository.save(rosca)
+        storeRepository.save(panaderia)
+
+        /*--------------------------*/
 
         var polenta = ProductBuilder.aProduct().withBrand("PrestoPronta").withName("Polenta Presto Pronta 200gr")
                 .withPrice(1250.0).withId(7).withUrl("https://cdn.shopify.com/s/files/1/2168/5959/products/polenta_360x.png").build()
 
-        var polenta2 = ProductBuilder.aProduct().withBrand("PrestoPronta").withName("Polenta Presto Pronta 200gr")
-                .withPrice(1250.0).withId(8).withUrl("https://cdn.shopify.com/s/files/1/2168/5959/products/polenta_360x.png").build()
+        productRepository.save(polenta)
+        kiosco.addProduct(polenta)
 
         productRepository.save(polenta)
-
-        supermercado.addProduct(polenta)
-
-        productRepository.save(polenta)
-        storeRepository.save(supermercado)
-
-        /*--------------------------*/
-        productRepository.save(polenta2)
-        kiosco.addProduct(polenta2)
-
-        productRepository.save(polenta2)
         storeRepository.save(kiosco)
 
 
