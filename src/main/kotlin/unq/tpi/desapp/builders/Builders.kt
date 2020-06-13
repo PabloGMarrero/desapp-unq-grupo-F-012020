@@ -1,9 +1,7 @@
 package unq.tpi.desapp.builders
 
 import unq.tpi.desapp.model.*
-import unq.tpi.desapp.model.deliveryType.DeliveryType
-import unq.tpi.desapp.model.deliveryType.HomeDelivery
-import unq.tpi.desapp.model.deliveryType.PickupInStore
+import unq.tpi.desapp.model.deliveryType.*
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -172,9 +170,23 @@ class UserBuilder {
     }
 
     fun build(): User {
-        return User(name, pass, email)
+        return User(name, email, pass)
     }
 
+    fun withName(name: String):UserBuilder{
+        this.name = name
+        return this
+    }
+
+    fun withEmail(email:String):UserBuilder{
+        this.email = email
+        return this
+    }
+
+    fun withPass(password:String):UserBuilder{
+        this.pass = password
+        return  this
+    }
 
 }
 

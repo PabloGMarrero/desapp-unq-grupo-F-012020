@@ -12,14 +12,24 @@ import java.util.*
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins = ["*"])
-
 class UserController {
 
     @Autowired
     val userService:UserService = UserService()
 
+    @GetMapping("/")
+    fun getAllUsers(): ResponseEntity<Iterable<User>> {
+        var list:Iterable<User> = this.userService.getAll()
+
+        if (list.toList().isNotEmpty()){
+            return ResponseEntity.status(HttpStatus.OK).body(list)
+        }else{
+            return ResponseEntity.noContent().build()
+        }
+    }
+
     @GetMapping("/get/")
-    fun getUserById(@RequestParam("id") id:Long):ResponseEntity<User>{
+    fun getUserById(@RequestParam("userid") id:Long):ResponseEntity<User>{
         var user: Optional<User> =  userService.findByID(id)
         if (user.isPresent){
             return ResponseEntity.status(HttpStatus.OK).body(user.get())
@@ -32,7 +42,7 @@ class UserController {
     fun getUserOrders(@PathVariable("id") id:Long):ResponseEntity<List<Purchase>>{
         var orders = userService.getUserOrders(id)
 
-        if (! orders.isEmpty()){
+        if (orders.isNotEmpty()){
             return ResponseEntity.status(HttpStatus.OK).body(orders)
         }else{
             return ResponseEntity.noContent().build()

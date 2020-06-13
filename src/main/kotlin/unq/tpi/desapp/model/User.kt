@@ -1,9 +1,9 @@
 package unq.tpi.desapp.model
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import com.fasterxml.jackson.annotation.JsonCreator
+import unq.tpi.desapp.dto.UserDto
+import javax.persistence.*
+import kotlin.jvm.Transient
 
 /**
  * Purchase represents the purchase of each user
@@ -12,17 +12,18 @@ import javax.persistence.Id
  * @param aPassword represents the password
  * @param aMail represents the email of the user.
  */
+
 @Entity
-class User{
+data class User(
+        var name: String,
+        var email: String,
+        var password: String){
+    constructor():this("", "", "")
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long = 0
-    var name: String = ""
-    var password: String = ""
-    var email: String = ""
     var purchaseRange: Double = 0.0
-
     @Transient
     var categoryPreferences: MutableList<Categories> =  mutableListOf()
     @Transient
@@ -30,12 +31,6 @@ class User{
     @Transient
     var shoppingBag: MutableList<Item> = mutableListOf()
 
-    constructor()
-    constructor(aName: String, aPassword: String, aMail: String){
-        this.name = aName
-        this.password = aPassword
-        this.email = aMail
-    }
     class Categories(name: String) {
         var name: String = name
     }
@@ -86,6 +81,15 @@ class User{
         result = 31 * result + email.hashCode()
         return result
     }
+
+    /**
+     * Convert User objecto to his DTO
+     */
+    fun toUserDTO()= UserDto(
+            name = name,
+            email = email,
+            password =  password
+    )
 
 
 }
