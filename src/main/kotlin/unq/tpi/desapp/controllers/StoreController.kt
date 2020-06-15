@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import unq.tpi.desapp.dto.StoreDto
+import unq.tpi.desapp.model.Address
+import unq.tpi.desapp.model.GeographicMap
 import unq.tpi.desapp.model.Product
 import unq.tpi.desapp.model.Store
 import unq.tpi.desapp.service.StoreService
@@ -52,6 +55,17 @@ class StoreController {
         }else{
             return ResponseEntity.notFound().build()
         }
+    }
+
+    @PostMapping("/addstore", consumes = arrayOf("application/json"), produces = arrayOf("application/json"))
+    fun addStore(@RequestBody storeDTO: StoreDto):ResponseEntity<Store>{
+
+        var geoZone= GeographicMap(storeDTO.latitude, storeDTO.longitude)
+        var anAddress= Address(storeDTO.locality,storeDTO.street,storeDTO.number,geoZone)
+        var anStore= Store(12,storeDTO.activity,anAddress,storeDTO.covDistance,storeDTO.name)
+
+        return ResponseEntity.ok().body(storeService.save(anStore))
+
     }
 
     @PostMapping("/add")
