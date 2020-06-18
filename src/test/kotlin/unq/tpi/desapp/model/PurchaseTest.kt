@@ -3,8 +3,8 @@ package unq.tpi.desapp.model
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
+import unq.tpi.desapp.PaymentMethod
 import unq.tpi.desapp.builders.*
-import unq.tpi.desapp.model.deliveryType.DeliveryType
 import java.time.LocalDate
 
 @SpringBootTest

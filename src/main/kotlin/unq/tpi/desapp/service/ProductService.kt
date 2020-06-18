@@ -3,7 +3,7 @@ package unq.tpi.desapp.service
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import unq.tpi.desapp.model.Product
+import unq.tpi.desapp.Product
 import unq.tpi.desapp.repository.ProductRepository
 import java.util.*
 
@@ -14,7 +14,7 @@ class ProductService{
     @Autowired
     lateinit var repository:ProductRepository
 
-    fun save(aProduct:Product):Product{
+    fun save(aProduct: Product): Product {
         return this.repository.save(aProduct)
     }
 
@@ -26,7 +26,7 @@ class ProductService{
         return this.repository.findAll()
     }
 
-    fun updateProduct(aProduct: Product):Product{
+    fun updateProduct(aProduct: Product): Product {
         return this.save(aProduct)
     }
 

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import unq.tpi.desapp.builders.UserBuilder
 import unq.tpi.desapp.dto.UserDto
-import unq.tpi.desapp.model.User
+import unq.tpi.desapp.User
 import unq.tpi.desapp.service.UserService
 import java.net.URI
 import java.util.*

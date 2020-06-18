@@ -1,4 +1,4 @@
-package unq.tpi.desapp.model
+package unq.tpi.desapp
 
 import unq.tpi.desapp.builders.GeographicMapBuilder
 import java.lang.Math.pow

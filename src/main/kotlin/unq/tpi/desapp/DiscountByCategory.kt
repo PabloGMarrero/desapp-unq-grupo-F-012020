@@ -1,6 +1,6 @@
-package unq.tpi.desapp.model
+package unq.tpi.desapp
 
-import unq.tpi.desapp.model.Discount
+import unq.tpi.desapp.Discount
 import java.time.LocalDate
 
 /**

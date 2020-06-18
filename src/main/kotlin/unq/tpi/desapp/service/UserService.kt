@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import unq.tpi.desapp.builders.UserBuilder
-import unq.tpi.desapp.model.Purchase
-import unq.tpi.desapp.model.User
+import unq.tpi.desapp.Purchase
+import unq.tpi.desapp.User
 import unq.tpi.desapp.repository.UserRepository
 import java.util.*
 
@@ -40,7 +40,7 @@ class UserService {
         var users:List<User> = this.repository.findAll()
 
         users = users.filter { anUser -> anUser.email == email }
-        var user:User? = null
+        var user: User? = null
 
         if (users.isNotEmpty()){
             user = users.first()
@@ -54,8 +54,8 @@ class UserService {
         return user
     }
 
-    fun create(anUser: User):User{
-        var user:User = this.repository.save(anUser)
+    fun create(anUser: User): User {
+        var user: User = this.repository.save(anUser)
         return user
     }
 }

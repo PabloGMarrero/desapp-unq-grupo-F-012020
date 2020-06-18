@@ -1,4 +1,4 @@
-package unq.tpi.desapp.model
+package unq.tpi.desapp
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import unq.tpi.desapp.dto.UserDto

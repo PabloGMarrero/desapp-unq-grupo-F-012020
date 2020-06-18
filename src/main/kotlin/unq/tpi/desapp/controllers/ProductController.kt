@@ -3,7 +3,7 @@ package unq.tpi.desapp.controllers
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import unq.tpi.desapp.model.Product
+import unq.tpi.desapp.Product
 import unq.tpi.desapp.service.ProductService
 import org.springframework.http.ResponseEntity
 import java.util.*
@@ -52,7 +52,7 @@ class ProductController{
     @PostMapping("/add")
     fun addProduct(@RequestBody aProduct: Product):ResponseEntity<Product>{
         try {
-            var productSaved:Product = this.productService.save(aProduct)
+            var productSaved: Product = this.productService.save(aProduct)
             return ResponseEntity.ok().body(productSaved)
         }catch(ex:Exception) {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null)
