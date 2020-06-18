@@ -42,7 +42,7 @@ class AuthController {
             return ResponseEntity.ok().body(anUserDTO)
         }
 
-        //TODO ver de devolver una exception
+        //TODO ver de devolver esto o una exception
         return ResponseEntity.notFound().build()
     }
 }
