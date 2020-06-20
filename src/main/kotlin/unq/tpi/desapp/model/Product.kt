@@ -31,6 +31,9 @@ class Product :Serializable {
     @Column
     var brand: String = ""
 
+    @Column
+    var quantity: Double= 0.0
+
     constructor()
     constructor(id:Long, imageUrl:String, productName:String, price:Double, brand:String){
         this.id = id
@@ -38,6 +41,7 @@ class Product :Serializable {
         this.productName = productName
         this.price = price
         this.brand= brand
+        this.quantity= 0.0
     }
 
 
