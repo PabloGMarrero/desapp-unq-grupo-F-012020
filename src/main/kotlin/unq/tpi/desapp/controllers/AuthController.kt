@@ -1,16 +1,11 @@
 package unq.tpi.desapp.controllers
 
-import com.fasterxml.jackson.module.kotlin.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import unq.tpi.desapp.builders.UserBuilder
 import unq.tpi.desapp.dto.UserDto
-import unq.tpi.desapp.User
 import unq.tpi.desapp.service.UserService
-import java.net.URI
-import java.util.*
-import javax.validation.Valid
 
 @RestController
 @RequestMapping("/authusers")

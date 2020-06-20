@@ -3,10 +3,6 @@ package unq.tpi.desapp.model
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
-import unq.tpi.desapp.Item
-import unq.tpi.desapp.Product
-import unq.tpi.desapp.Store
-import unq.tpi.desapp.User
 import unq.tpi.desapp.builders.AddressBuilder
 import unq.tpi.desapp.builders.PurchaseBuilder
 import unq.tpi.desapp.builders.UserBuilder

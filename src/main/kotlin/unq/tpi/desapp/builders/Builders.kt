@@ -1,6 +1,6 @@
 package unq.tpi.desapp.builders
 
-import unq.tpi.desapp.*
+import unq.tpi.desapp.model.*
 import unq.tpi.desapp.model.deliveryType.DeliveryType
 import unq.tpi.desapp.model.deliveryType.HomeDelivery
 import unq.tpi.desapp.model.deliveryType.PickupInStore

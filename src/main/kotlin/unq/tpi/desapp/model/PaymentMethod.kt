@@ -1,4 +1,4 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 /**
  * PaymentMethod represents the diferntes types of payments offered by the store

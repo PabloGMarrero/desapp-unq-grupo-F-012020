@@ -3,7 +3,7 @@ package unq.tpi.desapp.service
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import unq.tpi.desapp.Product
+import unq.tpi.desapp.model.Product
 import unq.tpi.desapp.repository.ProductRepository
 import java.util.*
 

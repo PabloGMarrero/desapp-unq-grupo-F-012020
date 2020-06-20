@@ -1,6 +1,5 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import unq.tpi.desapp.dto.UserDto
 import javax.persistence.*
 import kotlin.jvm.Transient

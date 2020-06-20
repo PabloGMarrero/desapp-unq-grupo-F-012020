@@ -1,4 +1,4 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 import java.time.LocalDate
 import java.time.LocalTime

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import unq.tpi.desapp.builders.DiscountByProductsBuilder
-import unq.tpi.desapp.Product
 import java.time.LocalDate
 
 @SpringBootTest

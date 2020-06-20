@@ -4,10 +4,6 @@ import org.joda.time.DateTime
 import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
-import unq.tpi.desapp.DiscountByCategory
-import unq.tpi.desapp.OpenHours
-import unq.tpi.desapp.PaymentMethod
-import unq.tpi.desapp.Product
 import unq.tpi.desapp.builders.*
 import java.time.LocalDate
 

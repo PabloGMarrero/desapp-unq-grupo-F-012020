@@ -1,10 +1,9 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 import unq.tpi.desapp.builders.GeographicMapBuilder
 import java.lang.Math.pow
 import javax.persistence.Column
 import javax.persistence.Embeddable
-import javax.persistence.Entity
 import kotlin.math.*
 /**
  * Represent the address of an specific place

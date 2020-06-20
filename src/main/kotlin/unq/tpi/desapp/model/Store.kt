@@ -1,7 +1,6 @@
-package unq.tpi.desapp
+package unq.tpi.desapp.model
 
 import unq.tpi.desapp.builders.AddressBuilder
-import java.io.Serializable
 import javax.persistence.*
 import kotlin.jvm.Transient
 
