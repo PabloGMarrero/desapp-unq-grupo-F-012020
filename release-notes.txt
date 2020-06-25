@@ -20,3 +20,24 @@ KNOWN ISSUES:
 * Falta delimitar cuando una compra intervienen varios locales y poder seccionarlo
 * Falta delimitar bien cuando un usuario es usuario o cuando admin de un local
 * Falta la carga mediante batch
+
+---------------------------------------------------------------------
+RELEASE V2.0.1
+---------------------------------------------------------------------
+NEW FEATURES:
+- AuthController y UserController para manejar requests de usuarios
+- Se utiliza H2 para persistir
+- Agregado de datos fake
+- Cálculo de distancia entre dos puntos utilizando cálculo matemático
+
+
+
+NOTES:
+- Se corrigieron las dos items de Notes de la entrega 1.0
+
+
+KNOWN ISSUES:
+- Falta delimitar cuando una compra intervienen varios locales y poder seccionarlo
+- Falta delimitar bien cuando un usuario es usuario o cuando admin de un local
+- Falta la carga mediante batch
+

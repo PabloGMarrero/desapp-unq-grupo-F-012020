@@ -6,6 +6,13 @@ import org.springframework.web.bind.annotation.*
 import unq.tpi.desapp.model.Product
 import unq.tpi.desapp.service.ProductService
 import org.springframework.http.ResponseEntity
+import unq.tpi.desapp.builders.ProductBuilder
+import unq.tpi.desapp.builders.StoreBuilder
+import unq.tpi.desapp.dto.ProductDto
+import unq.tpi.desapp.dto.StoreDto
+import unq.tpi.desapp.model.Address
+import unq.tpi.desapp.model.GeographicMap
+import unq.tpi.desapp.model.Store
 import java.util.*
 
 
@@ -74,5 +81,6 @@ class ProductController{
             return ResponseEntity.notFound().build()
         }
     }
+
 
 }

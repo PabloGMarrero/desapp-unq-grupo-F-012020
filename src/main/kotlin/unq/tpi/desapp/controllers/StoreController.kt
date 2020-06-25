@@ -5,11 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import unq.tpi.desapp.builders.ProductBuilder
+import unq.tpi.desapp.builders.StoreBuilder
+import unq.tpi.desapp.builders.UserBuilder
+import unq.tpi.desapp.dto.ProductDto
 import unq.tpi.desapp.dto.StoreDto
 import unq.tpi.desapp.model.Address
 import unq.tpi.desapp.model.GeographicMap
 import unq.tpi.desapp.model.Product
 import unq.tpi.desapp.model.Store
+import unq.tpi.desapp.service.ProductService
 import unq.tpi.desapp.service.StoreService
 import java.util.*
 import javax.validation.Valid
@@ -23,6 +28,7 @@ class StoreController {
 
     @Autowired
     val storeService: StoreService = StoreService()
+    val productService: ProductService = ProductService()
 
     @GetMapping("/")
     fun getAllStores(): ResponseEntity<Iterable<Store>> {
@@ -61,12 +67,15 @@ class StoreController {
     fun addStore(@RequestBody storeDTO: StoreDto):ResponseEntity<Store>{
 
         var geoZone= GeographicMap(storeDTO.latitude, storeDTO.longitude)
-        var anAddress= Address(storeDTO.locality, storeDTO.street, storeDTO.number, geoZone)
-        var anStore= Store(12, storeDTO.activity, anAddress, storeDTO.covDistance, storeDTO.name)
-
-        return ResponseEntity.ok().body(storeService.save(anStore))
+        var anAddress= Address(storeDTO.locality,storeDTO.street,storeDTO.number,geoZone)
+        var aStore = StoreBuilder.aStore().withStoreName(storeDTO.name).
+        withActivity(storeDTO.activity).withAdress(anAddress).withDistance(storeDTO.covDistance).build()
+        storeService.create(aStore)
+        return ResponseEntity.ok().body(storeService.save(aStore))
 
     }
+
+
 
     @PostMapping("/add")
     fun createStore(@RequestBody aStore: @Valid Store): ResponseEntity<Store> {
@@ -110,6 +119,22 @@ class StoreController {
         }else{
             return ResponseEntity.notFound().build()
         }
+    }
+
+    @PostMapping("/addproduct", consumes = arrayOf("application/json"), produces = arrayOf("application/json"))
+    fun addStore(@RequestBody productDTO: ProductDto):ResponseEntity<Product>{
+
+        var aProduct = ProductBuilder.aProduct().withName(productDTO.name).
+        withBrand(productDTO.brand).withUrl(productDTO.imagenUrl).withPrice(productDTO.price).build()
+
+        var aStore = this.storeService.getAStorebyName(productDTO.store)
+
+        if (aStore != null) {
+            aStore.addProduct(aProduct)
+            productService.save(aProduct)
+        }
+        return ResponseEntity.ok().body(aProduct)
+
     }
 
 }

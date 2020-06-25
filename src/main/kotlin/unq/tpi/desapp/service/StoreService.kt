@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import unq.tpi.desapp.model.Product
 import unq.tpi.desapp.model.Store
+import unq.tpi.desapp.model.User
 import unq.tpi.desapp.repository.StoreRepository
 import java.util.*
 
@@ -42,6 +43,14 @@ class StoreService {
             return listStores
       }
 
+      fun getAStorebyName(storeName: String): Store? {
+            var listStores: Iterable<Store> = this.repository.findAll()
+            var aStore = listStores.find { store -> store.storeName == storeName }
+
+            return aStore
+
+      }
+
       fun getProductsInsideRange(latitud:Double, longitude:Double):Iterable<Product>{
             var stores:Iterable<Store>  = this.repository.findAll()
             stores = stores.filter { store -> store.isInsideRange(latitud, longitude)}
@@ -59,6 +68,11 @@ class StoreService {
             stores = stores.filter { store -> store.isInsideRange(latitud, longitude)}
 
             return stores
+      }
+
+      fun create(aStore: Store): Store {
+            var store: Store = this.repository.save(aStore)
+            return store
       }
 
 }
