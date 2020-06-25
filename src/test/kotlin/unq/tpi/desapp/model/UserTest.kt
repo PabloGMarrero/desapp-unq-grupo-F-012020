@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import unq.tpi.desapp.builders.AddressBuilder
 import unq.tpi.desapp.builders.PurchaseBuilder
 import unq.tpi.desapp.builders.UserBuilder
+import kotlin.test.assertNotEquals
 
 @SpringBootTest
 class UserTest {
@@ -42,5 +43,37 @@ class UserTest {
         var user = UserBuilder.anUser().build()
         user.addCategory(aCategory)
         assert(user.categoryPreferences.contains(aCategory))
+    }
+
+    @Test
+    fun twoBasicUsersAreEquals(){
+        var userA = UserBuilder.anUser().build()
+        var userB = UserBuilder.anUser().build()
+
+        assertEquals(userA, userB)
+    }
+
+    @Test
+    fun twoUsersWithDifferentsEmailsAreNotEquals(){
+        var userA = UserBuilder.anUser().withEmail("pablo@gmail.com").build()
+        var userB = UserBuilder.anUser().build()
+
+        assertNotEquals(userA, userB)
+    }
+
+    @Test
+    fun twoUsersWithDifferentsNameAreNotEquals(){
+        var userA = UserBuilder.anUser().withName("Pablo").build()
+        var userB = UserBuilder.anUser().build()
+
+        assertNotEquals(userA, userB)
+    }
+
+    @Test
+    fun twoUsersWithDifferentsPasswordsAreEquals(){
+        var userA = UserBuilder.anUser().withPass("abc123").build()
+        var userB = UserBuilder.anUser().build()
+
+        assertEquals(userA, userB)
     }
 }
