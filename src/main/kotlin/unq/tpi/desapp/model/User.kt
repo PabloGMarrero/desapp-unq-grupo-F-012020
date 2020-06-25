@@ -87,7 +87,8 @@ data class User(
     fun toUserDTO()= UserDto(
             name = name,
             email = email,
-            password =  password
+            password =  "",
+            id = id
     )
 
 
