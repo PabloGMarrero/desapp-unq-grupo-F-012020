@@ -1,7 +1,9 @@
 package unq.tpi.desapp.builders
 
 import unq.tpi.desapp.model.*
-import unq.tpi.desapp.model.deliveryType.*
+import unq.tpi.desapp.model.deliveryType.DeliveryType
+import unq.tpi.desapp.model.deliveryType.HomeDelivery
+import unq.tpi.desapp.model.deliveryType.PickupInStore
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -68,7 +70,7 @@ class StoreBuilder {
     }
 
     fun build(): Store {
-        return Store(id,activity, address, coverageDistance, name)
+        return Store(id, activity, address, coverageDistance, name)
     }
 
     fun withActivity(activity: String): StoreBuilder{
@@ -76,7 +78,7 @@ class StoreBuilder {
         return this
     }
 
-    fun withAdress(address :Address):StoreBuilder{
+    fun withAdress(address : Address):StoreBuilder{
         this.address = address
         return this
     }
@@ -104,7 +106,7 @@ class ItemBuilder{
         }
     }
 
-    fun build():Item{
+    fun build(): Item {
         return Item(product, quantity, store)
     }
 
@@ -118,7 +120,7 @@ class ItemBuilder{
         return this
     }
 
-    fun withAStore(aStore:Store):ItemBuilder{
+    fun withAStore(aStore: Store):ItemBuilder{
         this.store = aStore
         return this
     }
@@ -141,12 +143,12 @@ class PurchaseBuilder {
         return Purchase(user, deliveryType, paymentMethod)
     }
 
-    fun withDeliveryType(aDeliveryType:DeliveryType):PurchaseBuilder{
+    fun withDeliveryType(aDeliveryType: DeliveryType):PurchaseBuilder{
         this.deliveryType = aDeliveryType
         return this
     }
 
-    fun withUser(anUser:User):PurchaseBuilder{
+    fun withUser(anUser: User):PurchaseBuilder{
         this.user = anUser
         return this
     }
@@ -446,7 +448,7 @@ class TurnBuilder{
         }
     }
 
-    fun build():Turn{
+    fun build(): Turn {
         return Turn(day, hour)
     }
 }

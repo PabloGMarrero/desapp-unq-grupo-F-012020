@@ -68,7 +68,6 @@ class StoreController {
 
         var geoZone= GeographicMap(storeDTO.latitude, storeDTO.longitude)
         var anAddress= Address(storeDTO.locality,storeDTO.street,storeDTO.number,geoZone)
-
         var aStore = StoreBuilder.aStore().withStoreName(storeDTO.name).
         withActivity(storeDTO.activity).withAdress(anAddress).withDistance(storeDTO.covDistance).build()
         storeService.create(aStore)

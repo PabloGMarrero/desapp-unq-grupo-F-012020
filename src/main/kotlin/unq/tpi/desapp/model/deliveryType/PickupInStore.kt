@@ -1,6 +1,5 @@
 package unq.tpi.desapp.model.deliveryType
 
-import unq.tpi.desapp.model.deliveryType.DeliveryType
 import java.time.LocalTime
 import java.time.LocalDate
 

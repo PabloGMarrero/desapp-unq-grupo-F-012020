@@ -10,6 +10,9 @@ import unq.tpi.desapp.builders.StoreBuilder
 import unq.tpi.desapp.repository.ProductRepository
 import unq.tpi.desapp.repository.StoreRepository
 
+/**
+ * Initial class to add fake objects to the application
+ */
 @Component
 class BootStrapData(storeRepository: StoreRepository, productRepository: ProductRepository) : CommandLineRunner {
     @Autowired

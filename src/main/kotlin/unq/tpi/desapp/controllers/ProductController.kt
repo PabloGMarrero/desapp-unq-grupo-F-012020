@@ -59,7 +59,7 @@ class ProductController{
     @PostMapping("/add")
     fun addProduct(@RequestBody aProduct: Product):ResponseEntity<Product>{
         try {
-            var productSaved:Product = this.productService.save(aProduct)
+            var productSaved: Product = this.productService.save(aProduct)
             return ResponseEntity.ok().body(productSaved)
         }catch(ex:Exception) {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null)

@@ -4,7 +4,6 @@ import unq.tpi.desapp.builders.GeographicMapBuilder
 import java.lang.Math.pow
 import javax.persistence.Column
 import javax.persistence.Embeddable
-import javax.persistence.Entity
 import kotlin.math.*
 /**
  * Represent the address of an specific place
@@ -78,27 +77,11 @@ class Address {
         return floor(res * 100) / 100
     }
 
-    /**
-     * Calculates the difference of latitudes between self and another address
-     * @return the difference expressed in a Double
-     */
     private fun differenceLatWith(latitude:Double):Double = geographicZone.differenceLatWith(latitude)
 
-    /**
-     * Calculates the difference of longitudes between self and another address
-     * @return the difference expressed in a Double
-     */
     private fun differenceLonWith(longitude:Double):Double = geographicZone.differenceLonWith(longitude)
 
-    /**
-     * Calculates a degrade value to his radian value
-     * @return the representation of the radianes
-     */
     private fun deg2rad(aValue: Double): Double = aValue * (PI / 180)
 
-    /**
-     * Calculates the cosine of an address
-     * @return the cosine expressed in radians
-     */
     private fun cosOfAddress(latitude:Double):Double = cos(deg2rad(latitude))
 }

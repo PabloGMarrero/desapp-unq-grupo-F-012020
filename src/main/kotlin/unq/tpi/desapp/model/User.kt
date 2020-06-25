@@ -1,6 +1,5 @@
 package unq.tpi.desapp.model
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import unq.tpi.desapp.dto.UserDto
 import javax.persistence.*
 import kotlin.jvm.Transient
@@ -64,6 +63,9 @@ data class User(
         this.categoryPreferences.add(aCategory)
     }
 
+    /**
+     * 
+     */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -76,6 +78,10 @@ data class User(
         return true
     }
 
+    /**
+     *
+     */
+
     override fun hashCode(): Int {
         var result = name.hashCode()
         result = 31 * result + email.hashCode()
@@ -83,12 +89,13 @@ data class User(
     }
 
     /**
-     * Convert User objecto to his DTO
+     * Convert User object to his DTO
      */
     fun toUserDTO()= UserDto(
             name = name,
             email = email,
-            password =  password
+            password =  "",
+            id = id
     )
 
 

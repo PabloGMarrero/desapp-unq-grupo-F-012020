@@ -1,7 +1,6 @@
 package unq.tpi.desapp.model
 
 import unq.tpi.desapp.builders.AddressBuilder
-import java.io.Serializable
 import javax.persistence.*
 import kotlin.jvm.Transient
 
@@ -58,7 +57,7 @@ class Store {
     }
 
     constructor()
-    constructor(storeId:Long,activity: String, address: Address, distance: Double, storeName:String){
+    constructor(storeId:Long, activity: String, address: Address, distance: Double, storeName:String){
         this.id = storeId
         this.activity = activity
         this.address = address

@@ -5,9 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import unq.tpi.desapp.builders.*
-import unq.tpi.desapp.model.*
 import java.time.LocalDate
-import java.time.LocalTime
 
 @SpringBootTest
 class StoreTest {

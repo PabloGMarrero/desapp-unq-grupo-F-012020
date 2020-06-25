@@ -14,7 +14,7 @@ class ProductService{
     @Autowired
     lateinit var repository:ProductRepository
 
-    fun save(aProduct:Product):Product{
+    fun save(aProduct: Product): Product {
         return this.repository.save(aProduct)
     }
 
@@ -26,7 +26,7 @@ class ProductService{
         return this.repository.findAll()
     }
 
-    fun updateProduct(aProduct: Product):Product{
+    fun updateProduct(aProduct: Product): Product {
         return this.save(aProduct)
     }
 

@@ -29,7 +29,7 @@ class StoreService {
             return repository.save(aStore)
       }
 
-      fun updateStore(aStore: Store):Store{
+      fun updateStore(aStore: Store): Store {
            return this.save(aStore)
       }
 
