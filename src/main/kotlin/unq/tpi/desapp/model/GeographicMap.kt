@@ -27,12 +27,16 @@ class GeographicMap {
     }
 
     /**
-     *
+     * Calculates the difference between the self latitude with another one
+     * @param latitude a double that represents the latitude to compare
+     * @return a double that represents the difference
      */
     fun differenceLatWith(latitude: Double):Double = latitude - this.latitude
 
     /**
-     *
+     * Calculates the difference between the self longitude with another one
+     * @param longitude a double that represents the longitud to compare
+     * @return a double that represents the difference
      */
     fun differenceLonWith(longitude: Double):Double = longitude - this.longitude
 
