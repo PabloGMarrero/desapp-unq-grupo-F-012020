@@ -98,6 +98,5 @@ data class User(
             id = id
     )
 
-
 }
 
