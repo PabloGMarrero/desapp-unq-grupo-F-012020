@@ -1,7 +1,12 @@
 package unq.tpi.desapp.model.deliveryType
 
+import com.fasterxml.jackson.annotation.JsonTypeName
 import java.time.LocalDate
 import java.time.LocalTime
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 
 /**
  * Pickup in store represent the idea of pick up the purchase on the store.
@@ -10,10 +15,19 @@ import java.time.LocalTime
  * @param hour represents the specific hour of the pickup.
  * @param address represents the address where the user want to send the purchase
  */
+@Entity
+@JsonTypeName("HomeDelivery")
 class HomeDelivery(date: LocalDate, hour: LocalTime, address:String): DeliveryType {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id:Long = 0
+
     var date = date
     var hour = hour
     var address = address
+
+    constructor():this(LocalDate.MIN, LocalTime.MAX, "")
 
     override fun hourOfTheDelivery(): LocalTime {
         return hour
@@ -52,3 +66,4 @@ class HomeDelivery(date: LocalDate, hour: LocalTime, address:String): DeliveryTy
     }
 
 }
+
