@@ -6,13 +6,7 @@ import org.springframework.web.bind.annotation.*
 import unq.tpi.desapp.model.Product
 import unq.tpi.desapp.service.ProductService
 import org.springframework.http.ResponseEntity
-import unq.tpi.desapp.builders.ProductBuilder
-import unq.tpi.desapp.builders.StoreBuilder
-import unq.tpi.desapp.dto.ProductDto
-import unq.tpi.desapp.dto.StoreDto
-import unq.tpi.desapp.model.Address
-import unq.tpi.desapp.model.GeographicMap
-import unq.tpi.desapp.model.Store
+import unq.tpi.desapp.aspects.LoggingAspect
 import java.util.*
 
 
@@ -25,6 +19,7 @@ class ProductController{
     @Autowired
     var productService: ProductService = ProductService()
 
+    @LoggingAspect
     @GetMapping("/")
     fun getAllProducts():ResponseEntity<Iterable<Product>> {
         var list:Iterable<Product> = this.productService.findAll()
@@ -35,6 +30,7 @@ class ProductController{
         }
     }
 
+    @LoggingAspect
     @GetMapping("/get")
     fun getProductById(@RequestParam("productId") productId:Long):ResponseEntity<Product>{
         var product:Optional<Product>  = this.productService.findById(productId)
@@ -45,6 +41,7 @@ class ProductController{
         }
     }
 
+    @LoggingAspect
     @GetMapping("/get/name")
     fun getProductsByName(@RequestParam("productName") nameProduct:String):ResponseEntity<Iterable<Product>>{
         var products:Iterable<Product>  = this.productService.getByName(nameProduct)
@@ -55,7 +52,7 @@ class ProductController{
         }
     }
 
-
+    @LoggingAspect
     @PostMapping("/add")
     fun addProduct(@RequestBody aProduct: Product):ResponseEntity<Product>{
         try {
@@ -67,11 +64,13 @@ class ProductController{
 
     }
 
+    @LoggingAspect
     @PutMapping("/add")
     fun updateProduct(@RequestParam("id") id: Long, @RequestBody product: Product):ResponseEntity<Product>{
         return ResponseEntity.ok().body(this.productService.updateProduct(product))
     }
 
+    @LoggingAspect
     @DeleteMapping("/delete")
     fun deleteProduct(@RequestParam("id") id: Long):ResponseEntity<Product>{
         try {

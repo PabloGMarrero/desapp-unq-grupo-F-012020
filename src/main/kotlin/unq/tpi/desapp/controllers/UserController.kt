@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import unq.tpi.desapp.aspects.LoggingAspect
 import unq.tpi.desapp.model.Purchase
 import unq.tpi.desapp.model.User
 import unq.tpi.desapp.service.UserService
@@ -17,6 +18,7 @@ class UserController {
     @Autowired
     val userService:UserService = UserService()
 
+    @LoggingAspect
     @GetMapping("/")
     fun getAllUsers(): ResponseEntity<Iterable<User>> {
         var list:Iterable<User> = this.userService.getAll()
@@ -28,6 +30,7 @@ class UserController {
         }
     }
 
+    @LoggingAspect
     @GetMapping("/get/")
     fun getUserById(@RequestParam("userid") id:Long):ResponseEntity<User>{
         var user: Optional<User> =  userService.findByID(id)
@@ -38,6 +41,7 @@ class UserController {
         }
     }
 
+    @LoggingAspect
     @GetMapping("/get/{id}/orders")
     fun getUserOrders(@PathVariable("id") id:Long):ResponseEntity<List<Purchase>>{
         var orders = userService.getUserOrders(id)
