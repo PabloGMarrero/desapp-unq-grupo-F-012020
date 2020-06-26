@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import unq.tpi.desapp.aspects.LoggingAspect
 import unq.tpi.desapp.builders.ProductBuilder
 import unq.tpi.desapp.builders.StoreBuilder
 import unq.tpi.desapp.builders.UserBuilder
@@ -30,6 +31,7 @@ class StoreController {
     val storeService: StoreService = StoreService()
     val productService: ProductService = ProductService()
 
+    @LoggingAspect
     @GetMapping("/")
     fun getAllStores(): ResponseEntity<Iterable<Store>> {
 
@@ -42,6 +44,7 @@ class StoreController {
         }
     }
 
+    @LoggingAspect
     @GetMapping("get/{id}")
     fun getStore(@PathVariable("id") id: Long): ResponseEntity<Store> {
         var store: Optional<Store> =  storeService.findByID(id)
@@ -53,6 +56,7 @@ class StoreController {
 
     }
 
+    @LoggingAspect
     @GetMapping("/get/name")
     fun getStoresByName(@RequestParam("storeName") nameStore:String):ResponseEntity<Iterable<Store>>{
         var stores:Iterable<Store>  = this.storeService.getByName(nameStore)
@@ -63,6 +67,7 @@ class StoreController {
         }
     }
 
+    @LoggingAspect
     @PostMapping("/addstore", consumes = arrayOf("application/json"), produces = arrayOf("application/json"))
     fun addStore(@RequestBody storeDTO: StoreDto):ResponseEntity<Store>{
 
@@ -75,18 +80,19 @@ class StoreController {
 
     }
 
-
-
+    @LoggingAspect
     @PostMapping("/add")
     fun createStore(@RequestBody aStore: @Valid Store): ResponseEntity<Store> {
         return ResponseEntity.ok().body(storeService.save(aStore))
     }
 
+    @LoggingAspect
     @PutMapping("/add")
     fun updateStore(@RequestParam("id") id: Long, @RequestBody aStore: @Valid Store):ResponseEntity<Store> {
         return ResponseEntity.ok().body(this.storeService.updateStore(aStore))
     }
 
+    @LoggingAspect
     @DeleteMapping("/delete")
     fun deletestore(@RequestParam("id") id: Long):ResponseEntity<Store>{
         try {
@@ -97,6 +103,7 @@ class StoreController {
         }
     }
 
+    @LoggingAspect
     @GetMapping("/store")
     fun getStoreProductsInsideRange(@RequestParam("latitude") latitude:Double,
                          @RequestParam("longitude") longitude:Double):ResponseEntity<Iterable<Product>>{
@@ -109,6 +116,7 @@ class StoreController {
         }
     }
 
+    @LoggingAspect
     @GetMapping("/stores")
     fun getStoresInsideRange(@RequestParam("latitude") latitude:Double,
                                     @RequestParam("longitude") longitude:Double):ResponseEntity<Iterable<Store>>{
@@ -121,6 +129,7 @@ class StoreController {
         }
     }
 
+    @LoggingAspect
     @PostMapping("/addproduct", consumes = arrayOf("application/json"), produces = arrayOf("application/json"))
     fun addStore(@RequestBody productDTO: ProductDto):ResponseEntity<Product>{
 
