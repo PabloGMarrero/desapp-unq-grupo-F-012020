@@ -24,6 +24,9 @@ class WebServiceLoggerAspect {
 
     }
 
+    /**
+     *
+     */
     @After("@annotation(unq.tpi.desapp.aspects.LoggingAspect)")
     fun logAfterMethod(joinPoint: JoinPoint){
         var infoResult:String = getInfo(joinPoint).stream().collect(Collectors.joining(""))
@@ -55,6 +58,9 @@ class WebServiceLoggerAspect {
         return result
     }
 
+    /**
+     *
+     */
     @Around("@annotation(unq.tpi.desapp.aspects.LoggingAspect)")
     fun logAroundMethod(joinPoint: ProceedingJoinPoint){
         log.info("### LOGGING AROUND METHOD START ###")
