@@ -21,8 +21,8 @@ import java.util.stream.Collectors
 class WebServiceLoggerAspect {
     companion object {
         val log: Logger = LoggerFactory.getLogger(this.javaClass.name)
-
     }
+
 
     /**
      *
@@ -62,13 +62,18 @@ class WebServiceLoggerAspect {
      *
      */
     @Around("@annotation(unq.tpi.desapp.aspects.LoggingAspect)")
-    fun logAroundMethod(joinPoint: ProceedingJoinPoint){
+    fun logAroundMethod(joinPoint: ProceedingJoinPoint): Any?{
         log.info("### LOGGING AROUND METHOD START ###")
         var startTime:DateTime = DateTime.now()
-        joinPoint.proceed()
+
+        var obj = joinPoint.proceed()
+
         var endTime:DateTime = DateTime.now()
 
-        log.info("Time taken by {} is {}", startTime, endTime)
+        log.info("Time taken start at {} end at {}", startTime, endTime)
         log.info("### LOGGING AROUND METHOD END ###")
+
+
+        return obj
     }
 }
