@@ -153,6 +153,10 @@ class PurchaseBuilder {
         return this
     }
 
+    fun withPaymentMethod(aPaymentMethod: PaymentMethod):PurchaseBuilder{
+        this.paymentMethod = aPaymentMethod
+        return this
+    }
 
 }
 
