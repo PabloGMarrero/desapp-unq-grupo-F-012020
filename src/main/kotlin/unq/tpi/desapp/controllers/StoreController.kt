@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*
 import unq.tpi.desapp.aspects.LoggingAspect
 import unq.tpi.desapp.builders.ProductBuilder
 import unq.tpi.desapp.builders.StoreBuilder
-import unq.tpi.desapp.builders.UserBuilder
 import unq.tpi.desapp.dto.ProductDto
+import unq.tpi.desapp.dto.ProductListDto
 import unq.tpi.desapp.dto.StoreDto
 import unq.tpi.desapp.model.Address
 import unq.tpi.desapp.model.GeographicMap
