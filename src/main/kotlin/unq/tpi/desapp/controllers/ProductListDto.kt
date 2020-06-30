@@ -6,6 +6,6 @@ import unq.tpi.desapp.model.Store
 
 data class ProductListDto @JsonCreator constructor(
         var product:Product,
-        var store: String
+        var store: Store
 
 )
