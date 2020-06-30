@@ -3,6 +3,7 @@ package unq.tpi.desapp.service
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import unq.tpi.desapp.controllers.ProductListDto
 import unq.tpi.desapp.model.Product
 import unq.tpi.desapp.model.Store
 import unq.tpi.desapp.model.User
@@ -51,8 +52,27 @@ class StoreService {
 
       }
 
-      fun getProductsInsideRange(latitud:Double, longitude:Double):Iterable<Product>{
+      fun getProductsInsideRange(latitud:Double, longitude:Double):Iterable<ProductListDto>{
             var stores:Iterable<Store>  = this.repository.findAll()
+            stores = stores.filter { store -> store.isInsideRange(latitud, longitude)}
+            var products:MutableList<Product> = mutableListOf()
+            var productList:MutableList<ProductListDto> = mutableListOf()
+
+            stores.forEach { store ->
+                  products = store.productList
+                  products.forEach { prod ->
+                        productList.add(
+                                ProductListDto(
+                                        product = prod,
+                                        store = store)
+                        )
+                  }
+
+            }
+
+
+            return productList
+          /*  var stores:Iterable<Store>  = this.repository.findAll()
             stores = stores.filter { store -> store.isInsideRange(latitud, longitude)}
             var products:MutableList<Product> = mutableListOf()
             stores.forEach { store -> products.addAll(store.productList) }
@@ -60,7 +80,7 @@ class StoreService {
                   products =
             }*/
 
-            return products
+            return products*/
       }
 
       fun getStoresInsideRange(latitud:Double, longitude:Double):Iterable<Store>{
