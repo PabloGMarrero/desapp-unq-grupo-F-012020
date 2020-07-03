@@ -1,4 +1,6 @@
 package unq.tpi.desapp.exceptions
 
-class StoreDoesntExistException {
+import java.lang.RuntimeException
+
+class StoreDoesntExistException(message:String) : RuntimeException(message) {
 }
