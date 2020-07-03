@@ -8,8 +8,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 class ProductBuilder {
-
-    var id: Long = 0
+    var id:Long = 0
     var urlImage:String =""
     var name: String = ""
     var price: Double = 0.0
@@ -24,11 +23,6 @@ class ProductBuilder {
 
     fun build(): Product {
         return Product(id, urlImage, name, price, brand)
-    }
-
-    fun withId(id:Long): ProductBuilder{
-        this.id = id
-        return this
     }
 
     fun withUrl(url:String):ProductBuilder{
@@ -48,6 +42,11 @@ class ProductBuilder {
 
     fun withPrice(price:Double):ProductBuilder{
         this.price = price
+        return this
+    }
+
+    fun withId(id: Long): ProductBuilder {
+        this.id = id
         return this
     }
 
