@@ -1,4 +1,10 @@
 package unq.tpi.desapp.dto
 
-class ItemDto {
-}
+import com.fasterxml.jackson.annotation.JsonCreator
+import unq.tpi.desapp.model.Store
+
+data class ItemDto @JsonCreator constructor(
+    var id:Long,
+    var quantity: Long,
+    var storeId:Long
+)
