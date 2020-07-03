@@ -11,19 +11,8 @@ import kotlin.test.assertNotEquals
 
 @SpringBootTest
 class UserTest {
-    val aProduct = Product(1, "blabla", "Pepitos", 35.5, "Bagley")
-    val address = AddressBuilder.anAddress().build()
-    val aStore = Store(1, "Kiosko", address, 20.0, "")
-    val aItem = Item(aProduct, 1.0, aStore)
     val aPurchase = PurchaseBuilder.aPurchase().build()
     val aCategory = User.Categories("Almacen")
-
-    @Test
-    fun TestUserAdddItemProduct() {
-        var user = UserBuilder.anUser().build()
-        user.addItemProduct(aItem)
-        assert(user.shoppingBag.contains(aItem))
-    }
 
     @Test
     fun TestUserAddToAlHistorial() {
