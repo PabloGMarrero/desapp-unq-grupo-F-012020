@@ -11,10 +11,11 @@ data class ProductDto @JsonCreator constructor(
         var brand:String,
         var imageUrl:String,
         var price:Double,
-        var store:String
+        var store:String,
+        var id:Long
 ){
     fun productDtoToProduct() = Product(
-            id = 0,
+            id = id,
             imageUrl = imageUrl,
             productName = name,
             price = price,

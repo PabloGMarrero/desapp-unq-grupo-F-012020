@@ -1,5 +1,6 @@
 package unq.tpi.desapp.model
 
+import unq.tpi.desapp.dto.ProductDto
 import unq.tpi.desapp.exceptions.InvalidBrandProductException
 import unq.tpi.desapp.exceptions.InvalidNameProductException
 import unq.tpi.desapp.exceptions.InvalidProductPriceException
@@ -64,7 +65,10 @@ class Product :Serializable {
     }
 
     /**
-     *
+     *  Validate product and returns an exception if some validation fails
+     *  @exception InvalidProductPriceException
+     *  @exception InvalidBrandProductException
+     *  @exception InvalidNameProductException
      */
     @Throws (InvalidBrandProductException::class, InvalidNameProductException::class, InvalidProductPriceException::class)
     fun validated() {
@@ -78,6 +82,18 @@ class Product :Serializable {
             throw InvalidProductPriceException("The product can be only possitive numbers")
         }
     }
+
+    /**
+     * Convert pojo to DTO
+     */
+    fun toProductDto()= ProductDto(
+            name = productName,
+            brand = brand,
+            price = price,
+            id = id,
+            imageUrl = imageUrl,
+            store = ""
+    )
 
 }
 

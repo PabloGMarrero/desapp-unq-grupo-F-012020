@@ -16,15 +16,19 @@ class ProductService{
 
     @Autowired
     lateinit var repository:ProductRepository
+
+    @Autowired
     lateinit var storeRepository: StoreRepository
 
     @Throws(StoreDoesntExistException::class)
     fun addProduct(idStore:Long, productDto: ProductDto): Product{
-        storeRepository.findById(idStore).orElseThrow {
+        var store = storeRepository.findById(idStore).orElseThrow {
             throw StoreDoesntExistException("The store does not exist.")
         }
 
         var aProduct: Product = productDto.productDtoToProduct()
+        store.addProduct(aProduct)
+
         return this.repository.save(aProduct)
     }
 
@@ -38,8 +42,13 @@ class ProductService{
         return this.repository.findById(id)
     }
 
-    fun findAll():Iterable<Product>{
-        return this.repository.findAll()
+    fun findAll():Iterable<ProductDto>{
+        var products = this.repository.findAll()
+        var productsDto = mutableListOf<ProductDto>()
+
+        products.forEach { product -> productsDto.add(product.toProductDto()) }
+
+        return productsDto
     }
 
     fun updateProduct(aProduct: ProductDto): Product {

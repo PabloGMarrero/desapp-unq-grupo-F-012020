@@ -24,8 +24,8 @@ class ProductController{
 
     @LoggingAspect
     @GetMapping("/")
-    fun getAllProducts():ResponseEntity<Iterable<Product>> {
-        var list:Iterable<Product> = this.productService.findAll()
+    fun getAllProducts():ResponseEntity<Iterable<ProductDto>> {
+        var list:Iterable<ProductDto> = this.productService.findAll()
         if (list.toList().isNotEmpty()){
             return ResponseEntity.status(HttpStatus.OK).body(list)
         }else{
