@@ -23,27 +23,22 @@ data class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long = 0
     var purchaseRange: Double = 0.0
+
     @Transient
     var categoryPreferences: MutableList<Categories> =  mutableListOf()
-    @Transient
+
+    @OneToMany(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "user_id")
     var historialPurchases: MutableList<Purchase> =  mutableListOf()
-    @Transient
-    var shoppingBag: MutableList<Item> = mutableListOf()
 
     class Categories(name: String) {
         var name: String = name
     }
 
-    /**
-     * Add a new item to the bag
-     * @param aItem
-     */
-    fun addItemProduct(aItem: Item) {
-        shoppingBag.add(aItem)
-    }
 
     /**
      * Add the purchase to his own historial
+     * @param purchase
      */
     fun addToHistorial(purchase: Purchase){
         historialPurchases.add(purchase)
@@ -51,13 +46,15 @@ data class User(
 
     /**
      * Changes the range of the purchase to find new stores in the map
+     * @param distance
      */
-    fun changePurchaseRange(distancia: Double){
-        this.purchaseRange = distancia
+    fun changePurchaseRange(distance: Double){
+        this.purchaseRange = distance
     }
 
     /**
      * Add a new category to his own preferences.
+     * @param aCategory
      */
     fun addCategory(aCategory: Categories){
         this.categoryPreferences.add(aCategory)

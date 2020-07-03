@@ -3,6 +3,7 @@ package unq.tpi.desapp.service
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import unq.tpi.desapp.builders.UserBuilder
 import unq.tpi.desapp.model.Purchase
 import unq.tpi.desapp.model.User
 import unq.tpi.desapp.repository.UserRepository
@@ -56,5 +57,18 @@ class UserService {
     fun create(anUser: User): User {
         var user: User = this.repository.save(anUser)
         return user
+    }
+
+    fun update(anUser: User):User{
+//        var userToBeSaved = UserBuilder.anUser().build()//this.findByID(anUser.id).get()
+
+        /*userToBeSaved.historialPurchases.addAll(anUser.historialPurchases)
+        userToBeSaved.password = anUser.password
+        userToBeSaved.name = anUser.name
+        userToBeSaved.purchaseRange = anUser.purchaseRange
+        userToBeSaved.categoryPreferences.addAll(anUser.categoryPreferences)*/
+
+        repository.save(anUser)
+        return anUser
     }
 }
