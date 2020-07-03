@@ -5,11 +5,16 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import unq.tpi.desapp.builders.ItemBuilder
 import unq.tpi.desapp.builders.PurchaseBuilder
-import unq.tpi.desapp.builders.StoreBuilder
+import unq.tpi.desapp.dto.ItemDto
 import unq.tpi.desapp.dto.PurchaseDto
+import unq.tpi.desapp.exceptions.StoreDoesntExistException
+import unq.tpi.desapp.exceptions.UserDoesntExistException
 import unq.tpi.desapp.model.*
 import unq.tpi.desapp.model.deliveryType.DeliveryType
+import unq.tpi.desapp.model.deliveryType.HomeDelivery
 import unq.tpi.desapp.repository.ProductRepository
+import unq.tpi.desapp.repository.PurchaseRepository
+import unq.tpi.desapp.repository.StoreRepository
 import unq.tpi.desapp.repository.UserRepository
 import java.util.*
 
@@ -18,27 +23,62 @@ import java.util.*
 class PurchaseService {
 
     @Autowired
-    lateinit var userRepository: UserRepository
+    var userService: UserService = UserService()
 
     @Autowired
-    lateinit var productRepository: ProductRepository
+    var productService: ProductService = ProductService()
 
+    @Autowired
+    var storeService: StoreService = StoreService()
+
+    @Autowired
+    var itemService: ItemService = ItemService()
+
+    @Autowired
+    lateinit var purchaseRepository: PurchaseRepository
+
+    @Throws(UserDoesntExistException::class)
     fun newPurchase(purchaseDto: PurchaseDto):Purchase{
-        var anUser:Optional<User> = userRepository.findById(purchaseDto.user.id)
-        var deliveryType: DeliveryType = purchaseDto.deliveryType
-        var paymentMethod: PaymentMethod = purchaseDto.paymentMethod
+        var anUser:Optional<User> = userService.findByID(purchaseDto.user.id)
+        if (anUser.isPresent){
+            var user = anUser.get()
+            var deliveryType: HomeDelivery = purchaseDto.deliveryType
+            var paymentMethod: PaymentMethod = purchaseDto.paymentMethod
 
-        var purchase:Purchase = PurchaseBuilder.aPurchase().withUser(anUser.get()).withDeliveryType(deliveryType).withPaymentMethod(paymentMethod).build()
-        addProductsToPurchase(purchase, purchaseDto.products)
-        return purchase
+            var purchase:Purchase = PurchaseBuilder.aPurchase().withUser(user).withDeliveryType(deliveryType).withPaymentMethod(paymentMethod).build()
+
+            var purchasedSaved = purchaseRepository.save(purchase)
+            addProductsToPurchase(user, purchasedSaved, purchaseDto.items)
+
+            //guardarla al usuario con el repo
+            user.addToHistorial(purchasedSaved)
+            var userSaved = userService.update(user)
+
+            return purchase
+
+        }else{
+            var id = purchaseDto.user.id
+            throw UserDoesntExistException("The user with id '$id' does not exist.")
+        }
     }
 
-    private fun addProductsToPurchase(purchase: Purchase, products: MutableList<Product>){
-        for(product in products){
-            var store: Store = StoreBuilder.aStore().build()
-            var item: Item = ItemBuilder.anItem().withAStore(store).withProduct(product).withQuantity(1.0).build()
-            purchase.addItem(item)
+    @Throws(StoreDoesntExistException::class)
+    private fun addProductsToPurchase(user: User, purchase: Purchase, items: MutableList<ItemDto>){
+        for(anItem in items){
+            var product = productService.findById(anItem.id).get()
+            var anStore: Optional<Store> = storeService.findByID(anItem.storeId)
+            if (anStore.isPresent){
+                var store = anStore.get()
+                var item: Item = ItemBuilder.anItem().withAStore(store).withProduct(product).withQuantity(anItem.quantity).build()
+                var itemSaved = itemService.save(item)
+                purchase.addItem(itemSaved)
+
+            }else{
+                var id = anItem.storeId
+                throw StoreDoesntExistException("the store with id '$id' doest not exist.")
+            }
         }
+
 
     }
 }

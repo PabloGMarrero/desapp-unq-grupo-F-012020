@@ -1,4 +1,7 @@
 package unq.tpi.desapp.repository
 
-interface ItemRepository {
+import org.springframework.data.jpa.repository.JpaRepository
+import unq.tpi.desapp.model.Item
+
+interface ItemRepository : JpaRepository<Item, Long> {
 }
