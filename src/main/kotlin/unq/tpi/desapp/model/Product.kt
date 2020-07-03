@@ -1,5 +1,8 @@
 package unq.tpi.desapp.model
 
+import unq.tpi.desapp.exceptions.InvalidBrandProductException
+import unq.tpi.desapp.exceptions.InvalidNameProductException
+import unq.tpi.desapp.exceptions.InvalidProductPriceException
 import java.io.Serializable
 import javax.persistence.*
 
@@ -58,6 +61,22 @@ class Product :Serializable {
 
     override fun hashCode(): Int {
         return id.hashCode()
+    }
+
+    /**
+     *
+     */
+    @Throws (InvalidBrandProductException::class, InvalidNameProductException::class, InvalidProductPriceException::class)
+    fun validated() {
+        if (this.brand.equals("")){
+            throw InvalidBrandProductException("The brand can not be empty")
+        }
+        if(this.productName.equals("")){
+            throw InvalidNameProductException("The product name can not be empty.")
+        }
+        if(this.price <= 0){
+            throw InvalidProductPriceException("The product can be only possitive numbers")
+        }
     }
 
 }

@@ -4,6 +4,10 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import unq.tpi.desapp.builders.ProductBuilder
+import unq.tpi.desapp.exceptions.InvalidBrandProductException
+import unq.tpi.desapp.exceptions.InvalidNameProductException
+import unq.tpi.desapp.exceptions.InvalidProductPriceException
+import kotlin.test.assertFailsWith
 
 @SpringBootTest
 class ProductTest {
@@ -17,12 +21,6 @@ class ProductTest {
         assertEquals(producto.brand, "")
         assertEquals(producto.productName, "")
         assertEquals(producto.price, 0.0)
-    }
-
-    @Test
-    fun testProductWithId100(){
-        var producto = ProductBuilder.aProduct().withId(100).build()
-        assertEquals(producto.id, 100)
     }
 
     @Test
@@ -67,7 +65,7 @@ class ProductTest {
     @Test
     fun testOneProductIsEqualToAnotherOneWithDifferentsAttributes(){
         var productA = ProductBuilder.aProduct().build()
-        var productB = ProductBuilder.aProduct().withId(10).build()
+        var productB = ProductBuilder.aProduct().withBrand("Coca").build()
 
         assertNotEquals(productA, productB)
     }
@@ -78,5 +76,47 @@ class ProductTest {
 
         assertEquals(product, product)
         assertEquals(product.hashCode(), product.hashCode())
+    }
+
+    @Test
+    fun testThrowInvalidProductNameExcepion(){
+        assertFailsWith(InvalidNameProductException::class){
+            var aProduct = ProductBuilder.aProduct().withBrand("Coke").withPrice(0.0).withName("").build()
+            aProduct.validated()
+        }
+    }
+
+    @Test
+    fun testThrowInvalidBrandProductExcepion(){
+        assertFailsWith(InvalidBrandProductException::class){
+            var aProduct = ProductBuilder.aProduct().withBrand("")
+                    .withPrice(0.0).withName("Coca-Cola").build()
+            aProduct.validated()
+        }
+    }
+
+    @Test
+    fun testThrowInvalidProductPriceExcepion(){
+        assertFailsWith(InvalidProductPriceException::class){
+            var aProduct = ProductBuilder.aProduct().withBrand("Coke")
+                    .withPrice(0.0).withName("Coca-Cola").build()
+            aProduct.validated()
+        }
+    }
+
+    @Test
+    fun testThrowInvalidProductPriceExcepionNegativeNumbers(){
+        assertFailsWith(InvalidProductPriceException::class){
+            var aProduct = ProductBuilder.aProduct().withBrand("Coke")
+                    .withPrice(-10.0).withName("Coca-Cola").build()
+            aProduct.validated()
+        }
+    }
+
+    @Test
+    fun testDoesNotThrowAnyException(){
+        var aProduct = ProductBuilder.aProduct().withBrand("Coke")
+                    .withPrice(10.0).withName("Coca-Cola").build()
+        aProduct.validated()
     }
 }
