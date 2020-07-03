@@ -16,4 +16,5 @@ interface UserRepository: JpaRepository<User, Long> {
      * @return an Optional<User> if the user does not exist
      */
     fun findByEmail(email:String): Optional<User>
+
 }

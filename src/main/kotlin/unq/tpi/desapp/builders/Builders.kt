@@ -96,7 +96,7 @@ class StoreBuilder {
 
 class ItemBuilder{
     var product: Product = ProductBuilder.aProduct().build()
-    var quantity: Double = 0.00
+    var quantity: Long = 0
     var store: Store = StoreBuilder.aStore().build()
 
     companion object{
@@ -115,7 +115,7 @@ class ItemBuilder{
         return this
     }
 
-    fun withQuantity(aQuantity:Double):ItemBuilder{
+    fun withQuantity(aQuantity:Long):ItemBuilder{
         this.quantity = aQuantity
         return this
     }
@@ -129,7 +129,7 @@ class ItemBuilder{
 class PurchaseBuilder {
 
     var user: User = UserBuilder.anUser().build()
-    var deliveryType: DeliveryType = PickupInStoreBuilder.aPickupInStore().build()
+    var deliveryType: DeliveryType = HomeDeliveryBuilder.aHomeDelivery().build() //PickupInStoreBuilder.aPickupInStore().build()
     var paymentMethod: PaymentMethod = PaymentMethod.CASH
 
     companion object {
@@ -153,6 +153,10 @@ class PurchaseBuilder {
         return this
     }
 
+    fun withPaymentMethod(aPaymentMethod: PaymentMethod):PurchaseBuilder{
+        this.paymentMethod = aPaymentMethod
+        return this
+    }
 
 }
 
