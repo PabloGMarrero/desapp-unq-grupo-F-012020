@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import java.time.LocalDate
 import java.time.LocalTime
+import javax.persistence.Entity
+
 /**
  * DeliveryType is the interface class to define the protocol of the delivery types
  */
@@ -21,7 +23,6 @@ import java.time.LocalTime
         JsonSubTypes.Type(name = "HomeDelivery", value = HomeDelivery::class),
         JsonSubTypes.Type(value = PickupInStore::class, name = "PickupInStore")
 )
-
 interface DeliveryType {
     /**
      * Returnn the hour of the delivery

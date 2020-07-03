@@ -3,10 +3,7 @@ package unq.tpi.desapp.model.deliveryType
 import com.fasterxml.jackson.annotation.JsonTypeName
 import java.time.LocalDate
 import java.time.LocalTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 /**
  * Pickup in store represent the idea of pick up the purchase on the store.
@@ -23,8 +20,11 @@ class HomeDelivery(date: LocalDate, hour: LocalTime, address:String): DeliveryTy
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long = 0
 
+    @Column
     var date = date
+    @Column
     var hour = hour
+    @Column
     var address = address
 
     constructor():this(LocalDate.MIN, LocalTime.MAX, "")
