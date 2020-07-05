@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.*
 import unq.tpi.desapp.model.Product
 import unq.tpi.desapp.service.ProductService
 import org.springframework.http.ResponseEntity
+import unq.tpi.desapp.aspects.ExceptionAspect
 import unq.tpi.desapp.aspects.LoggingAspect
+import unq.tpi.desapp.builders.ProductBuilder
+import unq.tpi.desapp.dto.ProductDto
 import java.util.*
 
 
@@ -21,8 +24,8 @@ class ProductController{
 
     @LoggingAspect
     @GetMapping("/")
-    fun getAllProducts():ResponseEntity<Iterable<Product>> {
-        var list:Iterable<Product> = this.productService.findAll()
+    fun getAllProducts():ResponseEntity<Iterable<ProductDto>> {
+        var list:Iterable<ProductDto> = this.productService.findAll()
         if (list.toList().isNotEmpty()){
             return ResponseEntity.status(HttpStatus.OK).body(list)
         }else{
@@ -53,33 +56,29 @@ class ProductController{
     }
 
     @LoggingAspect
-    @PostMapping("/add")
-    fun addProduct(@RequestBody aProduct: Product):ResponseEntity<Product>{
-        try {
-            var productSaved: Product = this.productService.save(aProduct)
-            return ResponseEntity.ok().body(productSaved)
-        }catch(ex:Exception) {
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null)
-        }
+    @ExceptionAspect
+    @PostMapping("/{idStore}/addProduct")
+    fun addProduct(@PathVariable("idStore") idStore:Long,
+                   @RequestBody aProductDto: ProductDto):ResponseEntity<Product>{
+
+        var productSaved: Product = this.productService.addProduct(idStore, aProductDto)
+        return ResponseEntity.ok().body(productSaved)
 
     }
 
     @LoggingAspect
-    @PutMapping("/add")
-    fun updateProduct(@RequestParam("id") id: Long, @RequestBody product: Product):ResponseEntity<Product>{
+    @ExceptionAspect
+    @PutMapping("/update")
+    fun updateProduct(@RequestParam("id") id: Long, @RequestBody product: ProductDto):ResponseEntity<Product>{
         return ResponseEntity.ok().body(this.productService.updateProduct(product))
     }
 
     @LoggingAspect
+    @ExceptionAspect
     @DeleteMapping("/delete")
     fun deleteProduct(@RequestParam("id") id: Long):ResponseEntity<Product>{
-        try {
-            this.productService.deleteProduct(id)
-            return ResponseEntity.noContent().build()
-        }catch(ex:Exception) {
-            return ResponseEntity.notFound().build()
-        }
+        this.productService.deleteProduct(id)
+        return ResponseEntity.noContent().build()
     }
-
 
 }

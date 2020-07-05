@@ -29,7 +29,6 @@ class StoreController {
 
     @Autowired
     val storeService: StoreService = StoreService()
-    val productService: ProductService = ProductService()
 
     @LoggingAspect
     @GetMapping("/")
@@ -127,23 +126,6 @@ class StoreController {
         }else{
             return ResponseEntity.notFound().build()
         }
-    }
-
-    @LoggingAspect
-    @PostMapping("/addproduct", consumes = arrayOf("application/json"), produces = arrayOf("application/json"))
-    fun addStore(@RequestBody productDTO: ProductDto):ResponseEntity<Product>{
-
-        var aProduct = ProductBuilder.aProduct().withName(productDTO.name).
-        withBrand(productDTO.brand).withUrl(productDTO.imagenUrl).withPrice(productDTO.price).build()
-
-        var aStore = this.storeService.getAStorebyName(productDTO.store)
-
-        if (aStore != null) {
-            aStore.addProduct(aProduct)
-            productService.save(aProduct)
-        }
-        return ResponseEntity.ok().body(aProduct)
-
     }
 
 }

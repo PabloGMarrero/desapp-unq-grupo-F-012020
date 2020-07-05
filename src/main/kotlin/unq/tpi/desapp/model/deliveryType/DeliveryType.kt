@@ -3,6 +3,7 @@ package unq.tpi.desapp.model.deliveryType
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
+import unq.tpi.desapp.model.Address
 import java.time.LocalDate
 import java.time.LocalTime
 import javax.persistence.Entity
@@ -14,7 +15,7 @@ import javax.persistence.Entity
 @JsonTypeInfo (
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY ,
-        property = "_type")
+        property = "type")
 //@JsonSubTypes(
 //    Type(value = HomeDelivery::class, name = "HomeDelivery"),
 //    Type(value = PickupInStore::class, name = "PickupInStore")
@@ -40,7 +41,7 @@ interface DeliveryType {
      * Returnn the address of the delivery
      */
     @JsonIgnore
-    fun addressOfPickup():String
+    fun addressOfPickup():Address
 
     /**
      * Returnn the pickup date of the delivery

@@ -3,6 +3,7 @@ package unq.tpi.desapp.model.deliveryType
 import org.junit.jupiter.api.Assertions.*
 import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
+import unq.tpi.desapp.builders.AddressBuilder
 import unq.tpi.desapp.builders.PickupInStoreBuilder
 import java.time.LocalDate
 import java.time.LocalTime
@@ -15,7 +16,7 @@ class PickupInStoreTest {
         var deliveryType = PickupInStoreBuilder.aPickupInStore().build()
         assertEquals(deliveryType.date, LocalDate.MIN)
         assertEquals(deliveryType.hour, LocalTime.MIDNIGHT)
-        assertEquals(deliveryType.address, "")
+        assertEquals(deliveryType.address, AddressBuilder.anAddress().build())
     }
 
     @Test
@@ -24,7 +25,7 @@ class PickupInStoreTest {
         var deliveryType = PickupInStoreBuilder.aPickupInStore().withDate(date).build()
 
         assertEquals(deliveryType.date, date)
-        assertEquals(deliveryType.addressOfPickup(), "")
+        assertEquals(deliveryType.addressOfPickup(), AddressBuilder.anAddress().build())
         assertEquals(deliveryType.hour, LocalTime.MIDNIGHT)
     }
 
@@ -35,12 +36,12 @@ class PickupInStoreTest {
 
         assertEquals(deliveryType.dateOfTheDelivery(), LocalDate.MIN)
         assertEquals(deliveryType.hourOfTheDelivery(), hour)
-        assertEquals(deliveryType.addressOfPickup(), "")
+        assertEquals(deliveryType.addressOfPickup(), AddressBuilder.anAddress().build())
     }
 
     @Test
     fun testPickUpInSoreDeliveryModeWithAddressCalleFalsa123(){
-        var address = "Calle Falsa 123"
+        var address = AddressBuilder.anAddress().build()
         var deliveryType = PickupInStoreBuilder.aPickupInStore().withStoreAddress(address).build()
 
         assertEquals(deliveryType.dateOfTheDelivery(), LocalDate.MIN)
@@ -52,7 +53,7 @@ class PickupInStoreTest {
     fun testPickUpInSoreDeliveryModeWithDate10052020AndHour1530(){
         var date = LocalDate.of(2020, 10, 5)
         var hour = LocalTime.of(15, 30)
-        var address = "Calle Falsa 123"
+        var address = AddressBuilder.anAddress().build()
         var deliveryType = PickupInStoreBuilder.aPickupInStore().withDate(date)
                 .withHour(hour).withStoreAddress(address).build()
 
@@ -71,8 +72,9 @@ class PickupInStoreTest {
 
     @Test
     fun testEqualityHomeDeliveryToAnotherOneWithDifferentAddresses(){
+        var address = AddressBuilder.anAddress().withStreet("test").build()
         var deliveryTypeA = PickupInStoreBuilder.aPickupInStore().build()
-        var deliveryTypeB = PickupInStoreBuilder.aPickupInStore().withStoreAddress("test").build()
+        var deliveryTypeB = PickupInStoreBuilder.aPickupInStore().withStoreAddress(address).build()
 
         assertNotEquals(deliveryTypeA, deliveryTypeB)
     }

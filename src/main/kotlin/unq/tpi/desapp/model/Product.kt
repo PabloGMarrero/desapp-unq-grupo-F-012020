@@ -1,5 +1,9 @@
 package unq.tpi.desapp.model
 
+import unq.tpi.desapp.dto.ProductDto
+import unq.tpi.desapp.exceptions.InvalidBrandProductException
+import unq.tpi.desapp.exceptions.InvalidNameProductException
+import unq.tpi.desapp.exceptions.InvalidProductPriceException
 import java.io.Serializable
 import javax.persistence.*
 
@@ -59,6 +63,37 @@ class Product :Serializable {
     override fun hashCode(): Int {
         return id.hashCode()
     }
+
+    /**
+     *  Validate product and returns an exception if some validation fails
+     *  @exception InvalidProductPriceException
+     *  @exception InvalidBrandProductException
+     *  @exception InvalidNameProductException
+     */
+    @Throws (InvalidBrandProductException::class, InvalidNameProductException::class, InvalidProductPriceException::class)
+    fun validated() {
+        if (this.brand.equals("")){
+            throw InvalidBrandProductException("The brand can not be empty")
+        }
+        if(this.productName.equals("")){
+            throw InvalidNameProductException("The product name can not be empty.")
+        }
+        if(this.price <= 0){
+            throw InvalidProductPriceException("The product can be only possitive numbers")
+        }
+    }
+
+    /**
+     * Convert pojo to DTO
+     */
+    fun toProductDto()= ProductDto(
+            name = productName,
+            brand = brand,
+            price = price,
+            id = id,
+            imageUrl = imageUrl,
+            store = ""
+    )
 
 }
 

@@ -8,8 +8,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 class ProductBuilder {
-
-    var id: Long = 0
+    var id:Long = 0
     var urlImage:String =""
     var name: String = ""
     var price: Double = 0.0
@@ -24,11 +23,6 @@ class ProductBuilder {
 
     fun build(): Product {
         return Product(id, urlImage, name, price, brand)
-    }
-
-    fun withId(id:Long): ProductBuilder{
-        this.id = id
-        return this
     }
 
     fun withUrl(url:String):ProductBuilder{
@@ -48,6 +42,11 @@ class ProductBuilder {
 
     fun withPrice(price:Double):ProductBuilder{
         this.price = price
+        return this
+    }
+
+    fun withId(id: Long): ProductBuilder {
+        this.id = id
         return this
     }
 
@@ -379,7 +378,7 @@ class AddressBuilder(){
 class PickupInStoreBuilder(){
     var date: LocalDate = LocalDate.MIN
     var hour: LocalTime = LocalTime.MIDNIGHT
-    var storeAddress: String  = ""
+    var storeAddress: Address  = AddressBuilder.anAddress().build()
 
     companion object{
         @JvmStatic
@@ -402,7 +401,7 @@ class PickupInStoreBuilder(){
         return this
     }
 
-    fun withStoreAddress(anAddress:String):PickupInStoreBuilder{
+    fun withStoreAddress(anAddress:Address):PickupInStoreBuilder{
         this.storeAddress = anAddress
         return this
     }
@@ -412,7 +411,7 @@ class PickupInStoreBuilder(){
 class HomeDeliveryBuilder(){
     var date: LocalDate = LocalDate.MIN
     var hour: LocalTime = LocalTime.MIDNIGHT
-    var address: String  = ""
+    var address: Address  = AddressBuilder.anAddress().build()
 
     companion object{
         @JvmStatic
@@ -435,7 +434,7 @@ class HomeDeliveryBuilder(){
         return this
     }
 
-    fun withAddress(anAddress:String):HomeDeliveryBuilder{
+    fun withAddress(anAddress:Address):HomeDeliveryBuilder{
         this.address = anAddress
         return this
     }
