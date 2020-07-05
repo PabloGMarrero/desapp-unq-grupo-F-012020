@@ -378,7 +378,7 @@ class AddressBuilder(){
 class PickupInStoreBuilder(){
     var date: LocalDate = LocalDate.MIN
     var hour: LocalTime = LocalTime.MIDNIGHT
-    var storeAddress: String  = ""
+    var storeAddress: Address  = AddressBuilder.anAddress().build()
 
     companion object{
         @JvmStatic
@@ -401,7 +401,7 @@ class PickupInStoreBuilder(){
         return this
     }
 
-    fun withStoreAddress(anAddress:String):PickupInStoreBuilder{
+    fun withStoreAddress(anAddress:Address):PickupInStoreBuilder{
         this.storeAddress = anAddress
         return this
     }
@@ -411,7 +411,7 @@ class PickupInStoreBuilder(){
 class HomeDeliveryBuilder(){
     var date: LocalDate = LocalDate.MIN
     var hour: LocalTime = LocalTime.MIDNIGHT
-    var address: String  = ""
+    var address: Address  = AddressBuilder.anAddress().build()
 
     companion object{
         @JvmStatic
@@ -434,7 +434,7 @@ class HomeDeliveryBuilder(){
         return this
     }
 
-    fun withAddress(anAddress:String):HomeDeliveryBuilder{
+    fun withAddress(anAddress:Address):HomeDeliveryBuilder{
         this.address = anAddress
         return this
     }

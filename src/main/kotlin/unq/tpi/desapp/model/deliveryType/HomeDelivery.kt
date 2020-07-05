@@ -1,6 +1,8 @@
 package unq.tpi.desapp.model.deliveryType
 
 import com.fasterxml.jackson.annotation.JsonTypeName
+import unq.tpi.desapp.builders.AddressBuilder
+import unq.tpi.desapp.model.Address
 import java.time.LocalDate
 import java.time.LocalTime
 import javax.persistence.*
@@ -14,7 +16,7 @@ import javax.persistence.*
  */
 @Entity
 @JsonTypeName("HomeDelivery")
-class HomeDelivery(date: LocalDate, hour: LocalTime, address:String): DeliveryType {
+class HomeDelivery(date: LocalDate, hour: LocalTime, address:Address): DeliveryType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +29,7 @@ class HomeDelivery(date: LocalDate, hour: LocalTime, address:String): DeliveryTy
     @Column
     var address = address
 
-    constructor():this(LocalDate.MIN, LocalTime.MAX, "")
+    constructor():this(LocalDate.MIN, LocalTime.MAX, AddressBuilder.anAddress().build())
 
     override fun hourOfTheDelivery(): LocalTime {
         return hour
@@ -37,7 +39,7 @@ class HomeDelivery(date: LocalDate, hour: LocalTime, address:String): DeliveryTy
         return date
     }
 
-    override fun addressOfPickup(): String {
+    override fun addressOfPickup(): Address {
         return address
     }
 

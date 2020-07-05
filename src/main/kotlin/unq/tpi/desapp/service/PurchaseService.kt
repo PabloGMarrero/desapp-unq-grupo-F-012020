@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import unq.tpi.desapp.builders.ItemBuilder
 import unq.tpi.desapp.builders.PurchaseBuilder
+import unq.tpi.desapp.builders.StoreBuilder
 import unq.tpi.desapp.dto.ItemDto
 import unq.tpi.desapp.dto.PurchaseDto
 import unq.tpi.desapp.exceptions.StoreDoesntExistException
@@ -62,21 +63,30 @@ class PurchaseService {
         }
     }
 
+    /**
+     *
+     */
     @Throws(StoreDoesntExistException::class)
     private fun addProductsToPurchase(user: User, purchase: Purchase, items: MutableList<ItemDto>){
         for(anItem in items){
             var product = productService.findById(anItem.id).get()
-            var anStore: Optional<Store> = storeService.findByID(anItem.storeId)
-            if (anStore.isPresent){
-                var store = anStore.get()
-                var item: Item = ItemBuilder.anItem().withAStore(store).withProduct(product).withQuantity(anItem.quantity).build()
-                var itemSaved = itemService.save(item)
-                purchase.addItem(itemSaved)
+            var store = StoreBuilder.aStore().build()
+            var item: Item = ItemBuilder.anItem().withAStore(store).withProduct(product).withQuantity(anItem.quantity).build()
+            var itemSaved = itemService.save(item)
+            purchase.addItem(itemSaved)
 
-            }else{
-                var id = anItem.storeId
-                throw StoreDoesntExistException("the store with id '$id' doest not exist.")
-            }
+//            var product = productService.findById(anItem.id).get()
+//            var anStore: Optional<Store> = storeService.findByID(anItem.storeId)
+//            if (anStore.isPresent){
+//                var store = anStore.get()
+//                var item: Item = ItemBuilder.anItem().withAStore(store).withProduct(product).withQuantity(anItem.quantity).build()
+//                var itemSaved = itemService.save(item)
+//                purchase.addItem(itemSaved)
+//
+//            }else{
+//                var id = anItem.storeId
+//                throw StoreDoesntExistException("the store with id '$id' doest not exist.")
+//            }
         }
 
 

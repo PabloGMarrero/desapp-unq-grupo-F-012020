@@ -2,6 +2,7 @@ package unq.tpi.desapp.model.deliveryType
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import unq.tpi.desapp.builders.AddressBuilder
 import kotlin.test.*
 import unq.tpi.desapp.builders.HomeDeliveryBuilder
 import java.time.LocalDate
@@ -39,7 +40,7 @@ class HomeDeliveryTest {
 
     @Test
     fun testHomeDeliveryTypeWithAddressCalleFalsa123(){
-        var address = "Calle Falsa 123"
+        var address = AddressBuilder.anAddress().build()
         var deliveryType = HomeDeliveryBuilder.aHomeDelivery().withAddress(address).build()
 
         assertEquals(deliveryType.dateOfTheDelivery(), LocalDate.MIN)
@@ -51,7 +52,7 @@ class HomeDeliveryTest {
     fun testHomeDeliveryTypeWithDate10052020AndHour1530(){
         var date = LocalDate.of(2020, 10, 5)
         var hour = LocalTime.of(15, 30)
-        var address = "Calle Falsa 123"
+        var address = AddressBuilder.anAddress().build()
         var deliveryType = HomeDeliveryBuilder.aHomeDelivery().withDate(date)
                 .withHour(hour).withAddress(address).build()
 
@@ -78,8 +79,9 @@ class HomeDeliveryTest {
 
     @Test
     fun testEqualityHomeDeliveryToAnotherOneWithDifferentAddresses(){
+        var address = AddressBuilder.anAddress().withStreet("test").build()
         var deliveryTypeA = HomeDeliveryBuilder.aHomeDelivery().build()
-        var deliveryTypeB = HomeDeliveryBuilder.aHomeDelivery().withAddress("test").build()
+        var deliveryTypeB = HomeDeliveryBuilder.aHomeDelivery().withAddress(address).build()
 
         assertNotEquals(deliveryTypeA, deliveryTypeB)
     }

@@ -1,6 +1,7 @@
 package unq.tpi.desapp.model.deliveryType
 
 import com.fasterxml.jackson.annotation.JsonTypeName
+import unq.tpi.desapp.model.Address
 import java.time.LocalTime
 import java.time.LocalDate
 import javax.persistence.Entity
@@ -18,7 +19,7 @@ import javax.persistence.Id
 
 @Entity
 @JsonTypeName("PickupInStore")
-class PickupInStore(date:LocalDate, hour: LocalTime, storeAddress:String): DeliveryType {
+class PickupInStore(date:LocalDate, hour: LocalTime, storeAddress:Address): DeliveryType {
     var date = date
     var hour = hour
     var address = storeAddress
@@ -35,7 +36,7 @@ class PickupInStore(date:LocalDate, hour: LocalTime, storeAddress:String): Deliv
         return date
     }
 
-    override fun addressOfPickup():String{
+    override fun addressOfPickup():Address{
         return address
     }
 

@@ -10,6 +10,5 @@ data class PurchaseDto @JsonCreator constructor(
     var items:MutableList<ItemDto>,
     var user:UserDto,
     var deliveryType: HomeDelivery,
-    var paymentMethod: PaymentMethod,
-    var address: Address
+    var paymentMethod: PaymentMethod
 )
