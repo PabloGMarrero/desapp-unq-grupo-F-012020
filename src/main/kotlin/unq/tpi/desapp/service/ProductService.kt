@@ -12,7 +12,7 @@ import java.util.*
 
 @Service
 @Transactional
-class ProductService{
+class ProductService {
 
     @Autowired
     lateinit var repository:ProductRepository

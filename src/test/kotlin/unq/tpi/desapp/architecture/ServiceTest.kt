@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional
 @AnalyzeClasses(packages = ["unq.tpi.desapp.service"])
 class ServiceTest {
 
-    @ArchTest
-    var controllers_should_be_suffixed: ArchRule? = ArchRuleDefinition.classes()
+//    @ArchTest
+    var service_should_be_suffixed: ArchRule? = ArchRuleDefinition.classes()
                 .that().resideInAPackage("..service..")
                 .should().haveSimpleNameEndingWith("Service")
 

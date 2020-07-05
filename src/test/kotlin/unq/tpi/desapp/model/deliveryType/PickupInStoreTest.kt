@@ -16,7 +16,7 @@ class PickupInStoreTest {
         var deliveryType = PickupInStoreBuilder.aPickupInStore().build()
         assertEquals(deliveryType.date, LocalDate.MIN)
         assertEquals(deliveryType.hour, LocalTime.MIDNIGHT)
-        assertEquals(deliveryType.address, "")
+        assertEquals(deliveryType.address, AddressBuilder.anAddress().build())
     }
 
     @Test
@@ -25,7 +25,7 @@ class PickupInStoreTest {
         var deliveryType = PickupInStoreBuilder.aPickupInStore().withDate(date).build()
 
         assertEquals(deliveryType.date, date)
-        assertEquals(deliveryType.addressOfPickup(), "")
+        assertEquals(deliveryType.addressOfPickup(), AddressBuilder.anAddress().build())
         assertEquals(deliveryType.hour, LocalTime.MIDNIGHT)
     }
 
@@ -36,7 +36,7 @@ class PickupInStoreTest {
 
         assertEquals(deliveryType.dateOfTheDelivery(), LocalDate.MIN)
         assertEquals(deliveryType.hourOfTheDelivery(), hour)
-        assertEquals(deliveryType.addressOfPickup(), "")
+        assertEquals(deliveryType.addressOfPickup(), AddressBuilder.anAddress().build())
     }
 
     @Test

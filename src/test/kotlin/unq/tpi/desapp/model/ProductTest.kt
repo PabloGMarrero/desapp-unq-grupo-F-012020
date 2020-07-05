@@ -65,7 +65,7 @@ class ProductTest {
     @Test
     fun testOneProductIsEqualToAnotherOneWithDifferentsAttributes(){
         var productA = ProductBuilder.aProduct().build()
-        var productB = ProductBuilder.aProduct().withBrand("Coca").build()
+        var productB = ProductBuilder.aProduct().withId(10).build()
 
         assertNotEquals(productA, productB)
     }

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import unq.tpi.desapp.builders.AddressBuilder
 import kotlin.test.*
 import unq.tpi.desapp.builders.HomeDeliveryBuilder
+import unq.tpi.desapp.model.Address
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -15,7 +16,7 @@ class HomeDeliveryTest {
         var deliveryType = HomeDeliveryBuilder.aHomeDelivery().build()
         assertEquals(deliveryType.date, LocalDate.MIN)
         assertEquals(deliveryType.hourOfTheDelivery(), LocalTime.MIDNIGHT)
-        assertEquals(deliveryType.addressOfPickup(), "")
+        assertEquals(deliveryType.addressOfPickup(), AddressBuilder.anAddress().build())
     }
 
     @Test
@@ -24,7 +25,7 @@ class HomeDeliveryTest {
         var deliveryType = HomeDeliveryBuilder.aHomeDelivery().withDate(date).build()
 
         assertEquals(deliveryType.dateOfTheDelivery(), date)
-        assertEquals(deliveryType.addressOfPickup(), "")
+        assertEquals(deliveryType.addressOfPickup(), AddressBuilder.anAddress().build())
         assertEquals(deliveryType.hourOfTheDelivery(), LocalTime.MIDNIGHT)
     }
 
@@ -34,7 +35,7 @@ class HomeDeliveryTest {
         var deliveryType = HomeDeliveryBuilder.aHomeDelivery().withHour(hour).build()
 
         assertEquals(deliveryType.dateOfTheDelivery(), LocalDate.MIN)
-        assertEquals(deliveryType.addressOfPickup(), "")
+        assertEquals(deliveryType.addressOfPickup(), AddressBuilder.anAddress().build())
         assertEquals(deliveryType.hourOfTheDelivery(), hour)
     }
 
