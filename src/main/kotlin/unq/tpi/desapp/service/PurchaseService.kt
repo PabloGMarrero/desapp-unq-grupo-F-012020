@@ -43,7 +43,7 @@ class PurchaseService {
         var anUser:Optional<User> = userService.findByID(purchaseDto.user.id)
         if (anUser.isPresent){
             var user = anUser.get()
-            var deliveryType: HomeDelivery = purchaseDto.deliveryType
+            var deliveryType: DeliveryType = purchaseDto.deliveryType
             var paymentMethod: PaymentMethod = purchaseDto.paymentMethod
 
             var purchase:Purchase = PurchaseBuilder.aPurchase().withUser(user).withDeliveryType(deliveryType).withPaymentMethod(paymentMethod).build()

@@ -12,7 +12,7 @@ import unq.tpi.desapp.service.PurchaseService
 
 @RestController
 @RequestMapping("/purchase")
-@CrossOrigin(origins = ["*"])
+@CrossOrigin(origins = ["http://localhost:3000", "https://buyingfromhome.herokuapp.com/"])
 class PurchaseController {
 
     @Autowired
@@ -20,7 +20,7 @@ class PurchaseController {
 
     @LoggingAspect
     @ExceptionAspect
-    @PostMapping("/new", consumes = arrayOf("application/json"), produces = arrayOf("application/json"))
+    @PostMapping("/new")
     fun newPurchase(@RequestBody purchaseDto: PurchaseDto):ResponseEntity<Purchase> {
         var purchaseSaved = this.purchaseService.newPurchase(purchaseDto)
         return ResponseEntity.ok().body(purchaseSaved)

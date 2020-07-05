@@ -9,6 +9,6 @@ import unq.tpi.desapp.model.deliveryType.HomeDelivery
 data class PurchaseDto @JsonCreator constructor(
     var items:MutableList<ItemDto>,
     var user:UserDto,
-    var deliveryType: HomeDelivery,
+    var deliveryType: DeliveryType,
     var paymentMethod: PaymentMethod
 )

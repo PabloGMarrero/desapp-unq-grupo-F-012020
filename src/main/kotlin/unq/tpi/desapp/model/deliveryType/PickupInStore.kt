@@ -19,10 +19,10 @@ import javax.persistence.Id
 
 @Entity
 @JsonTypeName("PickupInStore")
-class PickupInStore(date:LocalDate, hour: LocalTime, storeAddress:Address): DeliveryType {
+class PickupInStore(date:LocalDate, hour: LocalTime, address:Address): DeliveryType {
     var date = date
     var hour = hour
-    var address = storeAddress
+    var address = address
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
