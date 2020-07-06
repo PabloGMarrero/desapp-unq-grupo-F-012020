@@ -17,6 +17,7 @@ import unq.tpi.desapp.repository.ProductRepository
 import unq.tpi.desapp.repository.PurchaseRepository
 import unq.tpi.desapp.repository.StoreRepository
 import unq.tpi.desapp.repository.UserRepository
+import java.time.LocalDate
 import java.util.*
 
 @Service
@@ -90,5 +91,9 @@ class PurchaseService {
         }
 
 
+    }
+
+    fun getOrderNumber(userId: Long, purchaseId: Long, dateOfTheDelivery: LocalDate): String {
+        return "#" + userId.toString() + purchaseId.toString() + dateOfTheDelivery.dayOfWeek.value.toString() + dateOfTheDelivery.dayOfYear.toString()
     }
 }
