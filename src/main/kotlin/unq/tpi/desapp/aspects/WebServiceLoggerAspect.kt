@@ -6,8 +6,7 @@ import org.aspectj.lang.annotation.After
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 import org.joda.time.DateTime
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import org.apache.log4j.Logger
 import org.springframework.stereotype.Component
 import java.util.*
 import java.util.stream.Collectors
@@ -20,7 +19,7 @@ import java.util.stream.Collectors
 @Aspect
 class WebServiceLoggerAspect {
     companion object {
-        val log: Logger = LoggerFactory.getLogger(this.javaClass.name)
+        val log: Logger = Logger.getLogger(this.javaClass.name)
     }
 
 
@@ -70,9 +69,8 @@ class WebServiceLoggerAspect {
 
         var endTime:DateTime = DateTime.now()
 
-        log.info("Time taken start at {} end at {}", startTime, endTime)
+        log.info( "Time taken start at " +  startTime.toString() + " end at "+ endTime.toString())
         log.info("### LOGGING AROUND METHOD END ###")
-
 
         return obj
     }
