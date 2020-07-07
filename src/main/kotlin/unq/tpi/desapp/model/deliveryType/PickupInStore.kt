@@ -1,6 +1,7 @@
 package unq.tpi.desapp.model.deliveryType
 
 import com.fasterxml.jackson.annotation.JsonTypeName
+import unq.tpi.desapp.builders.AddressBuilder
 import unq.tpi.desapp.model.Address
 import java.time.LocalTime
 import java.time.LocalDate
@@ -23,6 +24,8 @@ class PickupInStore(date:LocalDate, hour: LocalTime, address:Address): DeliveryT
     var date = date
     var hour = hour
     var address = address
+
+    constructor():this(LocalDate.MIN, LocalTime.MAX, AddressBuilder.anAddress().build())
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
