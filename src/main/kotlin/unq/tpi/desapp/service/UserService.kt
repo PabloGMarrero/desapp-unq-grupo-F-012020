@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import unq.tpi.desapp.builders.UserBuilder
+import unq.tpi.desapp.dto.UserDto
+import unq.tpi.desapp.exceptions.InvalidEmailOrPasswordException
+import unq.tpi.desapp.exceptions.UserAlreadyExistsException
 import unq.tpi.desapp.model.Purchase
 import unq.tpi.desapp.model.User
 import unq.tpi.desapp.repository.UserRepository
@@ -49,9 +52,12 @@ class UserService {
         return anUser
     }
 
-    fun getUserByEmailAndPass(email:String, pass:String): Optional<User>{
-        var user:Optional<User> = this.repository.findByEmail(email)
-        return user
+    fun getUserByEmailAndPass(email:String, pass:String): User{
+        var user:Optional<User> = this.repository.findByEmailAndPassword(email, pass)
+        if (! user.isPresent) {
+            throw InvalidEmailOrPasswordException("Invalid email or password.")
+        }
+        return user.get()
     }
 
     fun create(anUser: User): User {
@@ -70,5 +76,15 @@ class UserService {
 
         repository.save(anUser)
         return anUser
+    }
+
+    fun registerUser(userDTO: UserDto): User {
+        var userExist = this.findByEmail(userDTO.email)
+        if (userExist.isPresent) {
+            throw UserAlreadyExistsException("The user with the email '${userDTO.email}' already exist.")
+        }
+        var anUser = UserBuilder.anUser().
+            withEmail(userDTO.email).withName(userDTO.name).withPass(userDTO.password).build()
+        return this.create(anUser)
     }
 }

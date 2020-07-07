@@ -17,4 +17,5 @@ interface UserRepository: JpaRepository<User, Long> {
      */
     fun findByEmail(email:String): Optional<User>
 
+    fun findByEmailAndPassword(email:String, password:String): Optional<User>
 }
