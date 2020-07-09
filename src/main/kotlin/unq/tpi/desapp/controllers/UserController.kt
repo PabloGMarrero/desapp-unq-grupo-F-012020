@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import unq.tpi.desapp.aspects.LoggingAspect
+import unq.tpi.desapp.dto.UserDto
 import unq.tpi.desapp.model.Purchase
 import unq.tpi.desapp.model.User
 import unq.tpi.desapp.service.UserService
@@ -32,10 +33,10 @@ class UserController {
 
     @LoggingAspect
     @GetMapping("/get/")
-    fun getUserById(@RequestParam("userid") id:Long):ResponseEntity<User>{
+    fun getUserById(@RequestParam("userid") id:Long):ResponseEntity<UserDto>{
         var user: Optional<User> =  userService.findByID(id)
         if (user.isPresent){
-            return ResponseEntity.status(HttpStatus.OK).body(user.get())
+            return ResponseEntity.status(HttpStatus.OK).body(user.get().toUserDTO())
         }else{
             return ResponseEntity.noContent().build()
         }
