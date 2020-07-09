@@ -5,12 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import unq.tpi.desapp.aspects.ExceptionAspect
 import unq.tpi.desapp.aspects.LoggingAspect
 import unq.tpi.desapp.builders.ProductBuilder
 import unq.tpi.desapp.builders.StoreBuilder
-import unq.tpi.desapp.dto.ProductDto
-import unq.tpi.desapp.dto.ProductListDto
-import unq.tpi.desapp.dto.StoreDto
+import unq.tpi.desapp.dto.*
 import unq.tpi.desapp.model.Address
 import unq.tpi.desapp.model.GeographicMap
 import unq.tpi.desapp.model.Product
@@ -23,7 +22,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/stores")
-@CrossOrigin(origins = ["*"])
+@CrossOrigin(origins = ["*"], methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE])
 
 class StoreController {
 
@@ -67,27 +66,17 @@ class StoreController {
     }
 
     @LoggingAspect
-    @PostMapping("/addstore", consumes = arrayOf("application/json"), produces = arrayOf("application/json"))
-    fun addStore(@RequestBody storeDTO: StoreDto):ResponseEntity<Store>{
-
-        var geoZone= GeographicMap(storeDTO.latitude, storeDTO.longitude)
-        var anAddress= Address(storeDTO.locality,storeDTO.street,storeDTO.number,geoZone)
-        var aStore = StoreBuilder.aStore().withStoreName(storeDTO.name).
-            withActivity(storeDTO.activity).withAdress(anAddress).withDistance(storeDTO.covDistance).build()
-        storeService.create(aStore)
-        return ResponseEntity.ok().body(storeService.save(aStore))
+    @ExceptionAspect
+    @PostMapping("/addstore")
+    fun addStore(@RequestBody userStoreDto: UserStoreDto):ResponseEntity<Store>{
+        return ResponseEntity.ok().body(storeService.addStore(userStoreDto.userDto, userStoreDto.storeDto))
 
     }
 
     @LoggingAspect
-    @PostMapping("/add")
-    fun createStore(@RequestBody aStore: @Valid Store): ResponseEntity<Store> {
-        return ResponseEntity.ok().body(storeService.save(aStore))
-    }
-
-    @LoggingAspect
-    @PutMapping("/add")
-    fun updateStore(@RequestParam("id") id: Long, @RequestBody aStore: @Valid Store):ResponseEntity<Store> {
+    @ExceptionAspect
+    @PutMapping("/updatestore")
+    fun updateStore(@RequestBody aStore: @Valid Store):ResponseEntity<Store> {
         return ResponseEntity.ok().body(this.storeService.updateStore(aStore))
     }
 
