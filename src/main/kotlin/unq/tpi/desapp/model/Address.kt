@@ -1,7 +1,11 @@
 package unq.tpi.desapp.model
 
 import unq.tpi.desapp.builders.GeographicMapBuilder
+import unq.tpi.desapp.exceptions.InvalidLocalityAddressException
+import unq.tpi.desapp.exceptions.InvalidNumberAddressException
+import unq.tpi.desapp.exceptions.InvalidStreetAddressException
 import java.lang.Math.pow
+import java.util.regex.Pattern
 import javax.persistence.Column
 import javax.persistence.Embeddable
 import kotlin.math.*
@@ -84,4 +88,21 @@ class Address {
     private fun deg2rad(aValue: Double): Double = aValue * (PI / 180)
 
     private fun cosOfAddress(latitude:Double):Double = cos(deg2rad(latitude))
+
+    /**
+     * Validated if the address has the correct values
+     */
+    fun validated() {
+        var pattern = "/^[a-zA-Z_]+\$/".toRegex()
+        if (this.locality.equals("") || ! Pattern.matches(".*[a-zA-Z_]+.*", this.locality) ){
+            throw InvalidLocalityAddressException("The locality is in invalid.")
+        }
+        if (this.number <= 0){
+            throw InvalidNumberAddressException("The number cant not be less or equal to 0.")
+        }
+
+        if (this.street.equals("") || ! Pattern.matches(".*[a-zA-Z_]+.*", this.street) ){
+            throw InvalidStreetAddressException("The street can not be empty and only contains letters.")
+        }
+    }
 }

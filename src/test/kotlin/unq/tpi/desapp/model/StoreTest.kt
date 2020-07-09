@@ -5,7 +5,9 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import unq.tpi.desapp.builders.*
+import unq.tpi.desapp.exceptions.InvalidCoverageDistanceStoreException
 import java.time.LocalDate
+import kotlin.test.assertFailsWith
 
 @SpringBootTest
 class StoreTest {
@@ -195,5 +197,29 @@ class StoreTest {
         var store = StoreBuilder.aStore().withDistance(0.5).withAdress(storeAddress).build()
 
         assertFalse(store.isInsideRange(marianoMoreno.latitude, marianoMoreno.longitude))
+    }
+
+    @Test
+    fun testStoreWithCoverageDistance0ThrowInvalidCoverageDistanceStoreException(){
+        assertFailsWith(InvalidCoverageDistanceStoreException::class){
+            var store = StoreBuilder.aStore().withDistance(0.0).build()
+            store.validated()
+        }
+    }
+
+    @Test
+    fun testStoreWithCoverageDistance0_4ThrowInvalidCoverageDistanceStoreException(){
+        assertFailsWith(InvalidCoverageDistanceStoreException::class){
+            var store = StoreBuilder.aStore().withDistance(0.4).build()
+            store.validated()
+        }
+    }
+
+    @Test
+    fun testStoreWithNegativeCoverageDistanceThrowInvalidCoverageDistanceStoreException(){
+        assertFailsWith(InvalidCoverageDistanceStoreException::class){
+            var store = StoreBuilder.aStore().withDistance(-0.4).build()
+            store.validated()
+        }
     }
 }

@@ -7,7 +7,9 @@ data class UserDto @JsonCreator constructor(
         var name:String,
         var email:String,
         var password:String,
-        var id:Long
+        var id:Long,
+        var isAdmin:Boolean,
+        var idStore: Long
 ){
         /**
          * Convert dto to User
