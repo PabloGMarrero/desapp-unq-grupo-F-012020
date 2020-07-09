@@ -1,6 +1,7 @@
 package unq.tpi.desapp.model
 
 import unq.tpi.desapp.builders.AddressBuilder
+import unq.tpi.desapp.exceptions.InvalidCoverageDistanceStoreException
 import javax.persistence.*
 import kotlin.jvm.Transient
 
@@ -51,6 +52,8 @@ class Store {
 
     @Transient
     var listOfTurns: MutableList<Turn> = mutableListOf()
+
+
 
     init {
         paymentsMethods.add(PaymentMethod.CASH)
@@ -188,11 +191,24 @@ class Store {
     }
 
     /**
-     *
+     * Returns true if the store is isnide of the latitude and longitude
+     * @param lat represents the latitude
+     * @param lon represents the longitude
+     * @return boolean if the store is inside of the range.
      */
 
     fun isInsideRange(lat:Double, lon: Double):Boolean{
         var distance = this.address.calculateDistanceWithInKm(lat, lon)
         return distance <= this.coverageDistance
+    }
+
+
+    /**
+     * Validates if the store is well done.
+     */
+    fun validated() {
+        if (this.coverageDistance <= 0.5){
+            throw InvalidCoverageDistanceStoreException("The distance can not be less than 0.")
+        }
     }
 }
