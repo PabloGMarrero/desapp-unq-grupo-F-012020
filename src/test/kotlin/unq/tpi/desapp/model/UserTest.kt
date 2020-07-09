@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import unq.tpi.desapp.builders.AddressBuilder
 import unq.tpi.desapp.builders.PurchaseBuilder
+import unq.tpi.desapp.builders.StoreBuilder
 import unq.tpi.desapp.builders.UserBuilder
 import unq.tpi.desapp.dto.UserDto
 import kotlin.test.assertNotEquals
@@ -80,7 +81,7 @@ class UserTest {
 
     @Test
     fun testCreationUserFromUserDto(){
-        var userDto = UserDto("Pablo", "pablo@gmail.com", "", 0).userDtoToUser()
+        var userDto = UserDto("Pablo", "pablo@gmail.com", "", 0, true, 0).userDtoToUser()
 
         assertEquals(userDto.email, "pablo@gmail.com")
         assertEquals(userDto.name, "Pablo")

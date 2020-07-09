@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Assertions.*
 import org.springframework.boot.test.context.SpringBootTest
 import unq.tpi.desapp.builders.AddressBuilder
 import unq.tpi.desapp.builders.GeographicMapBuilder
+import unq.tpi.desapp.exceptions.InvalidLocalityAddressException
+import unq.tpi.desapp.exceptions.InvalidNumberAddressException
+import unq.tpi.desapp.exceptions.InvalidStreetAddressException
+import kotlin.test.assertFailsWith
 
 @SpringBootTest
 class AddressTest {
@@ -105,5 +109,55 @@ class AddressTest {
 
         var distance = address.calculateDistanceWithInKm(marianoMoreno.latitude, marianoMoreno.longitude)
         assertEquals(distance, 0.68)
+    }
+
+    @Test
+    fun testGivenAnAddressWithLocalityEmptyThrowInvalidLocalityAddressException(){
+        assertFailsWith(InvalidLocalityAddressException::class){
+            var address = AddressBuilder.anAddress().withLocality("").build()
+            address.validated()
+        }
+    }
+
+    @Test
+    fun testGivenAnAddressWithLocalityWithSpecialCharactersThrowInvalidLocalityAddressException(){
+        assertFailsWith(InvalidLocalityAddressException::class){
+            var address = AddressBuilder.anAddress().withNumber(10).withLocality("'+").build()
+            address.validated()
+        }
+    }
+
+    @Test
+    fun testGivenAnAddressWithNumberAddres0ThrowInvalidNumberAddressException(){
+        assertFailsWith(InvalidNumberAddressException::class){
+            var address = AddressBuilder.anAddress().withLocality("Quilmes").withNumber(0).build()
+            address.validated()
+        }
+    }
+
+    @Test
+    fun testGivenAnAddressWithNegativeNumberAddresThrowInvalidNumberAddressException(){
+        assertFailsWith(InvalidNumberAddressException::class){
+            var address = AddressBuilder.anAddress().withLocality("Quilmes").withNumber(-1).build()
+            address.validated()
+        }
+    }
+
+    @Test
+    fun testGivenAnAddressWithEmptyStreetThrowInvalidStreetAddressException(){
+        assertFailsWith(InvalidStreetAddressException::class){
+            var address = AddressBuilder.anAddress().withLocality("Quilmes").withNumber(10)
+                    .withStreet("").build()
+            address.validated()
+        }
+    }
+
+    @Test
+    fun testGivenAnAddressWithStreetWithSpecialCharactersThrowInvalidStreetAddressException(){
+        assertFailsWith(InvalidStreetAddressException::class){
+            var address = AddressBuilder.anAddress().withLocality("Quilmes")
+                    .withNumber(10).withStreet("¿|").build()
+            address.validated()
+        }
     }
 }
