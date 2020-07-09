@@ -39,7 +39,6 @@ class UserService {
     }
 
     fun findByEmail(email: String):Optional<User>{
-        //return this.repository.findByEmail(email)
         var users:List<User> = this.repository.findAll()
 
         users = users.filter { anUser -> anUser.email == email }

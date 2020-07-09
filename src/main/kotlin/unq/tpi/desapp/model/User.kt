@@ -1,5 +1,6 @@
 package unq.tpi.desapp.model
 
+import unq.tpi.desapp.builders.StoreBuilder
 import unq.tpi.desapp.dto.UserDto
 import javax.persistence.*
 import kotlin.jvm.Transient
@@ -30,6 +31,10 @@ data class User(
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumn(name = "user_id")
     var historialPurchases: MutableList<Purchase> =  mutableListOf()
+
+    @OneToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "user_id")
+    var store:Store = StoreBuilder.aStore().build()
 
     class Categories(name: String) {
         var name: String = name
@@ -86,14 +91,30 @@ data class User(
     }
 
     /**
+     *  Returns true is the user is admin
+     */
+    fun isAdmin():Boolean{
+        return ! this.store.storeName.equals("")
+    }
+
+    /**
      * Convert User object to his DTO
      */
     fun toUserDTO()= UserDto(
             name = name,
             email = email,
             password =  "",
-            id = id
+            id = id,
+            isAdmin = isAdmin(),
+            idStore = store.id
     )
+
+    /**
+     * Add the store to the admin
+     */
+    fun addStore(aStore: Store) {
+        this.store = aStore
+    }
 
 }
 
