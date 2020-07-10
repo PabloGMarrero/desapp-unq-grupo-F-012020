@@ -15,7 +15,7 @@ import java.util.*
 
 @RestController
 @RequestMapping("/products")
-@CrossOrigin(origins = ["*"])
+@CrossOrigin(origins = ["http://localhost:3000","http://localhost:8080", "https://buyingfromhome.herokuapp.com/"])
 
 class ProductController{
 
