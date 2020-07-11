@@ -1,5 +1,6 @@
 package unq.tpi.desapp
 
+import it.ozimov.springboot.mail.configuration.EnableEmailTools
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 import org.springframework.boot.runApplication
@@ -9,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 
 @SpringBootApplication
-@EnableAspectJAutoProxy(proxyTargetClass = true)
-class DesappGroupFBackendApplication: WebMvcConfigurer
+@EnableEmailTools
+class DesappGroupFBackendApplication
 fun main(args: Array<String>) {
     runApplication<DesappGroupFBackendApplication>(*args)
 }
