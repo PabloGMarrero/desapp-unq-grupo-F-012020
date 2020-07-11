@@ -87,4 +87,14 @@ class UserTest {
         assertEquals(userDto.name, "Pablo")
         assertEquals(userDto.password, "")
     }
+
+    @Test
+    fun testAddAnStoreToTheUser(){
+        var store = StoreBuilder.aStore().build()
+        var user = UserBuilder.anUser().build()
+
+        user.addStore(store)
+
+        assertEquals(user.store, store)
+    }
 }
