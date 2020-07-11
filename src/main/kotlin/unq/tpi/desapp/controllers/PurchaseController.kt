@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*
 import unq.tpi.desapp.aspects.ExceptionAspect
 import unq.tpi.desapp.aspects.LoggingAspect
 import unq.tpi.desapp.dto.PurchaseDto
-import unq.tpi.desapp.model.Purchase
 import unq.tpi.desapp.service.PurchaseService
 
 @RestController

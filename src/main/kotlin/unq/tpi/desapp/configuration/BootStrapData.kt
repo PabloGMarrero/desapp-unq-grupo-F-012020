@@ -22,7 +22,7 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
     val productRepository = productRepository
 
     override fun run(vararg args: String?) {
-        var zone = GeographicMapBuilder.aGeographicMap().withLongitude(-34.721533).withLatitude(-58.258655).build()
+        var zone = GeographicMapBuilder.aGeographicMap().withLongitude(-58.258655).withLatitude(-34.721533).build()
         var addressPanaderia = AddressBuilder.anAddress().withLocality("Quilmes")
                 .withNumber(160).withStreet("Alsina").withZone(zone).build()
         var panaderia = StoreBuilder.aStore().withActivity("Panaderia").withDistance(2.0)
@@ -43,7 +43,7 @@ class BootStrapData(storeRepository: StoreRepository, productRepository: Product
 
 
 
-        var zoneKiosco = GeographicMapBuilder.aGeographicMap().withLongitude(-34.721732).withLatitude(-58.256736).build()
+        var zoneKiosco = GeographicMapBuilder.aGeographicMap().withLongitude(-58.256736).withLatitude(-34.721732).build()
         var addressKiosco = AddressBuilder.anAddress().withLocality("Quilmes")
                 .withNumber(130).withStreet("Rivadavia").withZone(zoneKiosco).build()
         var kiosco = StoreBuilder.aStore().withActivity("Kiosco").withDistance(0.5)
