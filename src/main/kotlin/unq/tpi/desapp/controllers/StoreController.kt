@@ -22,7 +22,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/stores")
-@CrossOrigin(origins = ["*"], methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE])
+@CrossOrigin(origins = ["*"])
 
 class StoreController {
 
@@ -75,9 +75,9 @@ class StoreController {
 
     @LoggingAspect
     @ExceptionAspect
-    @PutMapping("/updatestore")
-    fun updateStore(@RequestBody aStore: @Valid Store):ResponseEntity<Store> {
-        return ResponseEntity.ok().body(this.storeService.updateStore(aStore))
+    @PutMapping("/{id}/updatestore")
+    fun updateStore(@PathVariable("id") id:Long, @RequestBody aStore: StoreDto):ResponseEntity<Store> {
+        return ResponseEntity.ok().body(this.storeService.updatestore(id, aStore))
     }
 
     @LoggingAspect

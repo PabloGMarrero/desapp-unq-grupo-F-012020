@@ -119,4 +119,14 @@ class ProductTest {
                     .withPrice(10.0).withName("Coca-Cola").build()
         aProduct.validated()
     }
+
+    @Test
+    fun testConvertPOJOProductToProductDto(){
+        var aProductDto = ProductBuilder.aProduct().withBrand("Coke")
+                .withPrice(10.0).withName("Coca-Cola").build().toProductDto()
+
+        assertEquals(aProductDto.brand, "Coke")
+        assertEquals(aProductDto.price, 10.0)
+        assertEquals(aProductDto.name, "Coca-Cola")
+    }
 }

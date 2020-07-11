@@ -10,6 +10,7 @@ import unq.tpi.desapp.model.Purchase
 import unq.tpi.desapp.model.User
 import unq.tpi.desapp.service.UserService
 import java.util.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/users")
@@ -53,6 +54,15 @@ class UserController {
             return ResponseEntity.noContent().build()
         }
 
+    }
+
+    @LoggingAspect
+    @PutMapping("/updateuser")
+    fun updateUser(@RequestBody userDTO: @Valid UserDto):ResponseEntity<User> {
+
+        var anUser:User = userService.update(userDTO.userDtoToUser())
+
+        return ResponseEntity.ok().body(anUser)
     }
 
 }

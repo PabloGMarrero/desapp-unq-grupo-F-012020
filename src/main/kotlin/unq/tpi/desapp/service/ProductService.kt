@@ -20,7 +20,6 @@ class ProductService {
     @Autowired
     lateinit var storeRepository: StoreRepository
 
-    @Throws(StoreDoesntExistException::class)
     fun addProduct(idStore:Long, productDto: ProductDto): Product{
         var store = storeRepository.findById(idStore).orElseThrow {
             throw StoreDoesntExistException("The store does not exist.")

@@ -105,7 +105,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-<!--			<scope>provided</scope>-->
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -162,6 +162,12 @@
 <!--			<artifactId>slf4j-log4j12</artifactId>-->
 <!--			<version>1.6.2</version>-->
 <!--		</dependency>-->
+
+		<dependency>
+			<groupId>it.ozimov</groupId>
+			<artifactId>spring-boot-email-core</artifactId>
+			<version>0.6.3</version>
+		</dependency>
 
 	</dependencies>
 

@@ -7,6 +7,7 @@ import unq.tpi.desapp.builders.UserBuilder
 import unq.tpi.desapp.dto.UserDto
 import unq.tpi.desapp.exceptions.InvalidEmailOrPasswordException
 import unq.tpi.desapp.exceptions.UserAlreadyExistsException
+import unq.tpi.desapp.exceptions.UserDoesntExistException
 import unq.tpi.desapp.model.Purchase
 import unq.tpi.desapp.model.User
 import unq.tpi.desapp.repository.UserRepository
@@ -73,9 +74,22 @@ class UserService {
         userToBeSaved.purchaseRange = anUser.purchaseRange
         userToBeSaved.categoryPreferences.addAll(anUser.categoryPreferences)*/
 
-        repository.save(anUser)
-        return anUser
+        var userToBeSaved = this.findByEmail(anUser.email)
+
+        if(userToBeSaved.isPresent){
+            var userSaved = userToBeSaved.get()
+            userSaved.name = anUser.name
+            userSaved.password = anUser.password
+            userSaved.email = anUser.email
+
+            userSaved = repository.save(userSaved)
+            return userSaved
+        }else{
+            throw UserDoesntExistException("The user does not exist.")
+        }
     }
+
+
 
     fun registerUser(userDTO: UserDto): User {
         var userExist = this.findByEmail(userDTO.email)

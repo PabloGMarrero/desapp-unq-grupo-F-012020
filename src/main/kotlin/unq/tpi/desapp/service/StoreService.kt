@@ -9,6 +9,7 @@ import unq.tpi.desapp.builders.StoreBuilder
 import unq.tpi.desapp.dto.ProductListDto
 import unq.tpi.desapp.dto.StoreDto
 import unq.tpi.desapp.dto.UserDto
+import unq.tpi.desapp.exceptions.StoreDoesntExistException
 import unq.tpi.desapp.model.Product
 import unq.tpi.desapp.model.Store
 import unq.tpi.desapp.model.User
@@ -38,8 +39,36 @@ class StoreService {
             return repository.save(aStore)
       }
 
-      fun updateStore(aStore: Store): Store {
+     /* fun updateStore(aStore: Store): Store { // Posible to delete
            return this.save(aStore)
+      }
+*/
+      fun updatestore(idStore:Long, storeDTO: StoreDto): Store {
+         var geoZone= GeographicMapBuilder.aGeographicMap()
+                    .withLatitude(storeDTO.latitude).withLongitude(storeDTO.longitude).build()
+
+         var anAddress= AddressBuilder.anAddress().withLocality(storeDTO.locality)
+                    .withStreet(storeDTO.street).withNumber(storeDTO.number).withZone(geoZone).build()
+
+         anAddress.validated()
+
+             /*var sStore = StoreBuilder.aStore().withStoreName(storeDTO.name).
+             withActivity(storeDTO.activity).withAdress(anAddress).withDistance(storeDTO.covDistance).build()
+
+             aStore.validated()*/
+
+         var storeToBeSaved = this.repository.findById(idStore)
+
+         if (storeToBeSaved.isPresent){
+             storeToBeSaved.get().storeName = storeDTO.name
+             storeToBeSaved.get().coverageDistance = storeDTO.covDistance
+             storeToBeSaved.get().activity = storeDTO.activity
+
+             var storeSaved = this.save(storeToBeSaved.get())
+             return storeSaved
+         }else{
+             throw StoreDoesntExistException("The store with id: $idStore does not exist.")
+         }
       }
 
       fun deleteStore(id: Long){
