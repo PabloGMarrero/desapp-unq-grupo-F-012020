@@ -58,7 +58,10 @@ class UserController {
 
     @LoggingAspect
     @PutMapping("/updateuser")
-    fun updateUser(@RequestBody anUser: @Valid User):ResponseEntity<User> {
+    fun updateUser(@RequestBody userDTO: @Valid UserDto):ResponseEntity<User> {
+
+        var anUser:User = userService.registerUser(userDTO)
+
         return ResponseEntity.ok().body(this.userService.update(anUser))
     }
 

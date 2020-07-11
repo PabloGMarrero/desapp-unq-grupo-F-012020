@@ -75,9 +75,16 @@ class StoreController {
 
     @LoggingAspect
     @ExceptionAspect
-    @PutMapping("/updatestore")
-    fun updateStore(@RequestBody aStore: @Valid Store):ResponseEntity<Store> {
+    @PutMapping("/updateStore")
+    fun updateStore(@RequestBody aStore: @Valid Store):ResponseEntity<Store> { // possibly to delete
         return ResponseEntity.ok().body(this.storeService.updateStore(aStore))
+    }
+
+    @LoggingAspect
+    @ExceptionAspect
+    @PutMapping("/updatestore")
+    fun updateStore(@RequestBody aStore: @Valid StoreDto):ResponseEntity<Store> {
+        return ResponseEntity.ok().body(this.storeService.updatestore(aStore))
     }
 
     @LoggingAspect

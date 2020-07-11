@@ -38,8 +38,25 @@ class StoreService {
             return repository.save(aStore)
       }
 
-      fun updateStore(aStore: Store): Store {
+      fun updateStore(aStore: Store): Store { // Posible to delete
            return this.save(aStore)
+      }
+
+      fun updatestore(storeDTO: StoreDto): Store {
+            var geoZone= GeographicMapBuilder.aGeographicMap()
+                    .withLatitude(storeDTO.latitude).withLongitude(storeDTO.longitude).build()
+
+            var anAddress= AddressBuilder.anAddress().withLocality(storeDTO.locality)
+                    .withStreet(storeDTO.street).withNumber(storeDTO.number).withZone(geoZone).build()
+
+            anAddress.validated()
+
+            var aStore = StoreBuilder.aStore().withStoreName(storeDTO.name).
+            withActivity(storeDTO.activity).withAdress(anAddress).withDistance(storeDTO.covDistance).build()
+
+            aStore.validated()
+
+            return this.save(aStore)
       }
 
       fun deleteStore(id: Long){

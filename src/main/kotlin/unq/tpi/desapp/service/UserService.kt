@@ -77,6 +77,8 @@ class UserService {
         return anUser
     }
 
+
+
     fun registerUser(userDTO: UserDto): User {
         var userExist = this.findByEmail(userDTO.email)
         if (userExist.isPresent) {
