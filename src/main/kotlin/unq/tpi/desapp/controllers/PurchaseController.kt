@@ -19,7 +19,8 @@ import javax.mail.internet.InternetAddress
 
 @RestController
 @RequestMapping("/purchase")
-@CrossOrigin(origins = ["http://localhost:3000","http://localhost:8080", "https://buyingfromhome.herokuapp.com/"])
+//@CrossOrigin(origins = ["http://localhost:3000","http://localhost:8080", "https://buyingfromhome.herokuapp.com/"])
+
 class PurchaseController {
 
     @Autowired
@@ -31,6 +32,7 @@ class PurchaseController {
     @LoggingAspect
     @ExceptionAspect
     @PostMapping("/new")
+    @CrossOrigin(origins = ["*"])
     fun newPurchase(@RequestBody purchaseDto: PurchaseDto):ResponseEntity<String> {
         var purchaseSaved = this.purchaseService.newPurchase(purchaseDto)
         var orderNumber = this.purchaseService.getOrderNumber(

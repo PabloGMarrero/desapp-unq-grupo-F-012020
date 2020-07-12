@@ -39,5 +39,12 @@ class AuthController {
         return ResponseEntity.ok().body(user.toUserDTO())
     }
 
+    @LoggingAspect
+    @ExceptionAspect
+    @PostMapping("/authsignin")
+    fun authsignin(@RequestBody userDTO: UserDto): ResponseEntity<UserDto>{
+        var user:User = userService.authSignin(userDTO)
+        return ResponseEntity.ok().body(user.toUserDTO())
+    }
 
 }

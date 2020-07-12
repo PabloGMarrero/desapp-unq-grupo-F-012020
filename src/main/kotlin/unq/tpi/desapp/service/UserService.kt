@@ -100,4 +100,14 @@ class UserService {
             withEmail(userDTO.email).withName(userDTO.name).withPass(userDTO.password).build()
         return this.create(anUser)
     }
+
+    fun authSignin(userDTO: UserDto): User {
+        var userExist = this.findByEmail(userDTO.email)
+
+        if (userExist.isPresent){
+            return userExist.get()
+        }else{
+            return this.registerUser(userDTO)
+        }
+    }
 }
