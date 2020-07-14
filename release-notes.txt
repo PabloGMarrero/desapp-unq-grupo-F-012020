@@ -49,9 +49,11 @@ NEW FEATURES:
 - Se realizó autenticación con Facebook
 - Un comercio ahora puede registrarse mediante un usuario.
 - Si en una compra intervienen varios stores puede seccionarse en distintos comercios
+- Se agrego envío de emails
 
 NOTES:
 - Se pudo corregir uno de los errores conocidos de la entrega 2.
+- El template de envio de emails es un poco básico, podría ser más descriptivo.
 
 KNOWN ISSUES:
 - Por tiempo no se pudo implementar la carga mediante archivo CSV
