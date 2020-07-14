@@ -18,7 +18,7 @@ import javax.validation.Valid
 class UserController {
 
     @Autowired
-    val userService:UserService = UserService()
+    private val userService:UserService = UserService()
 
     @LoggingAspect
     @GetMapping("/")

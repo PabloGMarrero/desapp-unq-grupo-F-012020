@@ -1,5 +1,8 @@
 package unq.tpi.desapp.service
 
+import it.ozimov.springboot.mail.model.Email
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail
+import it.ozimov.springboot.mail.service.EmailService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -19,6 +22,7 @@ import unq.tpi.desapp.repository.StoreRepository
 import unq.tpi.desapp.repository.UserRepository
 import java.time.LocalDate
 import java.util.*
+import javax.mail.internet.InternetAddress
 
 @Service
 @Transactional
@@ -39,6 +43,9 @@ class PurchaseService {
     @Autowired
     lateinit var purchaseRepository: PurchaseRepository
 
+    @Autowired
+    private lateinit var emailService: EmailService
+
     @Throws(UserDoesntExistException::class)
     fun newPurchase(purchaseDto: PurchaseDto):Purchase{
         var anUser:Optional<User> = userService.findByID(purchaseDto.user.id)
@@ -55,6 +62,10 @@ class PurchaseService {
             //guardarla al usuario con el repo
             user.addToHistorial(purchasedSaved)
             var userSaved = userService.update(user)
+
+
+            this.sendConfirmationEmail(purchaseDto.user.name ,purchaseDto.user.email, purchase.getTotal(),
+                    purchase.paymentMethod,  purchase.deliveryType)
 
             return purchase
 
@@ -75,19 +86,6 @@ class PurchaseService {
             var item: Item = ItemBuilder.anItem().withAStore(store).withProduct(product).withQuantity(anItem.quantity).build()
             var itemSaved = itemService.save(item)
             purchase.addItem(itemSaved)
-
-//            var product = productService.findById(anItem.id).get()
-//            var anStore: Optional<Store> = storeService.findByID(anItem.storeId)
-//            if (anStore.isPresent){
-//                var store = anStore.get()
-//                var item: Item = ItemBuilder.anItem().withAStore(store).withProduct(product).withQuantity(anItem.quantity).build()
-//                var itemSaved = itemService.save(item)
-//                purchase.addItem(itemSaved)
-//
-//            }else{
-//                var id = anItem.storeId
-//                throw StoreDoesntExistException("the store with id '$id' doest not exist.")
-//            }
         }
 
 
@@ -95,5 +93,39 @@ class PurchaseService {
 
     fun getOrderNumber(userId: Long, purchaseId: Long, dateOfTheDelivery: LocalDate): String {
         return "#" + userId.toString() + purchaseId.toString() + dateOfTheDelivery.dayOfWeek.value.toString() + dateOfTheDelivery.dayOfYear.toString()
+    }
+
+    private fun sendConfirmationEmail(name:String, email: String, total: Double, paymentMethod: PaymentMethod,
+                                      deliveryType: DeliveryType) {
+        val from = InternetAddress("buyfromhome.desapp@gmail.com", "Buy From Home")
+        val to = InternetAddress(email, name)
+        val toCollection = mutableListOf<InternetAddress>()
+        toCollection.add(to)
+        val body = "La compra se realizó exitosamente. El total fue de ${total} con el método de pago ${paymentMethod}. "+
+                this.getDeliveryTypeText(deliveryType)
+
+        val email: Email = DefaultEmail.builder()
+                .from(from)
+                .to(toCollection)
+                .subject("Compra exitosa")
+                .body(body)
+                .encoding("UTF-8").build()
+
+        emailService.send(email)
+    }
+
+    private fun getDeliveryTypeText(deliveryType: DeliveryType):String{
+        var text = ""
+        if (deliveryType.javaClass == HomeDelivery::class){
+            text = "El comercio se estará contactando para coordinar la entrega el."
+        }else{
+            text = "Tu pedido será enviado el."
+        }
+
+        text = text +" ${deliveryType.dateOfTheDelivery()} " +
+                "a las ${deliveryType.hourOfTheDelivery()} con dirección ${deliveryType.addressOfPickup().street}, " +
+                "${deliveryType.addressOfPickup().number}, ${deliveryType.addressOfPickup().locality}."
+
+        return text
     }
 }

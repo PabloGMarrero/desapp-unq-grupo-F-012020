@@ -27,7 +27,7 @@ import javax.validation.Valid
 class StoreController {
 
     @Autowired
-    val storeService: StoreService = StoreService()
+    private val storeService: StoreService = StoreService()
 
     @LoggingAspect
     @GetMapping("/")

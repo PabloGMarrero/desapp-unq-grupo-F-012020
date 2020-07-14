@@ -21,7 +21,7 @@ import unq.tpi.desapp.service.UserService
 class AuthController {
 
     @Autowired
-    val userService: UserService = UserService()
+    private val userService: UserService = UserService()
 
     @LoggingAspect
     @ExceptionAspect

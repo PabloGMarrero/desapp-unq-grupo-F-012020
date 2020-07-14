@@ -20,7 +20,7 @@ import java.util.*
 class ProductController{
 
     @Autowired
-    var productService: ProductService = ProductService()
+    private var productService: ProductService = ProductService()
 
     @LoggingAspect
     @GetMapping("/")
