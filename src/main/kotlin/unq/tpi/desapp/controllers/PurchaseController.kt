@@ -1,7 +1,5 @@
 package unq.tpi.desapp.controllers
 
-
-import it.ozimov.springboot.mail.service.EmailService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -12,7 +10,6 @@ import unq.tpi.desapp.service.PurchaseService
 
 @RestController
 @RequestMapping("/purchase")
-//@CrossOrigin(origins = ["http://localhost:3000","http://localhost:8080", "https://buyingfromhome.herokuapp.com/"])
 
 class PurchaseController {
 
