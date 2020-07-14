@@ -30,14 +30,30 @@ NEW FEATURES:
 - Agregado de datos fake
 - Cálculo de distancia entre dos puntos utilizando cálculo matemático
 
-
-
 NOTES:
 - Se corrigieron las dos items de Notes de la entrega 1.0
-
 
 KNOWN ISSUES:
 - Falta delimitar cuando una compra intervienen varios locales y poder seccionarlo
 - Falta delimitar bien cuando un usuario es usuario o cuando admin de un local
 - Falta la carga mediante batch
 
+---------------------------------------------------------------------
+RELEASE V3.0.1
+---------------------------------------------------------------------
+
+NEW FEATURES:
+- Agregaron test de arquitectura
+- Se permite realizar una compra completa
+- Se agregó auditoría de servicios. WS loguean en un archivo generado en carpeta logs/info.log
+- Se realizó autenticación con Facebook
+- Un comercio ahora puede registrarse mediante un usuario.
+- Si en una compra intervienen varios stores puede seccionarse en distintos comercios
+- Se agrego envío de emails
+
+NOTES:
+- Se pudo corregir uno de los errores conocidos de la entrega 2.
+- El template de envio de emails es un poco básico, podría ser más descriptivo.
+
+KNOWN ISSUES:
+- Por tiempo no se pudo implementar la carga mediante archivo CSV
