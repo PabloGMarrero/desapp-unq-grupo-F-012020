@@ -13,16 +13,21 @@ import unq.tpi.desapp.dto.ItemDto
 import unq.tpi.desapp.dto.PurchaseDto
 import unq.tpi.desapp.exceptions.StoreDoesntExistException
 import unq.tpi.desapp.exceptions.UserDoesntExistException
-import unq.tpi.desapp.model.*
+import unq.tpi.desapp.model.Item
+import unq.tpi.desapp.model.PaymentMethod
+import unq.tpi.desapp.model.Purchase
+import unq.tpi.desapp.model.User
 import unq.tpi.desapp.model.deliveryType.DeliveryType
 import unq.tpi.desapp.model.deliveryType.HomeDelivery
-import unq.tpi.desapp.repository.ProductRepository
 import unq.tpi.desapp.repository.PurchaseRepository
-import unq.tpi.desapp.repository.StoreRepository
-import unq.tpi.desapp.repository.UserRepository
 import java.time.LocalDate
 import java.util.*
+import javax.mail.Authenticator
 import javax.mail.internet.InternetAddress
+import javax.mail.internet.MimeMessage
+
+
+
 
 @Service
 @Transactional
@@ -62,7 +67,6 @@ class PurchaseService {
             //guardarla al usuario con el repo
             user.addToHistorial(purchasedSaved)
             var userSaved = userService.update(user)
-
 
             this.sendConfirmationEmail(purchaseDto.user.name ,purchaseDto.user.email, purchase.getTotal(),
                     purchase.paymentMethod,  purchase.deliveryType)
@@ -112,6 +116,7 @@ class PurchaseService {
                 .encoding("UTF-8").build()
 
         emailService.send(email)
+
     }
 
     private fun getDeliveryTypeText(deliveryType: DeliveryType):String{

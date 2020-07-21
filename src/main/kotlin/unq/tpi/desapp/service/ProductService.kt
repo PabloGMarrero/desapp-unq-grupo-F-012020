@@ -64,4 +64,18 @@ class ProductService {
         return listProducts
     }
 
+    fun addProductsInBatch(idStore: Long, productList: List<ProductDto>): List<ProductDto>? {
+        var store = storeRepository.findById(idStore).orElseThrow {
+            throw StoreDoesntExistException("The store does not exist.")
+        }
+
+        for(productDto in productList){
+            var aProduct: Product = productDto.productDtoToProduct()
+            store.addProduct(aProduct)
+            this.repository.save(aProduct)
+        }
+
+        return productList
+    }
+
 }

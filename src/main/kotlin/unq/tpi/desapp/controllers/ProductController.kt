@@ -81,4 +81,13 @@ class ProductController{
         return ResponseEntity.noContent().build()
     }
 
+    @LoggingAspect
+    @ExceptionAspect
+    @PostMapping("/{idStore}/addProductsInBatch")
+    fun addProductsInBatch(@PathVariable("idStore") idStore: Long,
+                            @RequestBody productList:List<ProductDto>): ResponseEntity<List<ProductDto>>{
+        var productsSaved = this.productService.addProductsInBatch(idStore, productList)
+        return ResponseEntity.ok().body(productsSaved)
+    }
+
 }
