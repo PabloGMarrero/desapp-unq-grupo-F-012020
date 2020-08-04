@@ -21,9 +21,9 @@ class PurchaseController {
     @PostMapping("/new")
     @CrossOrigin(origins = ["*"])
     fun newPurchase(@RequestBody purchaseDto: PurchaseDto):ResponseEntity<String> {
-        var purchaseSaved = this.purchaseService.newPurchase(purchaseDto)
-        var orderNumber = this.purchaseService.getOrderNumber(
-                purchaseDto.user.id, purchaseSaved.id, purchaseDto.deliveryType.dateOfTheDelivery() )
+
+
+        var orderNumber = this.purchaseService.generatePurchase(purchaseDto)
 
         return ResponseEntity.ok().body(orderNumber)
     }

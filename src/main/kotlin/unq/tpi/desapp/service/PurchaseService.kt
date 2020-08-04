@@ -133,4 +133,13 @@ class PurchaseService {
 
         return text
     }
+
+    fun generatePurchase(purchaseDto: PurchaseDto): String {
+
+        var purchaseSaved = this.newPurchase(purchaseDto)
+        var orderNumber = this.getOrderNumber(
+                purchaseDto.user.id, purchaseSaved.id, purchaseDto.deliveryType.dateOfTheDelivery() )
+
+        return orderNumber;
+    }
 }
